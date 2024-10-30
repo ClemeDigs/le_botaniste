@@ -1,5 +1,8 @@
 import {Button} from './Button';
 import mailIcon from 'app/assets/mail.svg';
+import Modal from './Modal';
+import EmployeeDetails from './EmployeeDetails';
+import {useState} from 'react';
 
 export function CardEmployee({
   profilePicture,
@@ -8,7 +11,9 @@ export function CardEmployee({
   position,
   age,
   email,
+  salary,
 }) {
+  const [isDetailVisible, setIsDetailVisible] = useState(false);
   return (
     <div className="bg-orange-100 shadow-lg flex flex-col gap-4 items-center max-w-[300px]">
       <img
@@ -29,9 +34,19 @@ export function CardEmployee({
         <Button
           content="En savoir plus"
           onClick={() => {
-            alert('test');
+            setIsDetailVisible(true);
           }}
         ></Button>
+        <Modal isVisible={isDetailVisible} setIsVisible={setIsDetailVisible}>
+          <EmployeeDetails
+            firstName={firstName}
+            lastName={lastName}
+            email={email}
+            age={age}
+            position={position}
+            salary={salary}
+          />
+        </Modal>
       </div>
     </div>
   );

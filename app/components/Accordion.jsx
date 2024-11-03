@@ -10,7 +10,7 @@ export default function Accordion({
     <div>
       <button
         onClick={onClick}
-        className="w-[300px] md:w-[500px] lg:w-[800px] p-4 bg-green-800 text-white border border-green-950 transition hover:cursor-pointer hover:bg-green-900"
+        className="w-[300px] md:w-[500px] lg:w-[800px] p-4 bg-pink text-white border border-green-950 transition hover:cursor-pointer hover:bg-green-900"
       >
         <div className="flex justify-between items-center">
           <h3 className="font-bold">{title}</h3>

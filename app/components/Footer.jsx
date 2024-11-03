@@ -1,29 +1,39 @@
 import {Suspense} from 'react';
 import {Await, NavLink} from '@remix-run/react';
+import PreFooter from './PreFooter';
+import logo from 'app/assets/le_botaniste_logo.svg';
 
 /**
  * @param {FooterProps}
  */
 export function Footer({footer: footerPromise, header, publicStoreDomain}) {
   return (
-    <Suspense>
-      <Await resolve={footerPromise}>
-        {(footer) => (
-          <footer className="footer">
-            {footer?.menu && header.shop.primaryDomain?.url && (
-              <FooterMenu
-                menu={footer.menu}
-                primaryDomainUrl={header.shop.primaryDomain.url}
-                publicStoreDomain={publicStoreDomain}
-              />
-            )}
-          </footer>
-        )}
-      </Await>
-    </Suspense>
+    <>
+      <PreFooter />
+      <Suspense>
+        <Await resolve={footerPromise}>
+          {(footer) => (
+            <footer className="footer bg-dark-green text-offWhite flex justify-between px-16 py-8">
+              {footer?.menu && header.shop.primaryDomain?.url && (
+                <>
+                  <img className="w-[200px]" src={logo} alt="logo" />
+                  <Adresse />
+                  <div className="w-[1px] h-[170px] bg-offWhite"></div>
+                  <FooterMenu
+                    className=""
+                    menu={footer.menu}
+                    primaryDomainUrl={header.shop.primaryDomain.url}
+                    publicStoreDomain={publicStoreDomain}
+                  />
+                </>
+              )}
+            </footer>
+          )}
+        </Await>
+      </Suspense>
+    </>
   );
 }
-
 /**
  * @param {{
  *   menu: FooterQuery['menu'];
@@ -33,34 +43,58 @@ export function Footer({footer: footerPromise, header, publicStoreDomain}) {
  */
 function FooterMenu({menu, primaryDomainUrl, publicStoreDomain}) {
   return (
-    <nav className="footer-menu" role="navigation">
-      {(menu || FALLBACK_FOOTER_MENU).items.map((item) => {
-        if (!item.url) return null;
-        // if the url is internal, we strip the domain
-        const url =
-          item.url.includes('myshopify.com') ||
-          item.url.includes(publicStoreDomain) ||
-          item.url.includes(primaryDomainUrl)
-            ? new URL(item.url).pathname
-            : item.url;
-        const isExternal = !url.startsWith('/');
-        return isExternal ? (
-          <a href={url} key={item.id} rel="noopener noreferrer" target="_blank">
-            {item.title}
-          </a>
-        ) : (
-          <NavLink
-            end
-            key={item.id}
-            prefetch="intent"
-            style={activeLinkStyle}
-            to={url}
-          >
-            {item.title}
-          </NavLink>
-        );
-      })}
-    </nav>
+    <div className="flex flex-col gap-6">
+      <h3>Infos pratiques et légales</h3>
+      <nav className="footer-menu flex flex-col" role="navigation">
+        <a href="#">Condition générales de vente</a>
+        <a href="#">Mentions légales</a>
+        <a href="#">Infos pratiques</a>
+        {(menu || FALLBACK_FOOTER_MENU).items.map((item) => {
+          if (!item.url) return null;
+          // if the url is internal, we strip the domain
+          const url =
+            item.url.includes('myshopify.com') ||
+            item.url.includes(publicStoreDomain) ||
+            item.url.includes(primaryDomainUrl)
+              ? new URL(item.url).pathname
+              : item.url;
+          const isExternal = !url.startsWith('/');
+          return isExternal ? (
+            <a
+              href={url}
+              key={item.id}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              {item.title}
+            </a>
+          ) : (
+            <NavLink
+              end
+              key={item.id}
+              prefetch="intent"
+              style={activeLinkStyle}
+              to={url}
+            >
+              {item.title}
+            </NavLink>
+          );
+        })}
+      </nav>
+    </div>
+  );
+}
+
+function Adresse() {
+  return (
+    <div className="flex flex-col gap-6">
+      <h3>Le Botaniste</h3>
+      <div>
+        <p>270 rue des Plantes, G1V 2K6 Québec</p>
+        <p>418-555-9876</p>
+        <p>lebotaniste@gmail.ca</p>
+      </div>
+    </div>
   );
 }
 

@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Bowlby+One&family=Bree+Serif&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+
 :root {
   --aside-width: 400px;
   --cart-aside-summary-height-with-discount: 300px;
@@ -143,7 +149,7 @@ button.reset:hover:not(:has(> *)) {
 * components/Header
 * --------------------------------------------------
 */
-.header {
+/* .header {
   align-items: center;
   background: #fff;
   display: flex;
@@ -186,29 +192,10 @@ button.reset:hover:not(:has(> *)) {
   grid-gap: 1rem;
   margin-left: auto;
 }
-
+ */
 /*
-* --------------------------------------------------
-* components/Footer
-* --------------------------------------------------
-*/
-.footer {
-  background: var(--color-dark);
-  margin-top: auto;
-}
 
-.footer-menu {
-  align-items: center;
-  display: flex;
-  grid-gap: 1rem;
-  padding: 1rem;
-}
 
-.footer-menu a {
-  color: var(--color-light);
-}
-
-/*
 * --------------------------------------------------
 * components/Cart
 * --------------------------------------------------

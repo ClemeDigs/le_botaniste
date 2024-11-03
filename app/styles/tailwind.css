@@ -2,5 +2,99 @@
  * Configure Tailwind v4 in this file using CSS variables and directives:
  * https://tailwindcss.com/blog/tailwindcss-v4-alpha#css-first-configuration 
  */
+@import url('https://fonts.googleapis.com/css2?family=Bowlby+One&family=Bree+Serif&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
 
 @import 'tailwindcss';
+
+@theme {
+  --font-heading: 'Bowlby One', sans-serif;
+
+  --font-heading-serif: 'Bree Serif', serif;
+
+  --font-normal-sans: 'Raleway', sans-serif;
+
+  --color-offWhite: #efecec;
+  --color-dark: #111515;
+  --color-dark-green: #0f3132;
+  --color-green: #008c5b;
+  --color-pink: #ffb9b1;
+  --color-orange: #ff8b5a;
+}
+
+h1 {
+  font-family: 'Bowlby One', sans-serif;
+  font-size: 6.25rem;
+  color: #0f3132;
+}
+
+h2 {
+  font-family: 'Bree Serif', serif;
+  font-size: 3rem;
+}
+
+h3 {
+  font-family: 'Bree Serif', serif;
+  font-size: 2rem;
+}
+
+h4 {
+  font-family: 'Bree Serif', serif;
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-family: 'Bree Serif', serif;
+  font-size: 1.5rem;
+}
+
+h6 {
+  font-family: 'Bree Serif', serif;
+  font-size: 1.3rem;
+}
+
+button {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+p {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+li {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+a {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+a:active,
+a:focus {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+@layer utilities {
+  .font-heading {
+    font-family: var(--font-heading);
+  }
+
+  .font-heading-serif {
+    font-family: var(--font-heading-serif);
+  }
+
+  .font-normal-sans {
+    font-family: var(--font-normal-sans);
+  }
+}

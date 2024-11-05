@@ -64,7 +64,7 @@ export default function Homepage() {
   /** @type {LoaderReturnData} */
   const data = useLoaderData();
   return (
-    <div className="home">
+    <div className="home flex flex-col gap-12">
       <FeaturedCollection collection={data.featuredCollection} />
       <RecommendedProducts products={data.recommendedProducts} />
       <IconsWithText />
@@ -81,13 +81,12 @@ function FeaturedCollection({collection}) {
   if (!collection) return null;
   const image = collection?.image;
   return (
-    <Link className="text-dark-green" to={`/collections/${collection.handle}`}>
-      {image && (
-        <div className="featured-collection-image">
-          <Image data={image} sizes="40vw" />
-        </div>
-      )}
-      <h1>{collection.title}</h1>
+    <Link
+      className=" flex gap-8 items-center bg-dark-green rounded-lg p-4 text-offWhite max-w-[1240px] mx-auto my-0"
+      to={`/collections/${collection.handle}`}
+    >
+      {image && <Image className="rounded-lg" data={image} sizes="40vw" />}
+      <h1 className="text-offWhite p-4">{collection.title}</h1>
     </Link>
   );
 }
@@ -109,7 +108,7 @@ function RecommendedProducts({products}) {
                 ? response.products.nodes.map((product) => (
                     <Link
                       key={product.id}
-                      className="flex flex-col bg-dark-green rounded-lg"
+                      className="flex flex-col bg-dark-green text-offWhite rounded-lg shadow-2xl"
                       to={`/products/${product.handle}`}
                     >
                       <Image

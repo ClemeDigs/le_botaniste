@@ -1,6 +1,5 @@
 import {Suspense} from 'react';
 import {Await, NavLink} from '@remix-run/react';
-import IconsWithText from './IconsWithText';
 import logo from 'app/assets/le_botaniste_logo.svg';
 
 /**
@@ -8,28 +7,26 @@ import logo from 'app/assets/le_botaniste_logo.svg';
  */
 export function Footer({footer: footerPromise, header, publicStoreDomain}) {
   return (
-    <>
-      <Suspense>
-        <Await resolve={footerPromise}>
-          {(footer) => (
-            <footer className="footer bg-dark-green text-offWhite flex justify-between px-16 py-8">
-              {footer?.menu && header.shop.primaryDomain?.url && (
-                <>
-                  <img className="w-[200px]" src={logo} alt="logo" />
-                  <Adresse />
-                  <div className="w-[1px] h-[170px] bg-offWhite"></div>
-                  <FooterMenu
-                    menu={footer.menu}
-                    primaryDomainUrl={header.shop.primaryDomain.url}
-                    publicStoreDomain={publicStoreDomain}
-                  />
-                </>
-              )}
-            </footer>
-          )}
-        </Await>
-      </Suspense>
-    </>
+    <Suspense>
+      <Await resolve={footerPromise}>
+        {(footer) => (
+          <footer className="footer bg-dark-green text-offWhite flex justify-between px-16 py-8">
+            {footer?.menu && header.shop.primaryDomain?.url && (
+              <>
+                <img className="w-[200px]" src={logo} alt="logo" />
+                <Adresse />
+                <div className="w-[1px] h-[170px] bg-offWhite"></div>
+                <FooterMenu
+                  menu={footer.menu}
+                  primaryDomainUrl={header.shop.primaryDomain.url}
+                  publicStoreDomain={publicStoreDomain}
+                />
+              </>
+            )}
+          </footer>
+        )}
+      </Await>
+    </Suspense>
   );
 }
 /**

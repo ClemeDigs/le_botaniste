@@ -3,75 +3,38 @@ import {Await, NavLink, useAsyncValue} from '@remix-run/react';
 import {useAnalytics, useOptimisticCart} from '@shopify/hydrogen';
 import {useAside} from '~/components/Aside';
 import logo from 'app/assets/le_botaniste_logo-seul.svg';
-import Navigation from './Navigation';
 import {Link, Links} from '@remix-run/react';
-import cart from 'app/assets/cart.svg';
-import glass from 'app/assets/glass.svg';
+import {LuSearch} from 'react-icons/lu';
+import {LuShoppingBasket} from 'react-icons/lu';
+import {LuUserCircle2} from 'react-icons/lu';
 
 /**
  * @param {HeaderProps}
  */
 export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
-  const {shop, menu} = header;
+  const {menu} = header;
   return (
-    <header className="sticky top-0 left-0 z-50 bg-white">
-      <div className="bg-dark-green text-white text-center p-2">
-        <p>Livraison gratuie à partir de 60$</p>
-      </div>
-      <div className="header-global-wrapper p-3">
-        <div className="header-wrapper bg-pink p-3 flex justify-between items-center rounded-full">
-          <div className="flex items-center gap-1">
-            <img
-              className="logo-seul w-[60px]"
-              src={logo}
-              alt="Petit logo - Le Botaniste"
-            />
-            <span className="font-heading text-dark-green">Le Botaniste</span>
-          </div>
-
-          <Navigation></Navigation>
-          <HeaderCta />
-          {/* <NavLink
-            prefetch="intent"
-            to="/"
-            style={activeLinkStyle}
-            className={'gap-3'}
-            end
-          ></NavLink> */}
-          {/* <HeaderMenu
-            menu={menu}
-            viewport="desktop"
-            primaryDomainUrl={header.shop.primaryDomain.url}
-            publicStoreDomain={publicStoreDomain}
-          /> */}
-          {/* <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} /> */}
-        </div>
+    <header className="header p-3">
+      <div className="bg-pink flex justify-between p-3 mb-12 rounded-full items-center sticky">
+        <NavLink prefetch="intent" to="/" className="flex items-center">
+          <img
+            className="logo-seul w-[60px]"
+            src={logo}
+            alt="Petit logo - Le Botaniste"
+          />
+          <span className="font-heading text-dark-green text-2xl">
+            Le Botaniste
+          </span>
+        </NavLink>
+        <HeaderMenu
+          menu={menu}
+          viewport="desktop"
+          primaryDomainUrl={header.shop.primaryDomain.url}
+          publicStoreDomain={publicStoreDomain}
+        />
+        <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
       </div>
     </header>
-  );
-}
-
-function HeaderCta() {
-  return (
-    <div>
-      <ul className="flex flex-row gap-6 items-center">
-        <li>
-          <Link to="faq">Connexion</Link>
-        </li>
-        <li>
-          <Link to="faq" className="flex gap-1 items-center">
-            Recherche
-            <img className="glass w-[20px] rotate-45" src={glass} alt="Loupe" />
-          </Link>
-        </li>
-        <li>
-          <Link to="faq" className="flex gap-1 items-center">
-            Panier
-            <img className="cart w-[30px]" src={cart} alt="Panier" />
-          </Link>
-        </li>
-      </ul>
-    </div>
   );
 }
 
@@ -89,7 +52,7 @@ export function HeaderMenu({
   viewport,
   publicStoreDomain,
 }) {
-  const className = `header-menu-${viewport}`;
+  const className = `header-menu-${viewport} flex gap-3`;
   const {close} = useAside();
 
   return (
@@ -134,24 +97,31 @@ export function HeaderMenu({
 }
 
 /**
-//  * @param {Pick<HeaderProps, 'isLoggedIn' | 'cart'>}
-*/
-// function HeaderCtas({isLoggedIn, cart}) {
-//   return (
-//     <nav className="header-ctas" role="navigation">
-//       <HeaderMenuMobileToggle />
-//       <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
-//         <Suspense fallback="Sign in">
-//           <Await resolve={isLoggedIn} errorElement="Sign in">
-//             {(isLoggedIn) => (isLoggedIn ? 'Account' : 'Sign in')}
-//           </Await>
-//         </Suspense>
-//       </NavLink>
-//       <SearchToggle />
-//       <CartToggle cart={cart} />
-//     </nav>
-//   );
-// }
+ * @param {Pick<HeaderProps, 'isLoggedIn' | 'cart'>}
+ */
+function HeaderCtas({isLoggedIn, cart}) {
+  return (
+    <nav
+      className="header-ctas items-center align-middle flex gap-3"
+      role="navigation"
+    >
+      <HeaderMenuMobileToggle />
+      <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
+        <Suspense fallback="Sign in">
+          <Await resolve={isLoggedIn} errorElement="Sign in">
+            {(isLoggedIn) => (isLoggedIn ? 'Account' : 'Sign in')}
+            <div className="flex gap-1 items-center">
+              {' '}
+              <LuUserCircle2 /> Connexion
+            </div>
+          </Await>
+        </Suspense>
+      </NavLink>
+      <SearchToggle />
+      <CartToggle cart={cart} />
+    </nav>
+  );
+}
 
 function HeaderMenuMobileToggle() {
   const {open} = useAside();
@@ -168,9 +138,9 @@ function HeaderMenuMobileToggle() {
 function SearchToggle() {
   const {open} = useAside();
   return (
-    <button className="reset" onClick={() => open('search')}>
-      Search
-    </button>
+    <a className="reset flex gap-1 items-center" onClick={() => open('search')}>
+      <LuSearch /> Recherche{' '}
+    </a>
   );
 }
 
@@ -183,6 +153,7 @@ function CartBadge({count}) {
 
   return (
     <a
+      className="flex items-center gap-1"
       href="/cart"
       onClick={(e) => {
         e.preventDefault();
@@ -195,7 +166,7 @@ function CartBadge({count}) {
         });
       }}
     >
-      Cart {count === null ? <span>&nbsp;</span> : count}
+      <LuShoppingBasket /> Panier {count === null ? <span>&nbsp;</span> : count}
     </a>
   );
 }

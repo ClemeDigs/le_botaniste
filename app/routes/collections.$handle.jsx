@@ -78,12 +78,12 @@ export default function Collection() {
   const {collection} = useLoaderData();
 
   return (
-    <div className="collection">
+    <div className="flex flex-col gap-6">
       <h1>{collection.title}</h1>
       <p className="collection-description">{collection.description}</p>
       <PaginatedResourceSection
         connection={collection.products}
-        resourcesClassName="products-grid"
+        resourcesClassName="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
       >
         {({node: product, index}) => (
           <ProductItem
@@ -116,24 +116,27 @@ function ProductItem({product, loading}) {
   const variantUrl = useVariantUrl(product.handle, variant.selectedOptions);
   return (
     <Link
-      className="product-item"
+      className="bg-dark-green text-offWhite rounded-lg"
       key={product.id}
       prefetch="intent"
       to={variantUrl}
     >
       {product.featuredImage && (
         <Image
+          className="rounded-lg border-2 border-dark-green"
           alt={product.featuredImage.altText || product.title}
-          aspectRatio="1/1"
+          aspectRatio="1/1.3"
           data={product.featuredImage}
           loading={loading}
           sizes="(min-width: 45em) 400px, 100vw"
         />
       )}
-      <h4>{product.title}</h4>
-      <small>
-        <Money data={product.priceRange.minVariantPrice} />
-      </small>
+      <div className="flex flex-col gap-4 p-4">
+        <h4>{product.title}</h4>
+        <small>
+          <Money data={product.priceRange.minVariantPrice} />
+        </small>
+      </div>
     </Link>
   );
 }

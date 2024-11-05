@@ -14,7 +14,10 @@ import glass from 'app/assets/glass.svg';
 export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
   const {shop, menu} = header;
   return (
-    <header className="header">
+    <header className="sticky top-0 left-0 z-50 bg-white">
+      <div className="bg-dark-green text-white text-center p-2">
+        <p>Livraison gratuie à partir de 60$</p>
+      </div>
       <div className="header-global-wrapper p-3">
         <div className="header-wrapper bg-pink p-3 flex justify-between items-center rounded-full">
           <div className="flex items-center gap-1">

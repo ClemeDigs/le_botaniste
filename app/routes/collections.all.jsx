@@ -59,7 +59,7 @@ export default function Collection() {
   const {products} = useLoaderData();
 
   return (
-    <div className="collection">
+    <div>
       <h1>Products</h1>
       <PaginatedResourceSection
         connection={products}
@@ -87,14 +87,10 @@ function ProductItem({product, loading}) {
   const variant = product.variants.nodes[0];
   const variantUrl = useVariantUrl(product.handle, variant.selectedOptions);
   return (
-    <Link
-      className="product-item"
-      key={product.id}
-      prefetch="intent"
-      to={variantUrl}
-    >
+    <Link className="" key={product.id} prefetch="intent" to={variantUrl}>
       {product.featuredImage && (
         <Image
+          className=""
           alt={product.featuredImage.altText || product.title}
           aspectRatio="1/1"
           data={product.featuredImage}

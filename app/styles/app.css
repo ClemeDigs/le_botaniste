@@ -1,9 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Bowlby+One&family=Bree+Serif&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-
-@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
-
 :root {
   --aside-width: 400px;
   --cart-aside-summary-height-with-discount: 300px;
@@ -307,7 +301,7 @@ button.reset:hover:not(:has(> *)) {
 * routes/__index
 * --------------------------------------------------
 */
-.featured-collection {
+/* .featured-collection {
   display: block;
   margin-bottom: 2rem;
   position: relative;
@@ -337,14 +331,14 @@ button.reset:hover:not(:has(> *)) {
 
 .recommended-product img {
   height: auto;
-}
+} */
 
 /*
 * --------------------------------------------------
 * routes/collections._index.tsx
 * --------------------------------------------------
 */
-.collections-grid {
+/* .collections-grid {
   display: grid;
   grid-gap: 1.5rem;
   grid-template-columns: repeat(auto-fit, minmax(var(--grid-item-width), 1fr));
@@ -354,13 +348,13 @@ button.reset:hover:not(:has(> *)) {
 .collection-item img {
   height: auto;
 }
-
+ */
 /*
 * --------------------------------------------------
 * routes/collections.$handle.tsx
 * --------------------------------------------------
 */
-.collection-description {
+/* .collection-description {
   margin-bottom: 1rem;
   max-width: 95%;
   @media (min-width: 45em) {
@@ -378,14 +372,14 @@ button.reset:hover:not(:has(> *)) {
 .product-item img {
   height: auto;
   width: 100%;
-}
+} */
 
 /*
 * --------------------------------------------------
 * routes/products.$handle.tsx
 * --------------------------------------------------
 */
-.product {
+/* .product {
   display: grid;
   @media (min-width: 45em) {
     grid-template-columns: 1fr 1fr;
@@ -425,7 +419,7 @@ button.reset:hover:not(:has(> *)) {
 
 .product-options-item {
   padding: 0.25rem 0.5rem;
-}
+} */
 
 /*
 * --------------------------------------------------

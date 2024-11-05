@@ -1,6 +1,6 @@
 import {Suspense} from 'react';
 import {Await, NavLink} from '@remix-run/react';
-import PreFooter from './PreFooter';
+import IconsWithText from './IconsWithText';
 import logo from 'app/assets/le_botaniste_logo.svg';
 
 /**
@@ -9,7 +9,6 @@ import logo from 'app/assets/le_botaniste_logo.svg';
 export function Footer({footer: footerPromise, header, publicStoreDomain}) {
   return (
     <>
-      <PreFooter />
       <Suspense>
         <Await resolve={footerPromise}>
           {(footer) => (
@@ -20,7 +19,6 @@ export function Footer({footer: footerPromise, header, publicStoreDomain}) {
                   <Adresse />
                   <div className="w-[1px] h-[170px] bg-offWhite"></div>
                   <FooterMenu
-                    className=""
                     menu={footer.menu}
                     primaryDomainUrl={header.shop.primaryDomain.url}
                     publicStoreDomain={publicStoreDomain}

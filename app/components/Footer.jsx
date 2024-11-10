@@ -10,12 +10,13 @@ export function Footer({footer: footerPromise, header, publicStoreDomain}) {
     <Suspense>
       <Await resolve={footerPromise}>
         {(footer) => (
-          <footer className="footer bg-dark-green text-offWhite flex justify-between px-16 py-8">
+          <footer className="footer bg-dark-green text-offWhite flex flex-col lg:flex-row justify-between px-16 py-8 items-center gap-8 lg:gap-0">
             {footer?.menu && header.shop.primaryDomain?.url && (
               <>
                 <img className="w-[200px]" src={logo} alt="logo" />
                 <Adresse />
-                <div className="w-[1px] h-[170px] bg-offWhite"></div>
+                <div className="w-3/4 h-[1px] bg-offWhite lg:hidden "></div>
+                <div className="hidden w-[1px] h-[170px] bg-offWhite lg:inline "></div>
                 <FooterMenu
                   menu={footer.menu}
                   primaryDomainUrl={header.shop.primaryDomain.url}
@@ -38,7 +39,7 @@ export function Footer({footer: footerPromise, header, publicStoreDomain}) {
  */
 function FooterMenu({menu, primaryDomainUrl, publicStoreDomain}) {
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 w-[250px] md:w-[370px] lg:w-auto">
       <h3>Infos pratiques et légales</h3>
       <nav className="footer-menu flex flex-col" role="navigation">
         <a href="#">Condition générales de vente</a>
@@ -82,7 +83,7 @@ function FooterMenu({menu, primaryDomainUrl, publicStoreDomain}) {
 
 function Adresse() {
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 w-[250px] md:w-[370px] lg:w-auto">
       <h3>Le Botaniste</h3>
       <div>
         <p>270 rue des Plantes, G1V 2K6 Québec</p>

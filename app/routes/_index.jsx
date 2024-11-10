@@ -79,15 +79,21 @@ export default function Homepage() {
  */
 function FeaturedCollection({collection}) {
   if (!collection) return null;
+
   const image = collection?.image;
   return (
-    <Link
-      className=" flex gap-8 items-center bg-dark-green rounded-lg p-4 text-offWhite max-w-[1240px] mx-auto my-0"
-      to={`/collections/${collection.handle}`}
-    >
-      {image && <Image className="rounded-lg" data={image} sizes="40vw" />}
-      <h1 className="text-offWhite p-4">{collection.title}</h1>
-    </Link>
+    <div className="flex flex-col lg:flex-row gap-8 items-center bg-dark-green p-4 w-full max-w-[1536px]">
+      <Link
+        className="w-full lg:w-1/2"
+        to={`/collections/${collection.handle}`}
+      >
+        {image && <Image className="rounded-lg" data={image} sizes="40vw" />}
+      </Link>
+      <div className="text-offWhite w-full lg:w-1/2 w-1/2 p-4">
+        <h1>{collection.title}</h1>
+        <p>{collection.description}</p>
+      </div>
+    </div>
   );
 }
 
@@ -143,6 +149,7 @@ const FEATURED_COLLECTION_QUERY = `#graphql
   fragment FeaturedCollection on Collection {
     id
     title
+    description
     image {
       id
       url

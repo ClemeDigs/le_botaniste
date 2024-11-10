@@ -14,8 +14,8 @@ import {LuUserCircle2} from 'react-icons/lu';
 export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
   const {menu} = header;
   return (
-    <header className="header p-3">
-      <div className="bg-pink flex justify-between p-3 mb-12 rounded-full items-center sticky">
+    <header className="header p-3 sticky top-0 bg-white mb-12">
+      <div className="bg-pink flex flex-col md:flex-row justify-between p-3 rounded-full items-center ">
         <NavLink prefetch="intent" to="/" className="flex items-center">
           <img
             className="logo-seul w-[60px]"
@@ -101,10 +101,7 @@ export function HeaderMenu({
  */
 function HeaderCtas({isLoggedIn, cart}) {
   return (
-    <nav
-      className="header-ctas items-center align-middle flex gap-3"
-      role="navigation"
-    >
+    <nav className="items-center align-middle flex gap-3" role="navigation">
       <HeaderMenuMobileToggle />
       <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
         <Suspense fallback="Sign in">
@@ -112,7 +109,8 @@ function HeaderCtas({isLoggedIn, cart}) {
             {(isLoggedIn) => (isLoggedIn ? 'Account' : 'Sign in')}
             <div className="flex gap-1 items-center">
               {' '}
-              <LuUserCircle2 /> Connexion
+              <LuUserCircle2 />{' '}
+              <span className="hidden lg:inline">Connexion</span>
             </div>
           </Await>
         </Suspense>
@@ -139,7 +137,7 @@ function SearchToggle() {
   const {open} = useAside();
   return (
     <a className="reset flex gap-1 items-center" onClick={() => open('search')}>
-      <LuSearch /> Recherche{' '}
+      <LuSearch /> <span className="hidden lg:inline">Recherche </span>
     </a>
   );
 }
@@ -166,7 +164,8 @@ function CartBadge({count}) {
         });
       }}
     >
-      <LuShoppingBasket /> Panier {count === null ? <span>&nbsp;</span> : count}
+      <LuShoppingBasket /> <span className="hidden lg:inline">Panier</span>{' '}
+      {count === null ? <span>&nbsp;</span> : count}
     </a>
   );
 }

@@ -25,7 +25,7 @@
 
 h1 {
   font-family: 'Bowlby One', sans-serif;
-  font-size: 6rem;
+  font-size: 4rem;
 }
 
 h2 {
@@ -96,5 +96,11 @@ a:focus {
 
   .font-normal-sans {
     font-family: var(--font-normal-sans);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  h1 {
+    font-size: 6rem;
   }
 }

@@ -3,6 +3,13 @@ body {
     Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   margin: 0;
   padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex-grow: 1;
 }
 
 h1,
@@ -63,8 +70,8 @@ form {
 }
 
 input {
-  border-radius: 4px;
-  border: 1px solid #000;
+  /*   border-radius: 4px;
+  border: 1px solid #000; */
   font-size: 1rem;
   margin-bottom: 0.5rem;
   margin-top: 0.25rem;

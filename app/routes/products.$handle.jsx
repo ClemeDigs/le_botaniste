@@ -138,10 +138,13 @@ export default function Product() {
   const {title, descriptionHtml} = product;
 
   return (
-    <div className="product">
-      <ProductImage image={selectedVariant?.image} />
-      <div className="product-main">
-        <h1>{title}</h1>
+    <div className="flex gap-4 p-8">
+      <div className="w-1/2 bg-dark-green p-3 rounded-3xl">
+        <ProductImage image={selectedVariant?.image} />
+      </div>
+
+      <div className="w-1/2 flex flex-col justify-between">
+        <h1 className="text-dark-green">{title}</h1>
         <ProductPrice
           price={selectedVariant?.price}
           compareAtPrice={selectedVariant?.compareAtPrice}
@@ -169,14 +172,10 @@ export default function Product() {
             )}
           </Await>
         </Suspense>
-        <br />
-        <br />
         <p>
           <strong>Description</strong>
         </p>
-        <br />
         <div dangerouslySetInnerHTML={{__html: descriptionHtml}} />
-        <br />
       </div>
       <Analytics.ProductView
         data={{

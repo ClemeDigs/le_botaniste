@@ -59,11 +59,12 @@ export default function Collection() {
   const {products} = useLoaderData();
 
   return (
-    <div>
-      <h1>Products</h1>
+    <div className="p-8">
+      <h1 className="text-dark-green">Products</h1>
       <PaginatedResourceSection
         connection={products}
-        resourcesClassName="products-grid"
+        resourcesClassName="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+        /*         resourcesClassName="products-grid" */
       >
         {({node: product, index}) => (
           <ProductItem
@@ -87,21 +88,28 @@ function ProductItem({product, loading}) {
   const variant = product.variants.nodes[0];
   const variantUrl = useVariantUrl(product.handle, variant.selectedOptions);
   return (
-    <Link className="" key={product.id} prefetch="intent" to={variantUrl}>
+    <Link
+      className="bg-dark-green rounded-lg text-offWhite"
+      key={product.id}
+      prefetch="intent"
+      to={variantUrl}
+    >
       {product.featuredImage && (
         <Image
-          className=""
+          className="rounded-lg border-8 border-dark-green"
           alt={product.featuredImage.altText || product.title}
-          aspectRatio="1/1"
+          aspectRatio="1/1.3"
           data={product.featuredImage}
           loading={loading}
           sizes="(min-width: 45em) 400px, 100vw"
         />
       )}
-      <h4>{product.title}</h4>
-      <small>
-        <Money data={product.priceRange.minVariantPrice} />
-      </small>
+      <div className="p-3 text-offWhite">
+        <h4>{product.title}</h4>
+        <small>
+          <Money data={product.priceRange.minVariantPrice} />
+        </small>
+      </div>
     </Link>
   );
 }

@@ -10,9 +10,9 @@ export function Footer({footer: footerPromise, header, publicStoreDomain}) {
     <Suspense>
       <Await resolve={footerPromise}>
         {(footer) => (
-          <footer className="footer bg-dark-green text-offWhite flex flex-col lg:flex-row justify-between px-16 py-8 items-center gap-8 lg:gap-0">
+          <footer className=" bg-dark-green text-offWhite flex justify-center ">
             {footer?.menu && header.shop.primaryDomain?.url && (
-              <>
+              <div className="max-w-[1440px] w-full flex flex-col lg:flex-row justify-between px-16 py-8 items-center gap-8 lg:gap-0">
                 <img className="w-[200px]" src={logo} alt="logo" />
                 <Adresse />
                 <div className="w-3/4 h-[1px] bg-offWhite lg:hidden "></div>
@@ -22,7 +22,7 @@ export function Footer({footer: footerPromise, header, publicStoreDomain}) {
                   primaryDomainUrl={header.shop.primaryDomain.url}
                   publicStoreDomain={publicStoreDomain}
                 />
-              </>
+              </div>
             )}
           </footer>
         )}

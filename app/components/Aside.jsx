@@ -1,4 +1,5 @@
 import {createContext, useContext, useEffect, useState} from 'react';
+import {RiCloseCircleLine} from 'react-icons/ri';
 
 /**
  * A side bar component with Overlay
@@ -43,14 +44,14 @@ export function Aside({children, heading, type}) {
       role="dialog"
     >
       <button className="close-outside" onClick={close} />
-      <aside>
-        <header>
-          <h3>{heading}</h3>
+      <aside className="flex flex-col pt-3 pr-3">
+        <header className="flex justify-between items-center px-3 py-3 bg-pink rounded-r-full">
+          <h3 className="text-dark-green">{heading}</h3>
           <button className="close reset" onClick={close}>
-            &times;
+            <RiCloseCircleLine className="text-5xl text-dark-green" />
           </button>
         </header>
-        <main>{children}</main>
+        <main className="p-3">{children}</main>
       </aside>
     </div>
   );

@@ -39,7 +39,9 @@ export function ProductForm({product, selectedVariant, variants}) {
             : []
         }
       >
-        {selectedVariant?.availableForSale ? 'Add to cart' : 'Sold out'}
+        {selectedVariant?.availableForSale
+          ? 'Ajouter au panier'
+          : 'En rupture de stock'}
       </AddToCartButton>
     </div>
   );

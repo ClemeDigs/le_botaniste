@@ -49,8 +49,8 @@ export function PageLayout({
  */
 function CartAside({cart}) {
   return (
-    <Aside type="cart" heading="CART">
-      <Suspense fallback={<p>Loading cart ...</p>}>
+    <Aside type="cart" heading="PANIER">
+      <Suspense fallback={<p>En attente du panier ...</p>}>
         <Await resolve={cart}>
           {(cart) => {
             return <CartMain cart={cart} layout="aside" />;
@@ -64,8 +64,8 @@ function CartAside({cart}) {
 function SearchAside() {
   const queriesDatalistId = useId();
   return (
-    <Aside type="search" heading="SEARCH">
-      <div className="predictive-search">
+    <Aside type="search" heading="RECHERCHE">
+      <div className="predictive-search p-3">
         <br />
         <SearchFormPredictive>
           {({fetchResults, goToSearch, inputRef}) => (
@@ -74,13 +74,14 @@ function SearchAside() {
                 name="q"
                 onChange={fetchResults}
                 onFocus={fetchResults}
-                placeholder="Search"
+                placeholder="Recherche"
                 ref={inputRef}
                 type="search"
                 list={queriesDatalistId}
+                className="rounded-full bg-offWhite border-dark-green p-1"
               />
               &nbsp;
-              <button onClick={goToSearch}>Search</button>
+              <button onClick={goToSearch}>Rechercher</button>
             </>
           )}
         </SearchFormPredictive>

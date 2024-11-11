@@ -9,10 +9,13 @@ export function CartSummary({cart, layout}) {
     layout === 'page' ? 'cart-summary-page' : 'cart-summary-aside';
 
   return (
-    <div aria-labelledby="cart-summary" className={className}>
-      <h4>Totals</h4>
-      <dl className="cart-subtotal">
-        <dt>Subtotal</dt>
+    <div
+      aria-labelledby="cart-summary"
+      className={`${className} bg-pink border-t-2 border-dark-green absolute left-0 bottom-0 p-3`}
+    >
+      <h4>Total</h4>
+      <dl className="flex gap-4 font-semibold">
+        <dt>Sous-total</dt>
         <dd>
           {cart.cost?.subtotalAmount?.amount ? (
             <Money data={cart.cost?.subtotalAmount} />
@@ -36,7 +39,7 @@ function CartCheckoutActions({checkoutUrl}) {
   return (
     <div>
       <a href={checkoutUrl} target="_self">
-        <p>Continue to Checkout &rarr;</p>
+        <p>Continuer vers le paiement &rarr;</p>
       </a>
       <br />
     </div>
@@ -59,12 +62,12 @@ function CartDiscounts({discountCodes}) {
       {/* Have existing discount, display it with a remove option */}
       <dl hidden={!codes.length}>
         <div>
-          <dt>Discount(s)</dt>
+          <dt>Promotion(s)</dt>
           <UpdateDiscountForm>
             <div className="cart-discount">
               <code>{codes?.join(', ')}</code>
               &nbsp;
-              <button>Remove</button>
+              <button>Supprimer</button>
             </div>
           </UpdateDiscountForm>
         </div>
@@ -73,9 +76,14 @@ function CartDiscounts({discountCodes}) {
       {/* Show an input to apply a discount */}
       <UpdateDiscountForm discountCodes={codes}>
         <div>
-          <input type="text" name="discountCode" placeholder="Discount code" />
+          <input
+            type="text"
+            name="discountCode"
+            placeholder="Code promo"
+            className=" bg-offWhite border border-dark-green rounded-full p-1"
+          />
           &nbsp;
-          <button type="submit">Apply</button>
+          <button type="submit">Valider</button>
         </div>
       </UpdateDiscountForm>
     </div>
@@ -130,12 +138,12 @@ function CartGiftCard({giftCardCodes}) {
       {/* Have existing gift card applied, display it with a remove option */}
       <dl hidden={!codes.length}>
         <div>
-          <dt>Applied Gift Card(s)</dt>
+          <dt>Carte(s) cadeau(x) appliquée(s)</dt>
           <UpdateGiftCardForm>
             <div className="cart-discount">
               <code>{codes?.join(', ')}</code>
               &nbsp;
-              <button onSubmit={() => removeAppliedCode}>Remove</button>
+              <button onSubmit={() => removeAppliedCode}>Supprimer</button>
             </div>
           </UpdateGiftCardForm>
         </div>
@@ -148,13 +156,14 @@ function CartGiftCard({giftCardCodes}) {
       >
         <div>
           <input
+            className=" bg-offWhite border border-dark-green rounded-full p-1"
             type="text"
             name="giftCardCode"
-            placeholder="Gift card code"
+            placeholder="Code carte cadeau"
             ref={giftCardCodeInput}
           />
           &nbsp;
-          <button type="submit">Apply</button>
+          <button type="submit">Valider</button>
         </div>
       </UpdateGiftCardForm>
     </div>

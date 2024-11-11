@@ -100,12 +100,15 @@ export default function Cart() {
   if (!rootData) return null;
 
   return (
-    <div className="cart">
-      <h1>Cart</h1>
-      <Suspense fallback={<p>Loading cart ...</p>}>
+    <div>
+      <div className="pl-8">
+        <h1 className="text-dark-green">Panier</h1>
+      </div>
+
+      <Suspense fallback={<p>En attente du panier ...</p>}>
         <Await
           resolve={rootData.cart}
-          errorElement={<div>An error occurred</div>}
+          errorElement={<div>Une erreur est survenue</div>}
         >
           {(cart) => {
             return <CartMain layout="page" cart={cart} />;

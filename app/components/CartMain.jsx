@@ -24,8 +24,8 @@ export function CartMain({layout, cart: originalCart}) {
   return (
     <div className={className}>
       <CartEmpty hidden={linesCount} layout={layout} />
-      <div className="cart-details">
-        <div aria-labelledby="cart-lines">
+      <div className="">
+        <div aria-labelledby="cart-lines" className="max-w-[450px]">
           <ul>
             {(cart?.lines?.nodes ?? []).map((line) => (
               <CartLineItem key={line.id} line={line} layout={layout} />
@@ -47,15 +47,12 @@ export function CartMain({layout, cart: originalCart}) {
 function CartEmpty({hidden = false}) {
   const {close} = useAside();
   return (
-    <div hidden={hidden}>
+    <div className="p-8" hidden={hidden}>
       <br />
-      <p>
-        Looks like you haven&rsquo;t added anything yet, let&rsquo;s get you
-        started!
-      </p>
+      <p>On dirait que ton panier est vide. Ajoute quelque chose !</p>
       <br />
       <Link to="/collections" onClick={close} prefetch="viewport">
-        Continue shopping →
+        Continuer le magasinage →
       </Link>
     </div>
   );

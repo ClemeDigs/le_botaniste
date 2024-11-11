@@ -10,8 +10,9 @@ export function ProductImage({image}) {
     return <div className="" />;
   }
   return (
-    <div className="">
+    <div>
       <Image
+        className="rounded-3xl"
         alt={image.altText || 'Product Image'}
         aspectRatio="1/1"
         data={image}

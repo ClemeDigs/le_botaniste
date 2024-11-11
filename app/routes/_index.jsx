@@ -3,6 +3,7 @@ import {Await, useLoaderData, Link} from '@remix-run/react';
 import {Suspense} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
 import IconsWithText from '~/components/IconsWithText';
+import {AddToCartButton} from '~/components/AddToCartButton';
 
 /**
  * @type {MetaFunction}
@@ -82,16 +83,18 @@ function FeaturedCollection({collection}) {
 
   const image = collection?.image;
   return (
-    <div className="flex flex-col lg:flex-row gap-8 items-center bg-dark-green p-4 w-full max-w-[1536px]">
-      <Link
-        className="w-full lg:w-1/2"
-        to={`/collections/${collection.handle}`}
-      >
-        {image && <Image className="rounded-lg" data={image} sizes="40vw" />}
-      </Link>
-      <div className="text-offWhite w-full lg:w-1/2 w-1/2 p-4">
-        <h1>{collection.title}</h1>
-        <p>{collection.description}</p>
+    <div className=" bg-dark-green flex justify-center">
+      <div className="flex flex-col lg:flex-row gap-8 items-center p-4 max-w-[1536px]">
+        <Link
+          className="w-full lg:w-1/2"
+          to={`/collections/${collection.handle}`}
+        >
+          {image && <Image className="rounded-lg" data={image} sizes="40vw" />}
+        </Link>
+        <div className="text-offWhite w-full lg:w-1/2 w-1/2 p-4">
+          <h1>{collection.title}</h1>
+          <p>{collection.description}</p>
+        </div>
       </div>
     </div>
   );
@@ -118,7 +121,7 @@ function RecommendedProducts({products}) {
                       to={`/products/${product.handle}`}
                     >
                       <Image
-                        className="rounded-lg border-2 border-dark-green"
+                        className="rounded-lg border-8 border-dark-green"
                         data={product.images.nodes[0]}
                         aspectRatio="1/1.3"
                         sizes="(width: 40em) 20vw, 30vw"

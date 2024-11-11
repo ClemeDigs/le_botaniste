@@ -3,6 +3,7 @@ import {useVariantUrl} from '~/lib/variants';
 import {Link} from '@remix-run/react';
 import {ProductPrice} from './ProductPrice';
 import {useAside} from './Aside';
+import {SiPandas} from 'react-icons/si';
 
 /**
  * A single line item in the cart. It displays the product image, title, price.
@@ -19,11 +20,15 @@ export function CartLineItem({layout, line}) {
   const {close} = useAside();
 
   return (
-    <li key={id} className="cart-line">
+    <li
+      key={id}
+      className="flex items-center rounded-xl border-2 border-dark-green"
+    >
       {image && (
         <Image
+          className="rounded-l-xl"
           alt={title}
-          aspectRatio="1/1"
+          aspectRatio="1/1.5"
           data={image}
           height={100}
           loading="lazy"
@@ -31,7 +36,7 @@ export function CartLineItem({layout, line}) {
         />
       )}
 
-      <div>
+      <div className="p-3">
         <Link
           prefetch="intent"
           to={lineItemUrl}
@@ -74,8 +79,10 @@ function CartLineQuantity({line}) {
   const nextQuantity = Number((quantity + 1).toFixed(0));
 
   return (
-    <div className="cart-line-quantity">
-      <small>Quantity: {quantity} &nbsp;&nbsp;</small>
+    <div className="flex items-center gap-1">
+      <span className=" font-bold text-sm">
+        Quantité: {quantity} &nbsp;&nbsp;
+      </span>
       <CartLineUpdateButton lines={[{id: lineId, quantity: prevQuantity}]}>
         <button
           aria-label="Decrease quantity"
@@ -83,7 +90,9 @@ function CartLineQuantity({line}) {
           name="decrease-quantity"
           value={prevQuantity}
         >
-          <span>&#8722; </span>
+          <div className="text-dark-green border-dark-green font-bold text-lg border rounded-full h-[24px] w-[24px] flex justify-center items-center">
+            <span>&#8722; </span>
+          </div>
         </button>
       </CartLineUpdateButton>
       &nbsp;
@@ -94,7 +103,9 @@ function CartLineQuantity({line}) {
           value={nextQuantity}
           disabled={!!isOptimistic}
         >
-          <span>&#43;</span>
+          <div className="text-dark-green border-dark-green font-bold text-lg border rounded-full h-[24px] w-[24px] flex justify-center items-center">
+            <span>&#43; </span>
+          </div>
         </button>
       </CartLineUpdateButton>
       &nbsp;
@@ -120,7 +131,7 @@ function CartLineRemoveButton({lineIds, disabled}) {
       inputs={{lineIds}}
     >
       <button disabled={disabled} type="submit">
-        Remove
+        Supprimer
       </button>
     </CartForm>
   );

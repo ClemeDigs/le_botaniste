@@ -78,7 +78,7 @@ export default function Collection() {
   const {collection} = useLoaderData();
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 p-8">
       <h1>{collection.title}</h1>
       <p className="collection-description">{collection.description}</p>
       <PaginatedResourceSection
@@ -123,7 +123,7 @@ function ProductItem({product, loading}) {
     >
       {product.featuredImage && (
         <Image
-          className="rounded-lg border-2 border-dark-green"
+          className="rounded-lg border-8 border-dark-green"
           alt={product.featuredImage.altText || product.title}
           aspectRatio="1/1.3"
           data={product.featuredImage}

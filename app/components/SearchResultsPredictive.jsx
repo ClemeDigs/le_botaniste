@@ -98,7 +98,7 @@ function SearchResultsPredictiveCollections({term, collections, closeSearch}) {
   if (!collections.length) return null;
 
   return (
-    <div className="predictive-search-result" key="collections">
+    <div className="bg-pink" key="collections">
       <h5>Collections</h5>
       <ul>
         {collections.map((collection) => {
@@ -170,8 +170,8 @@ function SearchResultsPredictiveProducts({term, products, closeSearch}) {
   if (!products.length) return null;
 
   return (
-    <div className="predictive-search-result" key="products">
-      <h5>Products</h5>
+    <div className="predictive-search-result bg-pink" key="products">
+      <h5>Produits</h5>
       <ul>
         {products.map((product) => {
           const productUrl = urlWithTrackingParams({
@@ -240,7 +240,7 @@ function SearchResultsPredictiveEmpty({term}) {
 
   return (
     <p>
-      No results found for <q>{term.current}</q>
+      Aucun résultat trouvé pour <q>{term.current}</q>
     </p>
   );
 }

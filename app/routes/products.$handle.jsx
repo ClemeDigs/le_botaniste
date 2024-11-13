@@ -150,7 +150,7 @@ export default function Product() {
       <div className="lg:w-2/3 flex flex-col justify-between items-center lg:items-start">
         <div className="flex flex-col gap-3 max-w-[550px] lg:max-w-none m-auto lg:m-0">
           <h1 className="text-dark-green text-center lg:text-start">{title}</h1>
-          <Rating />
+          <Rating productId={product.title} />
           <ProductPrice
             price={selectedVariant?.price}
             compareAtPrice={selectedVariant?.compareAtPrice}

@@ -27,7 +27,7 @@ function SearchResultsArticles({term, articles}) {
   }
 
   return (
-    <div className="search-result">
+    <div className="p-8">
       <h2>Articles</h2>
       <div>
         {articles?.nodes?.map((article) => {
@@ -60,7 +60,7 @@ function SearchResultsPages({term, pages}) {
   }
 
   return (
-    <div className="search-result">
+    <div className="p-8">
       <h2>Pages</h2>
       <div>
         {pages?.nodes?.map((page) => {
@@ -93,7 +93,7 @@ function SearchResultsProducts({term, products}) {
   }
 
   return (
-    <div className="search-result">
+    <div className="p-8">
       <h2>Produits</h2>
       <Pagination connection={products}>
         {({nodes, isLoading, NextLink, PreviousLink}) => {
@@ -105,16 +105,22 @@ function SearchResultsProducts({term, products}) {
             });
 
             return (
-              <div className="search-results-item" key={product.id}>
-                <Link prefetch="intent" to={productUrl}>
+              <div key={product.id}>
+                <Link
+                  prefetch="intent"
+                  to={productUrl}
+                  className="text-offWhite"
+                >
                   {product.variants.nodes[0].image && (
                     <Image
+                      className="rounded-t-lg border-8 border-dark-green"
                       data={product.variants.nodes[0].image}
                       alt={product.title}
-                      width={50}
+                      width={200}
+                      height={300}
                     />
                   )}
-                  <div>
+                  <div className="bg-dark-green rounded-b-lg p-3 text-offWhite w-[200px]">
                     <p>{product.title}</p>
                     <small>
                       <Money data={product.variants.nodes[0].price} />
@@ -127,18 +133,18 @@ function SearchResultsProducts({term, products}) {
 
           return (
             <div>
-              <div>
+              <div className="mb-4">
                 <PreviousLink>
-                  {isLoading ? 'Loading...' : <span>↑ Load previous</span>}
+                  {isLoading ? 'Chargement...' : <span>↑ Précédents</span>}
                 </PreviousLink>
               </div>
-              <div>
+              <div className="flex gap-4 flex-wrap">
                 {ItemsMarkup}
                 <br />
               </div>
-              <div>
+              <div className="mt-4">
                 <NextLink>
-                  {isLoading ? 'Loading...' : <span>Load more ↓</span>}
+                  {isLoading ? 'Chargement...' : <span>Suivants ↓</span>}
                 </NextLink>
               </div>
             </div>
@@ -151,7 +157,7 @@ function SearchResultsProducts({term, products}) {
 }
 
 function SearchResultsEmpty() {
-  return <p>No results, try a different search.</p>;
+  return <p className="p-8">Pas de resultats. Essaie autre chose!</p>;
 }
 
 /** @typedef {RegularSearchReturn['result']['items']} SearchItems */

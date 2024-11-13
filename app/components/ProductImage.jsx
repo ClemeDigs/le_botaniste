@@ -7,12 +7,12 @@ import {Image} from '@shopify/hydrogen';
  */
 export function ProductImage({image}) {
   if (!image) {
-    return <div className="" />;
+    return <div />;
   }
   return (
     <div>
       <Image
-        className="rounded-3xl"
+        className="rounded-3xl border-8 border-dark-green"
         alt={image.altText || 'Product Image'}
         aspectRatio="1/1"
         data={image}

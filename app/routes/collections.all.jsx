@@ -60,7 +60,7 @@ export default function Collection() {
 
   return (
     <div className="p-8">
-      <h1 className="text-dark-green">Products</h1>
+      <h1 className="text-dark-green">Nos produits</h1>
       <PaginatedResourceSection
         connection={products}
         resourcesClassName="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"

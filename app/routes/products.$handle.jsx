@@ -10,6 +10,7 @@ import {getVariantUrl} from '~/lib/variants';
 import {ProductPrice} from '~/components/ProductPrice';
 import {ProductImage} from '~/components/ProductImage';
 import {ProductForm} from '~/components/ProductForm';
+import Rating from '~/components/Rating';
 
 /**
  * @type {MetaFunction<typeof loader>}
@@ -138,18 +139,45 @@ export default function Product() {
   const {title, descriptionHtml} = product;
 
   return (
-    <div className="flex gap-4 p-8">
-      <div className="w-1/2 bg-dark-green p-3 rounded-3xl">
-        <ProductImage image={selectedVariant?.image} />
+    <div className="flex flex-col lg:flex-row gap-8 p-8 m-auto max-w-[1440px]">
+      <div className="lg:w-1/3 flex items-center justify-center">
+        <ProductImage
+          className="border-8 border-dark-green"
+          image={selectedVariant?.image}
+        />
       </div>
 
-      <div className="w-1/2 flex flex-col justify-between">
-        <h1 className="text-dark-green">{title}</h1>
-        <ProductPrice
-          price={selectedVariant?.price}
-          compareAtPrice={selectedVariant?.compareAtPrice}
+      <div className="lg:w-2/3 flex flex-col justify-between items-center lg:items-start">
+        <div className="flex flex-col gap-3 max-w-[550px] lg:max-w-none m-auto lg:m-0">
+          <h1 className="text-dark-green text-center lg:text-start">{title}</h1>
+          <Rating />
+          <ProductPrice
+            price={selectedVariant?.price}
+            compareAtPrice={selectedVariant?.compareAtPrice}
+          />
+
+          <div>
+            <p>
+              <strong>Description</strong>
+            </p>
+            <div dangerouslySetInnerHTML={{__html: descriptionHtml}} />
+          </div>
+        </div>
+        <Analytics.ProductView
+          data={{
+            products: [
+              {
+                id: product.id,
+                title: product.title,
+                price: selectedVariant?.price.amount || '0',
+                vendor: product.vendor,
+                variantId: selectedVariant?.id || '',
+                variantTitle: selectedVariant?.title || '',
+                quantity: 1,
+              },
+            ],
+          }}
         />
-        <br />
         <Suspense
           fallback={
             <ProductForm
@@ -172,26 +200,7 @@ export default function Product() {
             )}
           </Await>
         </Suspense>
-        <p>
-          <strong>Description</strong>
-        </p>
-        <div dangerouslySetInnerHTML={{__html: descriptionHtml}} />
       </div>
-      <Analytics.ProductView
-        data={{
-          products: [
-            {
-              id: product.id,
-              title: product.title,
-              price: selectedVariant?.price.amount || '0',
-              vendor: product.vendor,
-              variantId: selectedVariant?.id || '',
-              variantTitle: selectedVariant?.title || '',
-              quantity: 1,
-            },
-          ],
-        }}
-      />
     </div>
   );
 }

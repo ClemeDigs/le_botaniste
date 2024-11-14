@@ -11,6 +11,9 @@ import {ProductPrice} from '~/components/ProductPrice';
 import {ProductImage} from '~/components/ProductImage';
 import {ProductForm} from '~/components/ProductForm';
 import Rating from '~/components/Rating';
+import {IoPawSharp} from 'react-icons/io5';
+import {GiWateringCan} from 'react-icons/gi';
+import {LuSunMedium} from 'react-icons/lu';
 
 /**
  * @type {MetaFunction<typeof loader>}
@@ -165,20 +168,26 @@ export default function Product() {
           <Rating />
           <div>
             {product.animaux?.value && (
-              <p>
-                <strong>Animaux :</strong>{' '}
+              <p className="flex flex-row gap-3 items-center">
+                <span className="text-2xl">
+                  <IoPawSharp />
+                </span>
                 {parseMetafieldValue(product.animaux.value)}
               </p>
             )}
             {product.arrosage?.value && (
-              <p>
-                <strong>Arrosage :</strong>{' '}
+              <p className="flex flex-row gap-3 items-center">
+                <span className="text-2xl">
+                  <GiWateringCan />
+                </span>
                 {parseMetafieldValue(product.arrosage.value)}
               </p>
             )}
             {product.luminosite?.value && (
-              <p>
-                <strong>Luminosité :</strong>{' '}
+              <p className="flex flex-row gap-3 items-center">
+                <span className="text-2xl">
+                  <LuSunMedium />
+                </span>
                 {parseMetafieldValue(product.luminosite.value)}
               </p>
             )}

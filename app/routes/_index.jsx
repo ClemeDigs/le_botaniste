@@ -91,7 +91,7 @@ function FeaturedCollection({collection}) {
         >
           {image && <Image className="rounded-lg" data={image} sizes="40vw" />}
         </Link>
-        <div className="text-offWhite w-full lg:w-1/2 w-1/2 p-4">
+        <div className="text-offWhite w-full lg:w-1/2 p-4">
           <h1>{collection.title}</h1>
           <p>{collection.description}</p>
         </div>

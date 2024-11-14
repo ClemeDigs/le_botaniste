@@ -142,10 +142,22 @@ function parseMetafieldValue(value) {
 export default function Product() {
   /** @type {LoaderReturnData} */
   const {product, variants} = useLoaderData();
+  console.log(product);
   const selectedVariant = useOptimisticVariant(
     product.selectedVariant,
     variants,
   );
+
+  function parseMetafieldValue(value) {
+    try {
+      const parsedValue = JSON.parse(value);
+      // Si la valeur analysée est un tableau, renvoyer le premier élément
+      return Array.isArray(parsedValue) ? parsedValue[0] : parsedValue;
+    } catch (error) {
+      // Si la valeur n'est pas du JSON, la renvoyer telle quelle
+      return value;
+    }
+  }
 
   const {title, descriptionHtml} = product;
 
@@ -161,7 +173,7 @@ export default function Product() {
       <div className="lg:w-[50%] xl:w-[60%] flex flex-col justify-between items-center lg:items-start">
         <div className="flex flex-col gap-3 max-w-[600px] lg:max-w-none m-auto lg:m-0">
           <h1 className="text-dark-green text-center lg:text-start">{title}</h1>
-          <Rating />
+          <Rating productId={product.title}/>
           <div>
             {product.animaux?.value && (
               <p>

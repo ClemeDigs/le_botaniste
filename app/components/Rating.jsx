@@ -1,21 +1,24 @@
 import {useEffect, useState} from 'react';
 
-export default function Rating({defaultValue = 5}) {
+export default function Rating({defaultValue = 5, productId}) {
   const btnRatings = [];
   const [currentRating, setCurrentRating] = useState(defaultValue);
 
   useEffect(() => {
-    setCurrentRating(localStorage.getItem('rating') ?? defaultValue);
-  }, [defaultValue]);
+    const storedRating = localStorage.getItem(`rating-${productId}`);
+    setCurrentRating(storedRating ?? defaultValue);
+  }, [defaultValue, productId]);
+
+  const handleRatingClick = (rating) => {
+    setCurrentRating(rating);
+    localStorage.setItem(`rating-${productId}`, rating);
+  };
 
   for (let i = 1; i <= 5; i++) {
     btnRatings.push(
       <button
         key={i}
-        onClick={() => {
-          setCurrentRating(i);
-          localStorage.setItem('rating', i);
-        }}
+        onClick={() => handleRatingClick(i)}
         className="text-[1.5rem] text-orange"
       >
         {parseInt(currentRating) >= i ? '★' : '☆'}

@@ -3,6 +3,7 @@ import {useLoaderData, Link} from '@remix-run/react';
 import {getPaginationVariables, Image, Money} from '@shopify/hydrogen';
 import {useVariantUrl} from '~/lib/variants';
 import {PaginatedResourceSection} from '~/components/PaginatedResourceSection';
+import AddToWishList from '~/components/AddToWishList';
 
 /**
  * @type {MetaFunction<typeof loader>}
@@ -105,7 +106,10 @@ function ProductItem({product, loading}) {
         />
       )}
       <div className="p-3 text-offWhite">
-        <h4>{product.title}</h4>
+        <div className="flex gap-4">
+          <h4 className="text-offWhite">{product.title}</h4>
+          <AddToWishList className="text-[1rem]" productId={product.id} />
+        </div>
         <small>
           <Money data={product.priceRange.minVariantPrice} />
         </small>

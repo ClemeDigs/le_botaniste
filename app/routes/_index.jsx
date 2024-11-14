@@ -4,6 +4,7 @@ import {Suspense} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
 import IconsWithText from '~/components/IconsWithText';
 import {AddToCartButton} from '~/components/AddToCartButton';
+import AddToWishList from '~/components/AddToWishList';
 
 /**
  * @type {MetaFunction}
@@ -128,7 +129,13 @@ function RecommendedProducts({products}) {
                       />
                       <div className="flex flex-col gap-4 p-4">
                         {' '}
-                        <h4 className="text-offWhite">{product.title}</h4>
+                        <div className="flex gap-4 items-center">
+                          <h4 className="text-offWhite">{product.title}</h4>
+                          <AddToWishList
+                            className="text-[1rem]"
+                            productId={product.id}
+                          />
+                        </div>
                         <small>
                           <Money
                             className="text-offWhite"

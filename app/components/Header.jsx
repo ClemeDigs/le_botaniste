@@ -7,6 +7,7 @@ import {Link, Links} from '@remix-run/react';
 import {LuSearch} from 'react-icons/lu';
 import {LuShoppingBasket} from 'react-icons/lu';
 import {LuUserCircle2} from 'react-icons/lu';
+import {TbHeart} from 'react-icons/tb';
 
 /**
  * @param {HeaderProps}
@@ -116,6 +117,7 @@ function HeaderCtas({isLoggedIn, cart}) {
         </Suspense>
       </NavLink>
       <SearchToggle />
+      <LikedProducts />
       <CartToggle cart={cart} />
     </nav>
   );
@@ -139,6 +141,15 @@ function SearchToggle() {
     <a className="reset flex gap-1 items-center" onClick={() => open('search')}>
       <LuSearch /> <span className="hidden lg:inline">Recherche </span>
     </a>
+  );
+}
+
+function LikedProducts() {
+  const {open} = useAside();
+  return (
+    <Link to="/wishList" className=" flex gap-1 items-center">
+      <TbHeart /> <span className="hidden lg:inline">Favoris </span>
+    </Link>
   );
 }
 

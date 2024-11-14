@@ -14,6 +14,7 @@ import Rating from '~/components/Rating';
 import {IoPawSharp} from 'react-icons/io5';
 import {GiWateringCan} from 'react-icons/gi';
 import {LuSunMedium} from 'react-icons/lu';
+import AddToWishList from '~/components/AddToWishList';
 
 /**
  * @type {MetaFunction<typeof loader>}
@@ -175,8 +176,13 @@ export default function Product() {
 
       <div className="lg:w-[50%] xl:w-[60%] flex flex-col justify-between items-center lg:items-start">
         <div className="flex flex-col gap-3 max-w-[600px] lg:max-w-none m-auto lg:m-0">
-          <h1 className="text-dark-green text-center lg:text-start">{title}</h1>
-          <Rating productId={product.title}/>
+          <div className="flex gap-4">
+            <h1 className="text-dark-green text-center lg:text-start">
+              {title}
+            </h1>
+            <AddToWishList className="text-[3.5rem]" productId={product.id} />
+          </div>
+          <Rating productId={product.title} />
           <div>
             {product.animaux?.value && (
               <p className="flex flex-row gap-3 items-center">

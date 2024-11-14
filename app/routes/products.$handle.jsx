@@ -131,10 +131,22 @@ function redirectToFirstVariant({product, request}) {
 export default function Product() {
   /** @type {LoaderReturnData} */
   const {product, variants} = useLoaderData();
+  console.log(product);
   const selectedVariant = useOptimisticVariant(
     product.selectedVariant,
     variants,
   );
+
+  function parseMetafieldValue(value) {
+    try {
+      const parsedValue = JSON.parse(value);
+      // Si la valeur analysée est un tableau, renvoyer le premier élément
+      return Array.isArray(parsedValue) ? parsedValue[0] : parsedValue;
+    } catch (error) {
+      // Si la valeur n'est pas du JSON, la renvoyer telle quelle
+      return value;
+    }
+  }
 
   const {title, descriptionHtml} = product;
 
@@ -151,6 +163,26 @@ export default function Product() {
         <div className="flex flex-col gap-3 max-w-[550px] lg:max-w-none m-auto lg:m-0">
           <h1 className="text-dark-green text-center lg:text-start">{title}</h1>
           <Rating />
+          <div>
+            {product.animaux?.value && (
+              <p>
+                <strong>Animaux :</strong>{' '}
+                {parseMetafieldValue(product.animaux.value)}
+              </p>
+            )}
+            {product.arrosage?.value && (
+              <p>
+                <strong>Arrosage :</strong>{' '}
+                {parseMetafieldValue(product.arrosage.value)}
+              </p>
+            )}
+            {product.luminosite?.value && (
+              <p>
+                <strong>Luminosité :</strong>{' '}
+                {parseMetafieldValue(product.luminosite.value)}
+              </p>
+            )}
+          </div>
           <ProductPrice
             price={selectedVariant?.price}
             compareAtPrice={selectedVariant?.compareAtPrice}
@@ -250,6 +282,15 @@ const PRODUCT_FRAGMENT = `#graphql
     handle
     descriptionHtml
     description
+    animaux: metafield(key: "animaux", namespace: "custom"){
+      value
+    }
+    arrosage: metafield(key: "arrosage", namespace: "custom"){
+      value
+    }
+    luminosite: metafield(key: "luminosit_", namespace: "custom"){
+      value
+    }
     options {
       name
       values

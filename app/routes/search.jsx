@@ -39,7 +39,7 @@ export default function SearchPage() {
   if (type === 'predictive') return null;
 
   return (
-    <div className="search">
+    <div className="p-8">
       <h1>Recherche</h1>
       <SearchForm>
         {({inputRef}) => (
@@ -50,6 +50,7 @@ export default function SearchPage() {
               placeholder="Rechercher..."
               ref={inputRef}
               type="search"
+              className=" bg-offWhite border border-dark-green rounded-full p-1"
             />
             &nbsp;
             <button type="submit">Rechercher</button>

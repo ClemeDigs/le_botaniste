@@ -21,7 +21,7 @@ export function PaginatedResourceSection({
         return (
           <div>
             <PreviousLink>
-              {isLoading ? 'Loading...' : <span>↑ Load previous</span>}
+              {isLoading ? 'Loading...' : <span>↑ Précédents</span>}
             </PreviousLink>
             {resourcesClassName ? (
               <div className={resourcesClassName}>{resoucesMarkup}</div>
@@ -29,7 +29,7 @@ export function PaginatedResourceSection({
               resoucesMarkup
             )}
             <NextLink>
-              {isLoading ? 'Loading...' : <span>Load more ↓</span>}
+              {isLoading ? 'Loading...' : <span>Suivants ↓</span>}
             </NextLink>
           </div>
         );

@@ -58,9 +58,12 @@ function SearchResultsPredictiveArticles({term, articles, closeSearch}) {
   if (!articles.length) return null;
 
   return (
-    <div className="predictive-search-result" key="articles">
+    <div
+      className="border-b-2 border-dark-green flex flex-col gap-4 mb-4"
+      key="articles"
+    >
       <h5>Articles</h5>
-      <ul>
+      <ul className=" flex flex-col gap-2">
         {articles.map((article) => {
           const articleUrl = urlWithTrackingParams({
             baseUrl: `/blogs/${article.blog.handle}/${article.handle}`,
@@ -69,7 +72,7 @@ function SearchResultsPredictiveArticles({term, articles, closeSearch}) {
           });
 
           return (
-            <li className="predictive-search-result-item" key={article.id}>
+            <li className="flex gap-4 items-center" key={article.id}>
               <Link onClick={closeSearch} to={articleUrl}>
                 {article.image?.url && (
                   <Image
@@ -98,9 +101,12 @@ function SearchResultsPredictiveCollections({term, collections, closeSearch}) {
   if (!collections.length) return null;
 
   return (
-    <div className="bg-pink" key="collections">
+    <div
+      className="border-b-2 border-dark-green flex flex-col gap-4 mb-4"
+      key="collections"
+    >
       <h5>Collections</h5>
-      <ul>
+      <ul className=" flex flex-col gap-2">
         {collections.map((collection) => {
           const colllectionUrl = urlWithTrackingParams({
             baseUrl: `/collections/${collection.handle}`,
@@ -109,14 +115,19 @@ function SearchResultsPredictiveCollections({term, collections, closeSearch}) {
           });
 
           return (
-            <li className="predictive-search-result-item" key={collection.id}>
-              <Link onClick={closeSearch} to={colllectionUrl}>
+            <li key={collection.id}>
+              <Link
+                onClick={closeSearch}
+                to={colllectionUrl}
+                className="flex gap-4 items-center"
+              >
                 {collection.image?.url && (
                   <Image
                     alt={collection.image.altText ?? ''}
                     src={collection.image.url}
-                    width={50}
-                    height={50}
+                    width={60}
+                    height={60}
+                    className="rounded-lg"
                   />
                 )}
                 <div>
@@ -140,7 +151,7 @@ function SearchResultsPredictivePages({term, pages, closeSearch}) {
   return (
     <div className="predictive-search-result" key="pages">
       <h5>Pages</h5>
-      <ul>
+      <ul className=" flex flex-col gap-2">
         {pages.map((page) => {
           const pageUrl = urlWithTrackingParams({
             baseUrl: `/pages/${page.handle}`,
@@ -149,7 +160,7 @@ function SearchResultsPredictivePages({term, pages, closeSearch}) {
           });
 
           return (
-            <li className="predictive-search-result-item" key={page.id}>
+            <li className="flex gap-4 items-center" key={page.id}>
               <Link onClick={closeSearch} to={pageUrl}>
                 <div>
                   <span>{page.title}</span>
@@ -170,7 +181,10 @@ function SearchResultsPredictiveProducts({term, products, closeSearch}) {
   if (!products.length) return null;
 
   return (
-    <div className="predictive-search-result bg-pink" key="products">
+    <div
+      className="border-b-2 border-dark-green flex flex-col gap-4 mb-4"
+      key="products"
+    >
       <h5>Produits</h5>
       <ul>
         {products.map((product) => {
@@ -182,14 +196,15 @@ function SearchResultsPredictiveProducts({term, products, closeSearch}) {
 
           const image = product?.variants?.nodes?.[0].image;
           return (
-            <li className="predictive-search-result-item" key={product.id}>
+            <li key={product.id}>
               <Link to={productUrl} onClick={closeSearch}>
                 {image && (
                   <Image
+                    className="rounded-lg"
                     alt={image.altText ?? ''}
                     src={image.url}
-                    width={50}
-                    height={50}
+                    width={80}
+                    height={80}
                   />
                 )}
                 <div>

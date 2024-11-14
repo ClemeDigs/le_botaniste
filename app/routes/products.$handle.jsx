@@ -128,6 +128,17 @@ function redirectToFirstVariant({product, request}) {
   );
 }
 
+function parseMetafieldValue(value) {
+  try {
+    const parsedValue = JSON.parse(value);
+    // Si la valeur analysée est un tableau, renvoyer le premier élément
+    return Array.isArray(parsedValue) ? parsedValue[0] : parsedValue;
+  } catch (error) {
+    // Si la valeur n'est pas du JSON, la renvoyer telle quelle
+    return value;
+  }
+}
+
 export default function Product() {
   /** @type {LoaderReturnData} */
   const {product, variants} = useLoaderData();
@@ -152,15 +163,15 @@ export default function Product() {
 
   return (
     <div className="flex flex-col lg:flex-row gap-8 p-8 m-auto max-w-[1440px]">
-      <div className="lg:w-1/3 flex items-center justify-center">
+      <div className="lg:w-[50%] xl:w-[40%] flex items-center justify-center">
         <ProductImage
           className="border-8 border-dark-green"
           image={selectedVariant?.image}
         />
       </div>
 
-      <div className="lg:w-2/3 flex flex-col justify-between items-center lg:items-start">
-        <div className="flex flex-col gap-3 max-w-[550px] lg:max-w-none m-auto lg:m-0">
+      <div className="lg:w-[50%] xl:w-[60%] flex flex-col justify-between items-center lg:items-start">
+        <div className="flex flex-col gap-3 max-w-[600px] lg:max-w-none m-auto lg:m-0">
           <h1 className="text-dark-green text-center lg:text-start">{title}</h1>
           <Rating productId={product.title}/>
           <div>

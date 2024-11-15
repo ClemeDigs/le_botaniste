@@ -62,11 +62,11 @@ export default function Blogs() {
   return (
     <div className="blogs">
       <h1>Blogs</h1>
-      <div className="blogs-grid">
+      <div className="">
         <PaginatedResourceSection connection={blogs}>
           {({node: blog}) => (
             <Link
-              className="blog"
+              className=""
               key={blog.handle}
               prefetch="intent"
               to={`/blogs/${blog.handle}`}

@@ -72,19 +72,24 @@ export default function Article() {
   }).format(new Date(article.publishedAt));
 
   return (
-    <div className="article">
-      <h1>
-        {title}
-        <div>
-          {publishedDate} &middot; {author?.name}
+    <div className="p-8 flex flex-col gap-8 max-w-[1600px] m-auto">
+      <h1>{title}</h1>
+      <div className="grid md:grid-cols-2 gap-8">
+        {image && (
+          <Image
+            className="rounded-lg"
+            data={image}
+            aspectRatio="1/1"
+            loading="eager"
+          />
+        )}
+        <div className="max-w-[800px] flex flex-col gap-4">
+          <h2>
+            {publishedDate} &middot; {author?.name}
+          </h2>
+          <div dangerouslySetInnerHTML={{__html: contentHtml}} className="" />
         </div>
-      </h1>
-
-      {image && <Image data={image} sizes="90vw" loading="eager" />}
-      <div
-        dangerouslySetInnerHTML={{__html: contentHtml}}
-        className="article"
-      />
+      </div>
     </div>
   );
 }

@@ -145,7 +145,6 @@ function SearchToggle() {
 }
 
 function LikedProducts() {
-  const {open} = useAside();
   return (
     <Link to="/wishList" className=" flex gap-1 items-center">
       <TbHeart /> <span className="hidden lg:inline">Favoris </span>

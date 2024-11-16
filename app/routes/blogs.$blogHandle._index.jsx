@@ -70,9 +70,9 @@ export default function Blog() {
   const {articles} = blog;
 
   return (
-    <div className="blog">
-      <h1>{blog.title}</h1>
-      <div className="blog-grid">
+    <div className="p-8 max-w-[1600px] m-auto">
+      <h1 className="text-dark-green">{blog.title}</h1>
+      <div className="">
         <PaginatedResourceSection connection={articles}>
           {({node: article, index}) => (
             <ArticleItem
@@ -100,21 +100,27 @@ function ArticleItem({article, loading}) {
     day: 'numeric',
   }).format(new Date(article.publishedAt));
   return (
-    <div className="blog-article" key={article.id}>
-      <Link to={`/blogs/${article.blog.handle}/${article.handle}`}>
+    <div key={article.id} className="mb-6">
+      <Link
+        className="text-offWhite"
+        to={`/blogs/${article.blog.handle}/${article.handle}`}
+      >
         {article.image && (
-          <div className="blog-article-image">
+          <div>
             <Image
               alt={article.image.altText || article.title}
               aspectRatio="3/2"
               data={article.image}
               loading={loading}
               sizes="(min-width: 768px) 50vw, 100vw"
+              className="rounded-t-lg border-8 border-dark-green"
             />
           </div>
         )}
-        <h3>{article.title}</h3>
-        <small>{publishedAt}</small>
+        <div className="bg-dark-green text-offWhite p-3 rounded-b-lg">
+          <h3>{article.title}</h3>
+          <small>{publishedAt}</small>
+        </div>
       </Link>
     </div>
   );

@@ -16,24 +16,26 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
   const {menu} = header;
   return (
     <header className="header p-3 sticky top-0 bg-white mb-12">
-      <div className="bg-pink flex flex-col md:flex-row justify-between p-3 rounded-full items-center ">
-        <NavLink prefetch="intent" to="/" className="flex items-center">
-          <img
-            className="logo-seul w-[60px]"
-            src={logo}
-            alt="Petit logo - Le Botaniste"
+      <div className="bg-pink  p-3 rounded-full">
+        <div className="max-w-[1600px] m-auto flex flex-col md:flex-row justify-between items-center">
+          <NavLink prefetch="intent" to="/" className="flex items-center">
+            <img
+              className="logo-seul w-[60px]"
+              src={logo}
+              alt="Petit logo - Le Botaniste"
+            />
+            <span className="font-heading text-dark-green text-2xl">
+              Le Botaniste
+            </span>
+          </NavLink>
+          <HeaderMenu
+            menu={menu}
+            viewport="desktop"
+            primaryDomainUrl={header.shop.primaryDomain.url}
+            publicStoreDomain={publicStoreDomain}
           />
-          <span className="font-heading text-dark-green text-2xl">
-            Le Botaniste
-          </span>
-        </NavLink>
-        <HeaderMenu
-          menu={menu}
-          viewport="desktop"
-          primaryDomainUrl={header.shop.primaryDomain.url}
-          publicStoreDomain={publicStoreDomain}
-        />
-        <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
+          <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
+        </div>
       </div>
     </header>
   );

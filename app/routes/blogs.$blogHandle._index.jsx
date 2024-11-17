@@ -72,8 +72,11 @@ export default function Blog() {
   return (
     <div className="p-8 max-w-[1600px] m-auto">
       <h1 className="text-dark-green">{blog.title}</h1>
-      <div className="">
-        <PaginatedResourceSection connection={articles}>
+      <div>
+        <PaginatedResourceSection
+          className="grid lg:grid-cols-2 gap-6"
+          connection={articles}
+        >
           {({node: article, index}) => (
             <ArticleItem
               article={article}
@@ -100,7 +103,7 @@ function ArticleItem({article, loading}) {
     day: 'numeric',
   }).format(new Date(article.publishedAt));
   return (
-    <div key={article.id} className="mb-6">
+    <div key={article.id}>
       <Link
         className="text-offWhite"
         to={`/blogs/${article.blog.handle}/${article.handle}`}

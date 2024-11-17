@@ -85,7 +85,7 @@ function FeaturedCollection({collection}) {
   const image = collection?.image;
   return (
     <div className=" bg-dark-green flex justify-center">
-      <div className="flex flex-col lg:flex-row gap-8 items-center p-4 max-w-[1536px]">
+      <div className="flex flex-col lg:flex-row gap-8 items-center p-4 max-w-[1600px] m-auto">
         <Link
           className="w-full lg:w-1/2"
           to={`/collections/${collection.handle}`}
@@ -108,7 +108,7 @@ function FeaturedCollection({collection}) {
  */
 function RecommendedProducts({products}) {
   return (
-    <div className="flex flex-col gap-4 bg p-8 ">
+    <div className="flex flex-col gap-4 bg p-8 max-w-[1600px] m-auto ">
       <h2 className="text-dark-green">Produits en vedette</h2>
       <Suspense fallback={<div>Loading...</div>}>
         <Await resolve={products}>

@@ -1,6 +1,7 @@
 import {defer} from '@shopify/remix-oxygen';
 import {useLoaderData} from '@remix-run/react';
 import {Image} from '@shopify/hydrogen';
+import {useEffect, useRef, useState} from 'react';
 
 /**
  * @type {MetaFunction<typeof loader>}
@@ -61,7 +62,6 @@ function loadDeferredData({context}) {
 }
 
 export default function Article() {
-  /** @type {LoaderReturnData} */
   const {article} = useLoaderData();
   const {title, image, contentHtml, author} = article;
 
@@ -71,23 +71,54 @@ export default function Article() {
     day: 'numeric',
   }).format(new Date(article.publishedAt));
 
+  const contentRef = useRef(null);
+  const imageRef = useRef(null);
+  const [isOverflowing, setIsOverflowing] = useState(false);
+
+  useEffect(() => {
+    if (contentRef.current && imageRef.current) {
+      const textHeight = contentRef.current.offsetHeight;
+      const imageHeight = imageRef.current.offsetHeight;
+
+      if (textHeight > imageHeight + 64) {
+        // 64px = 4rem
+        setIsOverflowing(true);
+      }
+    }
+  }, []);
+
   return (
     <div className="p-8 flex flex-col gap-8 max-w-[1600px] m-auto">
-      <h1>{title}</h1>
-      <div className="grid md:grid-cols-2 gap-8">
+      <h1 className={`text-dark-green ${isOverflowing ? 'text-center' : ''}`}>
+        {title}
+      </h1>
+      <div
+        className={`grid gap-8 ${
+          isOverflowing ? 'md:grid-cols-1' : 'md:grid-cols-2'
+        }`}
+      >
         {image && (
           <Image
-            className="rounded-lg"
+            ref={imageRef}
+            className={`rounded-lg border-8 border-dark-green ${
+              isOverflowing ? 'max-w-[1440px] m-auto' : ''
+            }`}
             data={image}
-            aspectRatio="1/1"
+            aspectRatio={`${isOverflowing ? '3/2' : '1/1'}`}
             loading="eager"
           />
         )}
-        <div className="max-w-[800px] flex flex-col gap-4">
-          <h2>
-            {publishedDate} &middot; {author?.name}
-          </h2>
-          <div dangerouslySetInnerHTML={{__html: contentHtml}} className="" />
+        <div
+          className={`max-w-[800px] flex flex-col gap-4 ${
+            isOverflowing ? 'w-full max-w-[1440px] m-auto' : ''
+          }`}
+        >
+          <h2>{publishedDate}</h2>
+          <h3>Par {author?.name}</h3>
+          <div
+            ref={contentRef}
+            dangerouslySetInnerHTML={{__html: contentHtml}}
+          />
         </div>
       </div>
     </div>

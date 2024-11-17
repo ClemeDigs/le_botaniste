@@ -10,6 +10,7 @@ export function PaginatedResourceSection({
   connection,
   children,
   resourcesClassName,
+  className,
 }) {
   return (
     <Pagination connection={connection}>
@@ -19,9 +20,13 @@ export function PaginatedResourceSection({
         );
 
         return (
-          <div>
+          <div className={`${className}`}>
             <PreviousLink>
-              {isLoading ? 'Loading...' : <span>↑ Précédents</span>}
+              {isLoading ? (
+                'Loading...'
+              ) : (
+                <span className="py-4">↑ Précédents</span>
+              )}
             </PreviousLink>
             {resourcesClassName ? (
               <div className={resourcesClassName}>{resoucesMarkup}</div>
@@ -29,7 +34,11 @@ export function PaginatedResourceSection({
               resoucesMarkup
             )}
             <NextLink>
-              {isLoading ? 'Loading...' : <span>Suivants ↓</span>}
+              {isLoading ? (
+                'Loading...'
+              ) : (
+                <span className="py-4">Suivants ↓</span>
+              )}
             </NextLink>
           </div>
         );

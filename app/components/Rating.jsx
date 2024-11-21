@@ -1,19 +1,33 @@
 import {useEffect, useState} from 'react';
 
 export default function Rating({defaultValue = 5, productId}) {
-  const btnRatings = [];
   const [currentRating, setCurrentRating] = useState(defaultValue);
+  const [ratings, setRatings] = useState([]);
 
   useEffect(() => {
-    const storedRating = localStorage.getItem(`rating-${productId}`);
-    setCurrentRating(storedRating ?? defaultValue);
+    const storedRatings = JSON.parse(localStorage.getItem('ratings')) || [];
+    setRatings(storedRatings);
+
+    const storedRatingForProduct = storedRatings.find(
+      (rating) => rating.productId === productId,
+    )?.currentRating;
+
+    setCurrentRating(storedRatingForProduct ?? defaultValue);
   }, [defaultValue, productId]);
 
   const handleRatingClick = (rating) => {
     setCurrentRating(rating);
-    localStorage.setItem(`rating-${productId}`, rating);
+
+    const updatedRatings = [
+      ...ratings.filter((r) => r.productId !== productId),
+      {productId, currentRating: rating},
+    ];
+    setRatings(updatedRatings);
+
+    localStorage.setItem('ratings', JSON.stringify(updatedRatings));
   };
 
+  const btnRatings = [];
   for (let i = 1; i <= 5; i++) {
     btnRatings.push(
       <button
@@ -21,7 +35,7 @@ export default function Rating({defaultValue = 5, productId}) {
         onClick={() => handleRatingClick(i)}
         className="text-[1.5rem] text-orange"
       >
-        {parseInt(currentRating) >= i ? '★' : '☆'}
+        {currentRating >= i ? '★' : '☆'}
       </button>,
     );
   }

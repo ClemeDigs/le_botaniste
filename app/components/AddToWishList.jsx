@@ -55,11 +55,17 @@ export default function AddToWishList({
   }
 
   return isActive ? (
-    <button className={`${className} cursor-pointer`} onClick={onRemove}>
+    <button
+      className={`${className} cursor-pointer text-pink`}
+      onClick={onRemove}
+    >
       <TbHeartFilled />
     </button>
   ) : (
-    <button className={`${className} cursor-pointer`} onClick={onAdd}>
+    <button
+      className={`${className} cursor-pointer  text-pink`}
+      onClick={onAdd}
+    >
       <TbHeartPlus />
     </button>
   );

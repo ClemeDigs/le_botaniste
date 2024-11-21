@@ -146,7 +146,6 @@ function parseMetafieldValue(value) {
 export default function Product() {
   /** @type {LoaderReturnData} */
   const {product, variants} = useLoaderData();
-  console.log(product);
   const selectedVariant = useOptimisticVariant(
     product.selectedVariant,
     variants,

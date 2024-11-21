@@ -20,7 +20,7 @@ export async function loader({context, request}) {
       variables: {ids: productIds},
     });
 
-    return {products: data.nodes};
+    return {products: data.nodes.filter((product) => product !== null)};
   }
 
   return {products: []};

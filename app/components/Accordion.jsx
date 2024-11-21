@@ -5,7 +5,7 @@ export default function Accordion({title, content, isOpen, onClick}) {
     <div>
       <button
         onClick={onClick}
-        className="w-[300px] md:w-[500px] lg:w-[800px] p-4 bg-pink text-dark border border-dark transition hover:cursor-pointer hover:bg-orange"
+        className="test grid gap-3 w-[300px] md:w-[500px] lg:w-[800px] p-4 bg-dark-green text-white border-dark transition hover:cursor-pointer hover:bg-pink hover:text-dark-green rounded-l"
       >
         <div className="flex justify-between items-center">
           <h5>{title}</h5>
@@ -15,7 +15,7 @@ export default function Accordion({title, content, isOpen, onClick}) {
         </div>
       </button>
       {isOpen && (
-        <div className="bg-orange-100 border border-dark p-4 w-[300px] md:w-[500px] lg:w-[800px]">
+        <div className="bg-offWhite border p-4 w-[300px] md:w-[500px] lg:w-[800px] hover:border-dark-green">
           <p>{content}</p>
         </div>
       )}

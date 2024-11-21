@@ -109,10 +109,8 @@ function HeaderCtas({isLoggedIn, cart}) {
       <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
         <Suspense fallback="Sign in">
           <Await resolve={isLoggedIn} errorElement="Sign in">
-            {(isLoggedIn) => (isLoggedIn ? 'Account' : 'Sign in')}
             <div className="flex gap-1 items-center">
-              {' '}
-              <LuUserCircle2 />{' '}
+              <LuUserCircle2 />
               <span className="hidden lg:inline">Connexion</span>
             </div>
           </Await>
@@ -129,7 +127,7 @@ function HeaderMenuMobileToggle() {
   const {open} = useAside();
   return (
     <button
-      className="header-menu-mobile-toggle reset hidden"
+      className="header-menu-mobile-toggle reset md:hidden"
       onClick={() => open('mobile')}
     >
       <h3>☰</h3>

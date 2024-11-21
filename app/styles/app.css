@@ -457,3 +457,32 @@ button.reset:hover:not(:has(> *)) {
 .account-logout {
   display: inline-block;
 }
+
+/*
+* --------------------------------------------------
+* Animations
+* --------------------------------------------------
+*/
+
+.marquee__list {
+  animation: scroll 20s linear infinite;
+}
+
+.marquee__list li {
+  margin: 0;
+  text-transform: uppercase;
+  font-family: 'Bowlby One', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.marquee__container:hover .marquee__list {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}

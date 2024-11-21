@@ -1,7 +1,7 @@
 import Accordion from '~/components/Accordion';
 import {useState} from 'react';
 
-export default function Accordions({accordions = []}) {
+export default function Accordions({accordions = [], className}) {
   const [currentAccordionId, setCurrentAccordionId] = useState(0);
 
   function onAccordionClick(accordionId) {
@@ -11,7 +11,7 @@ export default function Accordions({accordions = []}) {
   }
 
   return (
-    <div>
+    <div className={`w-[90%] ${className}`}>
       {accordions.map((accordion) => (
         <Accordion
           key={accordion.id}

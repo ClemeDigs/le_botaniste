@@ -5,6 +5,8 @@ import {Image, Money} from '@shopify/hydrogen';
 import IconsWithText from '~/components/IconsWithText';
 import {AddToCartButton} from '~/components/AddToCartButton';
 import AddToWishList from '~/components/AddToWishList';
+import {Button} from '~/components/Button';
+import mosaique from 'app/assets/mosaique.svg';
 
 /**
  * @type {MetaFunction}
@@ -84,17 +86,56 @@ function FeaturedCollection({collection}) {
 
   const image = collection?.image;
   return (
-    <div className=" bg-dark-green flex justify-center">
-      <div className="flex flex-col lg:flex-row gap-8 items-center p-4 max-w-[1600px] m-auto">
-        <Link
-          className="w-full lg:w-1/2"
-          to={`/collections/${collection.handle}`}
-        >
-          {image && <Image className="rounded-lg" data={image} sizes="40vw" />}
-        </Link>
-        <div className="text-offWhite w-full lg:w-1/2 p-4">
-          <h1>{collection.title}</h1>
-          <p>{collection.description}</p>
+    <div className=" bg-offWhite shadow-lg flex justify-center">
+      <div className="max-w-[2000px] grid lg:grid-cols-2 2xl:grid-cols-3">
+        <div className=" flex flex-col items-center justify-between">
+          <div className="p-3 lg:p-0 lg:h-1/2 w-full flex justify-center items-center bg-dark-green 2xl:bg-offWhite">
+            <h1 className="text-offWhite 2xl:text-dark-green text-center">
+              {collection.title}
+            </h1>
+          </div>
+          <img
+            className="w-full hidden 2xl:inline-block"
+            src={mosaique}
+            alt="motifs colorés"
+          />
+          <Link
+            className="hidden lg:inline-block w-full lg:h-1/2 2xl:h-auto 2xl:hidden"
+            to={`/collections/${collection.handle}`}
+          >
+            {image && (
+              <Image
+                className="h-full object-cover object-center rounded-b-lg 2xl:rounded-lg border-8 border-dark-green"
+                data={image}
+              />
+            )}
+          </Link>
+        </div>
+        <div className="flex flex-col justify-center lg:hidden 2xl:inline-block">
+          <Link className="h-full" to={`/collections/${collection.handle}`}>
+            {image && (
+              <Image
+                className="h-full object-cover object-center rounded-b-lg 2xl:rounded-lg border-8 border-dark-green"
+                data={image}
+              />
+            )}
+          </Link>
+        </div>
+        <div className="flex flex-col justify-between items-center">
+          <img
+            className="w-full lg:h-1/2 2xl:h- lg:object-cover lg:object-center 2xl:object-contain "
+            src={mosaique}
+            alt="motifs colorés"
+          />
+          <div className="p-4 text-dark lg:h-1/2 2xl:h-auto h-full flex flex-col items-center justify-center gap-3">
+            <p>{collection.description}</p>
+            <Link
+              className="bg-dark-green text-offWhite px-6 py-3 rounded-lg hover:shadow-lg"
+              to={`/collections/${collection.handle}`}
+            >
+              Voir la collection
+            </Link>
+          </div>
         </div>
       </div>
     </div>

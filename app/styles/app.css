@@ -153,9 +153,9 @@ button.reset:hover:not(:has(> *)) {
   top: 0;
   z-index: 1;
 
-
+ */
 .header-menu-mobile-toggle {
-  @media (min-width: 48em) {
+  @media (min-width: 45em) {
     display: none;
   }
 }
@@ -163,23 +163,19 @@ button.reset:hover:not(:has(> *)) {
 .header-menu-mobile {
   display: flex;
   flex-direction: column;
-  grid-gap: 1rem;
 }
 
 .header-menu-desktop {
   display: none;
-  grid-gap: 1rem;
   @media (min-width: 45em) {
     display: flex;
-    grid-gap: 1rem;
-    margin-left: 3rem;
   }
 }
 
 .header-menu-item {
   cursor: pointer;
 }
-
+/* 
 .header-ctas {
   align-items: center;
   display: flex;

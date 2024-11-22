@@ -8,6 +8,7 @@ import {LuSearch} from 'react-icons/lu';
 import {LuShoppingBasket} from 'react-icons/lu';
 import {LuUserCircle2} from 'react-icons/lu';
 import {TbHeart} from 'react-icons/tb';
+import {LuAlignJustify} from 'react-icons/lu';
 
 /**
  * @param {HeaderProps}
@@ -16,9 +17,9 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
   const {menu} = header;
   return (
     <header className="header p-3 sticky top-0 bg-white mb-12">
-      <div className="bg-pink  p-3 rounded-full">
-        <div className="max-w-[1600px] m-auto flex flex-col md:flex-row justify-between items-center">
-          <NavLink prefetch="intent" to="/" className="flex items-center">
+      <div className="bg-pink p-3 rounded-full">
+        <div className="max-w-[1600px] m-auto flex flex-col sm:flex-row justify-between items-center">
+          <NavLink prefetch="intent" to="/" className="items-center flex ">
             <img
               className="logo-seul w-[60px]"
               src={logo}
@@ -29,6 +30,7 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
             </span>
           </NavLink>
           <HeaderMenu
+            className="hidden md:flex"
             menu={menu}
             viewport="desktop"
             primaryDomainUrl={header.shop.primaryDomain.url}
@@ -130,7 +132,7 @@ function HeaderMenuMobileToggle() {
       className="header-menu-mobile-toggle reset md:hidden"
       onClick={() => open('mobile')}
     >
-      <h3>☰</h3>
+      <LuAlignJustify />
     </button>
   );
 }

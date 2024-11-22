@@ -147,11 +147,12 @@ function FeaturedCollection({collection}) {
  *   products: Promise<RecommendedProductsQuery | null>;
  * }}
  */
-function RecommendedProducts({products}) {
+
+function RecommendedProducts({products, product, selectedVariant, variants}) {
   return (
     <div className="flex flex-col gap-4 bg p-8 max-w-[1600px] m-auto ">
       <h2 className="text-dark-green">Produits en vedette</h2>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div>Chargement...</div>}>
         <Await resolve={products}>
           {(response) => (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
@@ -169,7 +170,6 @@ function RecommendedProducts({products}) {
                         sizes="(width: 40em) 20vw, 30vw"
                       />
                       <div className="flex flex-col gap-4 p-4">
-                        {' '}
                         <div className="flex gap-4 items-center">
                           <h4 className="text-offWhite">{product.title}</h4>
                           <AddToWishList

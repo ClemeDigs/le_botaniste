@@ -89,8 +89,8 @@ function FeaturedCollection({collection}) {
     <div className=" bg-offWhite shadow-lg flex justify-center">
       <div className="max-w-[2000px] grid lg:grid-cols-2 2xl:grid-cols-3">
         <div className=" flex flex-col items-center justify-between">
-          <div className="p-3 lg:p-0 lg:h-1/2 w-full flex justify-center items-center bg-dark-green 2xl:bg-offWhite">
-            <h1 className="text-offWhite 2xl:text-dark-green text-center">
+          <div className="p-3 lg:p-0 lg:h-1/2 w-full flex justify-center items-center bg-dark-green lg:bg-offWhite">
+            <h1 className="text-offWhite lg:text-dark-green text-center">
               {collection.title}
             </h1>
           </div>

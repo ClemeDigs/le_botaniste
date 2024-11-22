@@ -1,10 +1,16 @@
 import Accordions from '~/components/Accordions';
 import SearchBar from '~/components/SearchBar';
 import favicon from 'app/assets/favicon.svg';
-import {faq} from '~/data/faq';
 import {useState} from 'react';
+import {useLoaderData} from '@remix-run/react';
+
+export async function loader({context}) {
+  const data = await context.storefront.query(FAQ_QUERY);
+  return {faq: data.metaobjects.nodes};
+}
 
 export default function Faq() {
+  const {faq} = useLoaderData();
   const [searchValue, setSearchValue] = useState('');
 
   function onSearch(e) {
@@ -12,7 +18,9 @@ export default function Faq() {
   }
 
   const filteredFaq = faq.filter((eachQuestion) =>
-    eachQuestion.question.toLowerCase().includes(searchValue.toLowerCase()),
+    eachQuestion.question.value
+      .toLowerCase()
+      .includes(searchValue.toLowerCase()),
   );
 
   return (
@@ -31,11 +39,27 @@ export default function Faq() {
           className=""
           accordions={filteredFaq.map((eachQuestion) => ({
             id: eachQuestion.id,
-            title: eachQuestion.question,
-            content: eachQuestion.answer,
+            title: eachQuestion.question.value,
+            content: eachQuestion.answer.value,
           }))}
         />
       </div>
     </div>
   );
 }
+
+const FAQ_QUERY = `#graphql
+query faq {
+  metaobjects(first: 250, type: "faq") {
+    nodes {
+      id
+      question: field(key: "question") {
+        value
+      }
+      answer: field(key: "answer") {
+        value
+      }
+    }
+  }
+}
+`;

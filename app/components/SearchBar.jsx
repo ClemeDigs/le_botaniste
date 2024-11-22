@@ -7,7 +7,7 @@ export default function SearchBar({onSearch = () => {}}) {
         id="search"
         name="search"
         onInput={onSearch}
-        className=" bg-offWhite border border-dark-green rounded-full p-1"
+        className=" bg-offWhite border border-dark-green rounded-full p-1 w-[250px]"
       />
     </div>
   );

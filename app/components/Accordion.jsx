@@ -5,17 +5,19 @@ export default function Accordion({title, content, isOpen, onClick}) {
     <div>
       <button
         onClick={onClick}
-        className="w-[300px] md:w-[500px] lg:w-[800px] p-4 bg-pink text-dark border border-dark transition hover:cursor-pointer hover:bg-orange"
+        className="w-full p-4 bg-dark-green text-offWhite border border-dark transition hover:cursor-pointer hover:underline"
       >
         <div className="flex justify-between items-center">
-          <h5>{title}</h5>
+          <h5 className="w-full text-center lg:text-start lg:pl-16">{title}</h5>
           <SlArrowDown
-            className={`${isOpen ? 'rotate-180' : ''} transition-transform`}
+            className={`${
+              isOpen ? 'rotate-180' : ''
+            } transition-transform text-3xl font-bold`}
           />
         </div>
       </button>
       {isOpen && (
-        <div className="bg-orange-100 border border-dark p-4 w-[300px] md:w-[500px] lg:w-[800px]">
+        <div className="bg-pink border border-dark p-4 w-full">
           <p>{content}</p>
         </div>
       )}

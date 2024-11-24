@@ -23,7 +23,7 @@ export function PaginatedResourceSection({
           <div className={`${className}`}>
             <PreviousLink>
               {isLoading ? (
-                'Loading...'
+                'Chargement...'
               ) : (
                 <span className="py-4">↑ Précédents</span>
               )}
@@ -35,7 +35,7 @@ export function PaginatedResourceSection({
             )}
             <NextLink>
               {isLoading ? (
-                'Loading...'
+                'Chargement...'
               ) : (
                 <span className="py-4">Suivants ↓</span>
               )}

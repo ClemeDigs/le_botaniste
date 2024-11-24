@@ -254,7 +254,7 @@ function SearchAside() {
                 type="search"
               />
               &nbsp;
-              <button onClick={goToSearch}>Search</button>
+              <button onClick={goToSearch}>Rechercher</button>
             </>
           )}
         </SearchFormPredictive>
@@ -264,7 +264,7 @@ function SearchAside() {
             const {articles, collections, pages, products, queries} = items;
 
             if (state === 'loading' && term.current) {
-              return <div>Loading...</div>;
+              return <div>Chargement...</div>;
             }
 
             if (!total) {

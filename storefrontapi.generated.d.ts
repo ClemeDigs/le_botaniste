@@ -748,6 +748,25 @@ export type FaqQuery = {
   };
 };
 
+export type PartnersQueryVariables = StorefrontAPI.Exact<{
+  [key: string]: never;
+}>;
+
+export type PartnersQuery = {
+  metaobjects: {
+    nodes: Array<
+      Pick<StorefrontAPI.Metaobject, 'id'> & {
+        logo?: StorefrontAPI.Maybe<
+          Pick<StorefrontAPI.MetaobjectField, 'value'>
+        >;
+        name?: StorefrontAPI.Maybe<
+          Pick<StorefrontAPI.MetaobjectField, 'value'>
+        >;
+      }
+    >;
+  };
+};
+
 export type PolicyFragment = Pick<
   StorefrontAPI.ShopPolicy,
   'body' | 'handle' | 'id' | 'title' | 'url'
@@ -1343,6 +1362,10 @@ interface GeneratedQueryTypes {
   '#graphql\nquery faq {\n  metaobjects(first: 250, type: "faq") {\n    nodes {\n      id\n      question: field(key: "question") {\n        value\n      }\n      answer: field(key: "answer") {\n        value\n      }\n    }\n  }\n}\n': {
     return: FaqQuery;
     variables: FaqQueryVariables;
+  };
+  '#graphql\nquery partners {\n    metaobjects(first: 250, type: "Partners") {\n      nodes {\n        id\n        logo: field(key: "logo") {\n          value\n        }\n        name: field(key: "name") {\n          value\n        }\n      }\n    }\n  }\n': {
+    return: PartnersQuery;
+    variables: PartnersQueryVariables;
   };
   '#graphql\n  fragment Policy on ShopPolicy {\n    body\n    handle\n    id\n    title\n    url\n  }\n  query Policy(\n    $country: CountryCode\n    $language: LanguageCode\n    $privacyPolicy: Boolean!\n    $refundPolicy: Boolean!\n    $shippingPolicy: Boolean!\n    $termsOfService: Boolean!\n  ) @inContext(language: $language, country: $country) {\n    shop {\n      privacyPolicy @include(if: $privacyPolicy) {\n        ...Policy\n      }\n      shippingPolicy @include(if: $shippingPolicy) {\n        ...Policy\n      }\n      termsOfService @include(if: $termsOfService) {\n        ...Policy\n      }\n      refundPolicy @include(if: $refundPolicy) {\n        ...Policy\n      }\n    }\n  }\n': {
     return: PolicyQuery;

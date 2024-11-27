@@ -45,7 +45,7 @@ export default function WishList() {
   }
 
   return (
-    <div className="p-8">
+    <div className="p-8 max-w-[1600px] m-auto">
       <h1 className="text-dark-green">Favoris</h1>
       {favoriteProducts.length > 0 ? (
         <div className="grid md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-8">

@@ -25,18 +25,17 @@ export default function Faq() {
 
   return (
     <div className="p-8 max-w-[1600px] m-auto">
-      <div className="lg:p-12 flex flex-col md:flex-row justify-between">
+      <div className="flex flex-col md:flex-row justify-between py-12 lg:px-12">
         <h1 className="text-dark-green">FAQ</h1>
         <SearchBar onSearch={onSearch} />
       </div>
-      <div className="relative w-full flex flex-col items-center gap-4 mt-12 z-0">
+      <div className="relative w-full flex flex-col items-center gap-4 mt-12">
         <img
           className="w-[100px] absolute top-[-80px] left-[60px]"
           src={favicon}
           alt="Illustration de fougère"
         />
         <Accordions
-          className=""
           accordions={filteredFaq.map((eachQuestion) => ({
             id: eachQuestion.id,
             title: eachQuestion.question.value,

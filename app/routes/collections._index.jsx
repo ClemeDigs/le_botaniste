@@ -51,7 +51,7 @@ export default function Collections() {
   const {collections} = useLoaderData();
 
   return (
-    <div className="collections">
+    <div className="p-8 max-w-[1600px] m-auto">
       <h1>Collections</h1>
       <PaginatedResourceSection
         connection={collections}

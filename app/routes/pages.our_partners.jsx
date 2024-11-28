@@ -1,4 +1,5 @@
 import {useLoaderData} from '@remix-run/react';
+import PageTitle from '~/components/PageTitle';
 
 export async function loader({context}) {
   const data = await context.storefront.query(PARTNERS_QUERY);
@@ -9,9 +10,9 @@ export default function OurPartners() {
   const {partners} = useLoaderData();
 
   return (
-    <div className="p-8 max-w-[1600px] m-auto">
-      <h1 className="text-dark-green">Nos partenaires</h1>
-      <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8 justify-items-center">
+    <div className="py-8">
+      <PageTitle title="Nos partenaires" />
+      <div className="max-w-[1600px] m-auto mt-8 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8 justify-items-center">
         {partners.map(({id, logo, name}) => (
           <figure
             className="grid grid-rows-2 gap-4 border-8 border-dark-green rounded-lg w-[300px] h-[300px]"

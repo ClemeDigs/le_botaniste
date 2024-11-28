@@ -123,7 +123,7 @@ function FeaturedCollection({collection}) {
         </div>
         <div className="flex flex-col justify-between items-center">
           <img
-            className="w-full lg:h-1/2 2xl:h- lg:object-cover lg:object-center 2xl:object-contain "
+            className="w-full lg:h-1/2 lg:object-cover lg:object-center 2xl:object-contain "
             src={mosaique}
             alt="motifs colorés"
           />

@@ -710,6 +710,13 @@ export type EmployeesQuery = {
         email?: StorefrontAPI.Maybe<
           Pick<StorefrontAPI.MetaobjectField, 'value'>
         >;
+        photo?: StorefrontAPI.Maybe<{
+          reference?: StorefrontAPI.Maybe<
+            Pick<StorefrontAPI.MediaImage, 'id'> & {
+              image?: StorefrontAPI.Maybe<Pick<StorefrontAPI.Image, 'url'>>;
+            }
+          >;
+        }>;
       }
     >;
   };
@@ -1355,7 +1362,7 @@ interface GeneratedQueryTypes {
     return: CatalogQuery;
     variables: CatalogQueryVariables;
   };
-  '#graphql\n  query employees {\n    metaobjects(first: 250, type: "Employee") {\n      nodes {\n        id\n        firstname: field(key: "first_name") {\n          value\n        }\n        lastname: field(key: "last_name") {\n          value\n        }\n        profilepicture: field(key: "profile_picture") {\n          value\n        }\n        age: field(key: "age") {\n          value\n        }\n        position: field(key: "position") {\n          value\n        }\n        salary: field(key: "salary") {\n          value\n        }\n        email: field(key: "email") {\n          value\n        }\n      }\n    }\n  }\n': {
+  '#graphql\n  query employees {\n    metaobjects(first: 250, type: "Employee") {\n      nodes {\n        id\n        firstname: field(key: "first_name") {\n          value\n        }\n        lastname: field(key: "last_name") {\n          value\n        }\n        profilepicture: field(key: "profile_picture") {\n          value\n        }\n        age: field(key: "age") {\n          value\n        }\n        position: field(key: "position") {\n          value\n        }\n        salary: field(key: "salary") {\n          value\n        }\n        email: field(key: "email") {\n          value\n        }\n        photo: field(key: "photo") {\n          reference {\n          ... on MediaImage {\n            id\n            image {\n              url\n            }\n          }\n        }\n        }\n      }\n    }\n  }\n': {
     return: EmployeesQuery;
     variables: EmployeesQueryVariables;
   };

@@ -22,7 +22,7 @@ export function Footer({footer: footerPromise, header, publicStoreDomain}) {
     <Suspense>
       <Await resolve={footerPromise}>
         {(footer) => (
-          <footer className=" bg-dark-green text-offWhite">
+          <footer className="w-full bg-dark-green text-offWhite flex justify-center ">
             {footer?.menu && header.shop.primaryDomain?.url && (
               <div className="max-w-[1440px] m-auto w-full flex flex-col gap-3 items-center md:flex-row md:justify-evenly py-8 lg:items-center">
                 <div className="flex flex-row md:gap-[1.3rem] lg:gap-[3rem] md:flex-col">

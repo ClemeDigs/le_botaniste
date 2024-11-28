@@ -165,7 +165,7 @@ export default function Product() {
   const {title, descriptionHtml} = product;
 
   return (
-    <div className="flex flex-col lg:flex-row gap-8 p-8 m-auto max-w-[1440px]">
+    <div className="flex flex-col lg:flex-row gap-8 p-8 m-auto max-w-[1600px]">
       <div className="lg:w-[50%] xl:w-[40%] flex items-center justify-center">
         <ProductImage
           className="border-8 border-dark-green"

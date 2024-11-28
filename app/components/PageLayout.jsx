@@ -23,18 +23,24 @@ export function PageLayout({
 }) {
   return (
     <Aside.Provider>
-      <CartAside cart={cart} />
-      <SearchAside />
-      <MobileMenuAside header={header} publicStoreDomain={publicStoreDomain} />
-      {header && (
-        <Header
+      <div className="wrapper max-w-[2000px] w-full bg-white">
+        <CartAside cart={cart} />
+        <SearchAside />
+        <MobileMenuAside
           header={header}
-          cart={cart}
-          isLoggedIn={isLoggedIn}
           publicStoreDomain={publicStoreDomain}
         />
-      )}
-      <main>{children}</main>
+        {header && (
+          <Header
+            header={header}
+            cart={cart}
+            isLoggedIn={isLoggedIn}
+            publicStoreDomain={publicStoreDomain}
+          />
+        )}
+        <main>{children}</main>
+      </div>
+
       <Footer
         footer={footer}
         header={header}

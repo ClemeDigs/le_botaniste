@@ -7,7 +7,7 @@ export default function Accordion({title, content, isOpen, onClick}) {
         onClick={onClick}
         className="w-full p-4 bg-dark-green text-offWhite border border-dark transition hover:cursor-pointer hover:underline"
       >
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center gap-6">
           <h5 className="w-full text-center lg:text-start lg:pl-16">{title}</h5>
           <SlArrowDown
             className={`${

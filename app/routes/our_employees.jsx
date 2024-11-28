@@ -23,13 +23,14 @@ export default function OurEmployees() {
             age,
             position,
             salary,
+            photo,
           }) => (
             <div
               key={id}
               className="rounded-lg border-4 border-dark-green bg-dark-green flex flex-col gap-2"
             >
               <img
-                src={profilepicture.value}
+                src={photo.reference.image.url}
                 alt={firstname.value + ' ' + lastname.value}
                 className="rounded-t-lg border-4 border-dark-green max-h-[500px] md:max-h-[400px] w-full object-cover object-center lg:object-cover
                 "
@@ -77,6 +78,16 @@ const EMPLOYEES_QUERY = `#graphql
         }
         email: field(key: "email") {
           value
+        }
+        photo: field(key: "photo") {
+          reference {
+          ... on MediaImage {
+            id
+            image {
+              url
+            }
+          }
+        }
         }
       }
     }

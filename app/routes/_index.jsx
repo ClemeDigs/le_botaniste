@@ -7,6 +7,7 @@ import {AddToCartButton} from '~/components/AddToCartButton';
 import AddToWishList from '~/components/AddToWishList';
 import {Button} from '~/components/Button';
 import mosaique from 'app/assets/mosaique.svg';
+import PageTitle from '~/components/PageTitle';
 
 /**
  * @type {MetaFunction}
@@ -89,10 +90,13 @@ function FeaturedCollection({collection}) {
     <div className=" bg-offWhite shadow-lg flex justify-center">
       <div className="grid lg:grid-cols-2 2xl:grid-cols-3">
         <div className=" flex flex-col items-center justify-between">
-          <div className="p-3 lg:p-0 lg:h-1/2 w-full flex justify-center items-center bg-dark-green lg:bg-offWhite">
+          <div className="hidden lg:flex p-3 lg:p-0 lg:h-1/2 w-full justify-center items-center bg-dark-green lg:bg-offWhite">
             <h1 className="text-offWhite lg:text-dark-green text-center">
               {collection.title}
             </h1>
+          </div>
+          <div className="lg:hidden">
+            <PageTitle title={collection.title} />
           </div>
           <img
             className="w-full hidden 2xl:inline-block"
@@ -123,7 +127,7 @@ function FeaturedCollection({collection}) {
         </div>
         <div className="flex flex-col justify-between items-center">
           <img
-            className="w-full lg:h-1/2 lg:object-cover lg:object-center 2xl:object-contain "
+            className="hidden lg:inline-block w-full lg:h-1/2 lg:object-cover lg:object-center 2xl:object-contain "
             src={mosaique}
             alt="motifs colorés"
           />

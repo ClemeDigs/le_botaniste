@@ -756,9 +756,13 @@ export type PartnersQuery = {
   metaobjects: {
     nodes: Array<
       Pick<StorefrontAPI.Metaobject, 'id'> & {
-        logo?: StorefrontAPI.Maybe<
-          Pick<StorefrontAPI.MetaobjectField, 'value'>
-        >;
+        logo?: StorefrontAPI.Maybe<{
+          reference?: StorefrontAPI.Maybe<
+            Pick<StorefrontAPI.MediaImage, 'id'> & {
+              image?: StorefrontAPI.Maybe<Pick<StorefrontAPI.Image, 'url'>>;
+            }
+          >;
+        }>;
         name?: StorefrontAPI.Maybe<
           Pick<StorefrontAPI.MetaobjectField, 'value'>
         >;
@@ -1363,7 +1367,7 @@ interface GeneratedQueryTypes {
     return: FaqQuery;
     variables: FaqQueryVariables;
   };
-  '#graphql\nquery partners {\n    metaobjects(first: 250, type: "Partners") {\n      nodes {\n        id\n        logo: field(key: "logo") {\n          value\n        }\n        name: field(key: "name") {\n          value\n        }\n      }\n    }\n  }\n': {
+  '#graphql\nquery partners {\n  metaobjects(first: 250, type: "Partners") {\n    nodes {\n      id\n      logo: field(key: "logo") {\n        reference {\n          ... on MediaImage {\n            id\n            image {\n              url\n            }\n          }\n        }\n      }\n      name: field(key: "name") {\n        value\n      }\n    }\n  }\n}\n': {
     return: PartnersQuery;
     variables: PartnersQueryVariables;
   };

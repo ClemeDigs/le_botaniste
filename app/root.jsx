@@ -94,7 +94,7 @@ async function loadCriticalData({context}) {
 
   const [header] = await Promise.all([
     storefront.query(HEADER_QUERY, {
-      cache: storefront.CacheLong(),
+      cache: storefront.CacheNone(),
       variables: {
         headerMenuHandle: 'main-menu', // Adjust to your header menu handle
       },

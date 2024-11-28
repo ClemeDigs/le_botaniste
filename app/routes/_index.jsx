@@ -7,6 +7,8 @@ import {AddToCartButton} from '~/components/AddToCartButton';
 import AddToWishList from '~/components/AddToWishList';
 import {Button} from '~/components/Button';
 import mosaique from 'app/assets/mosaique.svg';
+import PageTitle from '~/components/PageTitle';
+import {useAside} from '~/components/Aside';
 
 /**
  * @type {MetaFunction}
@@ -89,10 +91,13 @@ function FeaturedCollection({collection}) {
     <div className=" bg-offWhite shadow-lg flex justify-center">
       <div className="grid lg:grid-cols-2 2xl:grid-cols-3">
         <div className=" flex flex-col items-center justify-between">
-          <div className="p-3 lg:p-0 lg:h-1/2 w-full flex justify-center items-center bg-dark-green lg:bg-offWhite">
+          <div className="hidden lg:flex p-3 lg:p-0 lg:h-1/2 w-full justify-center items-center bg-dark-green lg:bg-offWhite">
             <h1 className="text-offWhite lg:text-dark-green text-center">
               {collection.title}
             </h1>
+          </div>
+          <div className="lg:hidden">
+            <PageTitle title={collection.title} />
           </div>
           <img
             className="w-full hidden 2xl:inline-block"
@@ -123,7 +128,7 @@ function FeaturedCollection({collection}) {
         </div>
         <div className="flex flex-col justify-between items-center">
           <img
-            className="w-full lg:h-1/2 lg:object-cover lg:object-center 2xl:object-contain "
+            className="hidden lg:inline-block w-full lg:h-1/2 lg:object-cover lg:object-center 2xl:object-contain "
             src={mosaique}
             alt="motifs colorés"
           />
@@ -149,6 +154,7 @@ function FeaturedCollection({collection}) {
  */
 
 function RecommendedProducts({products, product, selectedVariant, variants}) {
+  const {open} = useAside();
   return (
     <div className="flex flex-col gap-4 bg p-8 max-w-[1600px] m-auto ">
       <h2 className="text-dark-green">Produits en vedette</h2>
@@ -158,33 +164,48 @@ function RecommendedProducts({products, product, selectedVariant, variants}) {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {response
                 ? response.products.nodes.map((product) => (
-                    <Link
-                      key={product.id}
-                      className="flex flex-col bg-dark-green text-offWhite rounded-lg shadow-2xl"
-                      to={`/products/${product.handle}`}
-                    >
-                      <Image
-                        className="rounded-lg border-8 border-dark-green"
-                        data={product.images.nodes[0]}
-                        aspectRatio="1/1.3"
-                        sizes="(width: 40em) 20vw, 30vw"
-                      />
-                      <div className="flex flex-col gap-4 p-4">
-                        <div className="flex gap-4 items-center">
-                          <h4 className="text-offWhite">{product.title}</h4>
-                          <AddToWishList
-                            className="text-[1rem]"
-                            productId={product.id}
-                          />
+                    <div key={product.id}>
+                      <Link
+                        className="flex flex-col bg-dark-green text-offWhite rounded-lg shadow-2xl"
+                        to={`/products/${product.handle}`}
+                      >
+                        <Image
+                          className="rounded-lg border-8 border-dark-green"
+                          data={product.images.nodes[0]}
+                          aspectRatio="1/1.3"
+                          sizes="(width: 40em) 20vw, 30vw"
+                        />
+                        <div className="flex flex-col gap-4 p-4">
+                          <div className="flex gap-4 items-center">
+                            <h4 className="text-offWhite">{product.title}</h4>
+                            <AddToWishList
+                              className="text-[1rem]"
+                              productId={product.id}
+                            />
+                          </div>
+                          <small>
+                            <Money
+                              className="text-offWhite"
+                              data={product.priceRange.minVariantPrice}
+                            />
+                          </small>
                         </div>
-                        <small>
-                          <Money
-                            className="text-offWhite"
-                            data={product.priceRange.minVariantPrice}
-                          />
-                        </small>
-                      </div>
-                    </Link>
+                      </Link>
+                      <AddToCartButton
+                        onClick={() => {
+                          open('cart');
+                        }}
+                        lines={[
+                          {
+                            merchandiseId: product.variants.nodes[0].id,
+                            quantity: 1,
+                            selectedVariant: product.variants.nodes[0],
+                          },
+                        ]}
+                      >
+                        Ajouter au panier
+                      </AddToCartButton>
+                    </div>
                   ))
                 : null}
             </div>
@@ -229,6 +250,18 @@ const RECOMMENDED_PRODUCTS_QUERY = `#graphql
       minVariantPrice {
         amount
         currencyCode
+      }
+    }
+    variants(first: 1){
+      nodes{
+        id
+        selectedOptions {
+          name
+          value
+        }
+        product {
+          handle
+        }
       }
     }
     images(first: 1) {

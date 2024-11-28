@@ -60,7 +60,7 @@ export default function Collection() {
   const {products} = useLoaderData();
 
   return (
-    <div className="p-8">
+    <div className="p-8 max-w-[1600px] m-auto">
       <h1 className="text-dark-green">Nos produits</h1>
       <PaginatedResourceSection
         connection={products}

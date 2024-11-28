@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 import {useLoaderData, Link} from '@remix-run/react';
 import {Money, Image} from '@shopify/hydrogen';
 import AddToWishList from '~/components/AddToWishList';
+import PageTitle from '~/components/PageTitle';
 
 export async function loader({context, request}) {
   const cookie = request.headers
@@ -45,10 +46,10 @@ export default function WishList() {
   }
 
   return (
-    <div className="p-8">
-      <h1 className="text-dark-green">Favoris</h1>
+    <div className="py-8 flex flex-col gap-8">
+      <PageTitle title="Favoris" />
       {favoriteProducts.length > 0 ? (
-        <div className="grid md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-8">
+        <div className="max-w-[1600px] m-auto grid md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-8">
           {favoriteProducts.map((product) => (
             <ProductItem
               key={product.id}

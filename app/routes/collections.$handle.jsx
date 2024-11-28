@@ -9,6 +9,7 @@ import {
 import {useVariantUrl} from '~/lib/variants';
 import {PaginatedResourceSection} from '~/components/PaginatedResourceSection';
 import AddToWishList from '~/components/AddToWishList';
+import PageTitle from '~/components/PageTitle';
 
 /**
  * @type {MetaFunction<typeof loader>}
@@ -79,29 +80,31 @@ export default function Collection() {
   const {collection} = useLoaderData();
 
   return (
-    <div className="flex flex-col gap-6 p-8">
-      <h1>{collection.title}</h1>
-      <p className="collection-description">{collection.description}</p>
-      <PaginatedResourceSection
-        connection={collection.products}
-        resourcesClassName="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
-      >
-        {({node: product, index}) => (
-          <ProductItem
-            key={product.id}
-            product={product}
-            loading={index < 8 ? 'eager' : undefined}
-          />
-        )}
-      </PaginatedResourceSection>
-      <Analytics.CollectionView
-        data={{
-          collection: {
-            id: collection.id,
-            handle: collection.handle,
-          },
-        }}
-      />
+    <div className="py-8">
+      <PageTitle title={collection.title} />
+      <div className="flex flex-col gap-6 p-8 max-w-[1600px] m-auto">
+        <p className="collection-description">{collection.description}</p>
+        <PaginatedResourceSection
+          connection={collection.products}
+          resourcesClassName="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+        >
+          {({node: product, index}) => (
+            <ProductItem
+              key={product.id}
+              product={product}
+              loading={index < 8 ? 'eager' : undefined}
+            />
+          )}
+        </PaginatedResourceSection>
+        <Analytics.CollectionView
+          data={{
+            collection: {
+              id: collection.id,
+              handle: collection.handle,
+            },
+          }}
+        />
+      </div>
     </div>
   );
 }

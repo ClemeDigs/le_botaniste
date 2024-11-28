@@ -10,6 +10,8 @@ import {useVariantUrl} from '~/lib/variants';
 import {PaginatedResourceSection} from '~/components/PaginatedResourceSection';
 import AddToWishList from '~/components/AddToWishList';
 import PageTitle from '~/components/PageTitle';
+import {useAside} from '~/components/Aside';
+import {AddToCartButton} from '~/components/AddToCartButton';
 
 /**
  * @type {MetaFunction<typeof loader>}
@@ -118,33 +120,45 @@ export default function Collection() {
 function ProductItem({product, loading}) {
   const variant = product.variants.nodes[0];
   const variantUrl = useVariantUrl(product.handle, variant.selectedOptions);
+  const {open} = useAside();
   return (
-    <Link
-      className="bg-dark-green text-offWhite rounded-lg"
-      key={product.id}
-      prefetch="intent"
-      to={variantUrl}
-    >
-      {product.featuredImage && (
-        <Image
-          className="rounded-lg border-8 border-dark-green"
-          alt={product.featuredImage.altText || product.title}
-          aspectRatio="1/1.3"
-          data={product.featuredImage}
-          loading={loading}
-          sizes="(min-width: 45em) 400px, 100vw"
-        />
-      )}
-      <div className="flex flex-col gap-4 p-4">
-        <div className="flex gap-4">
-          <h4 className="text-offWhite">{product.title}</h4>
-          <AddToWishList className="text-[1rem]" productId={product.id} />
+    <div className="bg-dark-green text-offWhite rounded-lg pb-4 flex flex-col items-center">
+      <Link key={product.id} prefetch="intent" to={variantUrl}>
+        {product.featuredImage && (
+          <Image
+            className="rounded-lg border-8 border-dark-green"
+            alt={product.featuredImage.altText || product.title}
+            aspectRatio="1/1.3"
+            data={product.featuredImage}
+            loading={loading}
+            sizes="(min-width: 45em) 400px, 100vw"
+          />
+        )}
+        <div className="flex flex-col gap-4 p-4">
+          <div className="flex gap-4">
+            <h4 className="text-offWhite">{product.title}</h4>
+            <AddToWishList className="text-[1rem]" productId={product.id} />
+          </div>
+          <small>
+            <Money data={product.priceRange.minVariantPrice} />
+          </small>
         </div>
-        <small>
-          <Money data={product.priceRange.minVariantPrice} />
-        </small>
-      </div>
-    </Link>
+      </Link>
+      <AddToCartButton
+        onClick={() => {
+          open('cart');
+        }}
+        lines={[
+          {
+            merchandiseId: product.variants.nodes[0].id,
+            quantity: 1,
+            selectedVariant: product.variants.nodes[0],
+          },
+        ]}
+      >
+        Ajouter au panier
+      </AddToCartButton>
+    </div>
   );
 }
 
@@ -174,9 +188,13 @@ const PRODUCT_ITEM_FRAGMENT = `#graphql
     }
     variants(first: 1) {
       nodes {
+        id
         selectedOptions {
           name
           value
+        }
+        product {
+          handle
         }
       }
     }

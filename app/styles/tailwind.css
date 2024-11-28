@@ -64,6 +64,12 @@ p {
   font-size: 1rem;
 }
 
+.p-bold {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
 li {
   font-family: 'Raleway', sans-serif;
   font-weight: 400;

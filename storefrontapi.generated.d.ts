@@ -548,11 +548,14 @@ export type ProductItemFragment = Pick<
     maxVariantPrice: Pick<StorefrontAPI.MoneyV2, 'amount' | 'currencyCode'>;
   };
   variants: {
-    nodes: Array<{
-      selectedOptions: Array<
-        Pick<StorefrontAPI.SelectedOption, 'name' | 'value'>
-      >;
-    }>;
+    nodes: Array<
+      Pick<StorefrontAPI.ProductVariant, 'id'> & {
+        selectedOptions: Array<
+          Pick<StorefrontAPI.SelectedOption, 'name' | 'value'>
+        >;
+        product: Pick<StorefrontAPI.Product, 'handle'>;
+      }
+    >;
   };
 };
 
@@ -596,11 +599,14 @@ export type CollectionQuery = {
               >;
             };
             variants: {
-              nodes: Array<{
-                selectedOptions: Array<
-                  Pick<StorefrontAPI.SelectedOption, 'name' | 'value'>
-                >;
-              }>;
+              nodes: Array<
+                Pick<StorefrontAPI.ProductVariant, 'id'> & {
+                  selectedOptions: Array<
+                    Pick<StorefrontAPI.SelectedOption, 'name' | 'value'>
+                  >;
+                  product: Pick<StorefrontAPI.Product, 'handle'>;
+                }
+              >;
             };
           }
         >;
@@ -688,17 +694,53 @@ export type CatalogQuery = {
           >;
         };
         variants: {
-          nodes: Array<{
-            selectedOptions: Array<
-              Pick<StorefrontAPI.SelectedOption, 'name' | 'value'>
-            >;
-          }>;
+          nodes: Array<
+            Pick<StorefrontAPI.ProductVariant, 'id'> & {
+              selectedOptions: Array<
+                Pick<StorefrontAPI.SelectedOption, 'name' | 'value'>
+              >;
+              product: Pick<StorefrontAPI.Product, 'handle'>;
+            }
+          >;
         };
       }
     >;
     pageInfo: Pick<
       StorefrontAPI.PageInfo,
       'hasPreviousPage' | 'hasNextPage' | 'startCursor' | 'endCursor'
+    >;
+  };
+};
+
+export type PageQueryVariables = StorefrontAPI.Exact<{
+  language?: StorefrontAPI.InputMaybe<StorefrontAPI.LanguageCode>;
+  country?: StorefrontAPI.InputMaybe<StorefrontAPI.CountryCode>;
+  handle: StorefrontAPI.Scalars['String']['input'];
+}>;
+
+export type PageQuery = {
+  page?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.Page, 'id' | 'title' | 'body'> & {
+      seo?: StorefrontAPI.Maybe<
+        Pick<StorefrontAPI.Seo, 'description' | 'title'>
+      >;
+    }
+  >;
+};
+
+export type FaqQueryVariables = StorefrontAPI.Exact<{[key: string]: never}>;
+
+export type FaqQuery = {
+  metaobjects: {
+    nodes: Array<
+      Pick<StorefrontAPI.Metaobject, 'id'> & {
+        question?: StorefrontAPI.Maybe<
+          Pick<StorefrontAPI.MetaobjectField, 'value'>
+        >;
+        answer?: StorefrontAPI.Maybe<
+          Pick<StorefrontAPI.MetaobjectField, 'value'>
+        >;
+      }
     >;
   };
 };
@@ -737,39 +779,6 @@ export type EmployeesQuery = {
             }
           >;
         }>;
-      }
-    >;
-  };
-};
-
-export type PageQueryVariables = StorefrontAPI.Exact<{
-  language?: StorefrontAPI.InputMaybe<StorefrontAPI.LanguageCode>;
-  country?: StorefrontAPI.InputMaybe<StorefrontAPI.CountryCode>;
-  handle: StorefrontAPI.Scalars['String']['input'];
-}>;
-
-export type PageQuery = {
-  page?: StorefrontAPI.Maybe<
-    Pick<StorefrontAPI.Page, 'id' | 'title' | 'body'> & {
-      seo?: StorefrontAPI.Maybe<
-        Pick<StorefrontAPI.Seo, 'description' | 'title'>
-      >;
-    }
-  >;
-};
-
-export type FaqQueryVariables = StorefrontAPI.Exact<{[key: string]: never}>;
-
-export type FaqQuery = {
-  metaobjects: {
-    nodes: Array<
-      Pick<StorefrontAPI.Metaobject, 'id'> & {
-        question?: StorefrontAPI.Maybe<
-          Pick<StorefrontAPI.MetaobjectField, 'value'>
-        >;
-        answer?: StorefrontAPI.Maybe<
-          Pick<StorefrontAPI.MetaobjectField, 'value'>
-        >;
       }
     >;
   };
@@ -1370,7 +1379,7 @@ interface GeneratedQueryTypes {
     return: BlogsQuery;
     variables: BlogsQueryVariables;
   };
-  '#graphql\n  #graphql\n  fragment MoneyProductItem on MoneyV2 {\n    amount\n    currencyCode\n  }\n  fragment ProductItem on Product {\n    id\n    handle\n    title\n    featuredImage {\n      id\n      altText\n      url\n      width\n      height\n    }\n    priceRange {\n      minVariantPrice {\n        ...MoneyProductItem\n      }\n      maxVariantPrice {\n        ...MoneyProductItem\n      }\n    }\n    variants(first: 1) {\n      nodes {\n        selectedOptions {\n          name\n          value\n        }\n      }\n    }\n  }\n\n  query Collection(\n    $handle: String!\n    $country: CountryCode\n    $language: LanguageCode\n    $first: Int\n    $last: Int\n    $startCursor: String\n    $endCursor: String\n  ) @inContext(country: $country, language: $language) {\n    collection(handle: $handle) {\n      id\n      handle\n      title\n      description\n      products(\n        first: $first,\n        last: $last,\n        before: $startCursor,\n        after: $endCursor\n      ) {\n        nodes {\n          ...ProductItem\n        }\n        pageInfo {\n          hasPreviousPage\n          hasNextPage\n          endCursor\n          startCursor\n        }\n      }\n    }\n  }\n': {
+  '#graphql\n  #graphql\n  fragment MoneyProductItem on MoneyV2 {\n    amount\n    currencyCode\n  }\n  fragment ProductItem on Product {\n    id\n    handle\n    title\n    featuredImage {\n      id\n      altText\n      url\n      width\n      height\n    }\n    priceRange {\n      minVariantPrice {\n        ...MoneyProductItem\n      }\n      maxVariantPrice {\n        ...MoneyProductItem\n      }\n    }\n    variants(first: 1) {\n      nodes {\n        id\n        selectedOptions {\n          name\n          value\n        }\n        product {\n          handle\n        }\n      }\n    }\n  }\n\n  query Collection(\n    $handle: String!\n    $country: CountryCode\n    $language: LanguageCode\n    $first: Int\n    $last: Int\n    $startCursor: String\n    $endCursor: String\n  ) @inContext(country: $country, language: $language) {\n    collection(handle: $handle) {\n      id\n      handle\n      title\n      description\n      products(\n        first: $first,\n        last: $last,\n        before: $startCursor,\n        after: $endCursor\n      ) {\n        nodes {\n          ...ProductItem\n        }\n        pageInfo {\n          hasPreviousPage\n          hasNextPage\n          endCursor\n          startCursor\n        }\n      }\n    }\n  }\n': {
     return: CollectionQuery;
     variables: CollectionQueryVariables;
   };
@@ -1378,13 +1387,9 @@ interface GeneratedQueryTypes {
     return: StoreCollectionsQuery;
     variables: StoreCollectionsQueryVariables;
   };
-  '#graphql\n  query Catalog(\n    $country: CountryCode\n    $language: LanguageCode\n    $first: Int\n    $last: Int\n    $startCursor: String\n    $endCursor: String\n  ) @inContext(country: $country, language: $language) {\n    products(first: $first, last: $last, before: $startCursor, after: $endCursor) {\n      nodes {\n        ...ProductItem\n      }\n      pageInfo {\n        hasPreviousPage\n        hasNextPage\n        startCursor\n        endCursor\n      }\n    }\n  }\n  #graphql\n  fragment MoneyProductItem on MoneyV2 {\n    amount\n    currencyCode\n  }\n  fragment ProductItem on Product {\n    id\n    handle\n    title\n    featuredImage {\n      id\n      altText\n      url\n      width\n      height\n    }\n    priceRange {\n      minVariantPrice {\n        ...MoneyProductItem\n      }\n      maxVariantPrice {\n        ...MoneyProductItem\n      }\n    }\n    variants(first: 1) {\n      nodes {\n        selectedOptions {\n          name\n          value\n        }\n      }\n    }\n  }\n\n': {
+  '#graphql\n  query Catalog(\n    $country: CountryCode\n    $language: LanguageCode\n    $first: Int\n    $last: Int\n    $startCursor: String\n    $endCursor: String\n  ) @inContext(country: $country, language: $language) {\n    products(first: $first, last: $last, before: $startCursor, after: $endCursor) {\n      nodes {\n        ...ProductItem\n      }\n      pageInfo {\n        hasPreviousPage\n        hasNextPage\n        startCursor\n        endCursor\n      }\n    }\n  }\n  #graphql\n  fragment MoneyProductItem on MoneyV2 {\n    amount\n    currencyCode\n  }\n  fragment ProductItem on Product {\n    id\n    handle\n    title\n    featuredImage {\n      id\n      altText\n      url\n      width\n      height\n    }\n    priceRange {\n      minVariantPrice {\n        ...MoneyProductItem\n      }\n      maxVariantPrice {\n        ...MoneyProductItem\n      }\n    }\n    variants(first: 1) {\n      nodes {\n        id\n        selectedOptions {\n          name\n          value\n        }\n        product {\n          handle\n        }\n      }\n    }\n  }\n\n': {
     return: CatalogQuery;
     variables: CatalogQueryVariables;
-  };
-  '#graphql\n  query employees {\n    metaobjects(first: 250, type: "Employee") {\n      nodes {\n        id\n        firstname: field(key: "first_name") {\n          value\n        }\n        lastname: field(key: "last_name") {\n          value\n        }\n        profilepicture: field(key: "profile_picture") {\n          value\n        }\n        age: field(key: "age") {\n          value\n        }\n        position: field(key: "position") {\n          value\n        }\n        salary: field(key: "salary") {\n          value\n        }\n        email: field(key: "email") {\n          value\n        }\n        photo: field(key: "photo") {\n          reference {\n          ... on MediaImage {\n            id\n            image {\n              url\n            }\n          }\n        }\n        }\n      }\n    }\n  }\n': {
-    return: EmployeesQuery;
-    variables: EmployeesQueryVariables;
   };
   '#graphql\n  query Page(\n    $language: LanguageCode,\n    $country: CountryCode,\n    $handle: String!\n  )\n  @inContext(language: $language, country: $country) {\n    page(handle: $handle) {\n      id\n      title\n      body\n      seo {\n        description\n        title\n      }\n    }\n  }\n': {
     return: PageQuery;
@@ -1393,6 +1398,10 @@ interface GeneratedQueryTypes {
   '#graphql\nquery faq {\n  metaobjects(first: 250, type: "faq") {\n    nodes {\n      id\n      question: field(key: "question") {\n        value\n      }\n      answer: field(key: "answer") {\n        value\n      }\n    }\n  }\n}\n': {
     return: FaqQuery;
     variables: FaqQueryVariables;
+  };
+  '#graphql\n  query employees {\n    metaobjects(first: 250, type: "Employee") {\n      nodes {\n        id\n        firstname: field(key: "first_name") {\n          value\n        }\n        lastname: field(key: "last_name") {\n          value\n        }\n        profilepicture: field(key: "profile_picture") {\n          value\n        }\n        age: field(key: "age") {\n          value\n        }\n        position: field(key: "position") {\n          value\n        }\n        salary: field(key: "salary") {\n          value\n        }\n        email: field(key: "email") {\n          value\n        }\n        photo: field(key: "photo") {\n          reference {\n          ... on MediaImage {\n            id\n            image {\n              url\n            }\n          }\n        }\n        }\n      }\n    }\n  }\n': {
+    return: EmployeesQuery;
+    variables: EmployeesQueryVariables;
   };
   '#graphql\nquery partners {\n  metaobjects(first: 250, type: "Partners") {\n    nodes {\n      id\n      logo: field(key: "logo") {\n        reference {\n          ... on MediaImage {\n            id\n            image {\n              url\n            }\n          }\n        }\n      }\n      name: field(key: "name") {\n        value\n      }\n    }\n  }\n}\n': {
     return: PartnersQuery;

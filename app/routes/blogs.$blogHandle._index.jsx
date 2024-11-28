@@ -2,6 +2,7 @@ import {defer} from '@shopify/remix-oxygen';
 import {Link, useLoaderData} from '@remix-run/react';
 import {Image, getPaginationVariables} from '@shopify/hydrogen';
 import {PaginatedResourceSection} from '~/components/PaginatedResourceSection';
+import PageTitle from '~/components/PageTitle';
 
 /**
  * @type {MetaFunction<typeof loader>}
@@ -70,9 +71,9 @@ export default function Blog() {
   const {articles} = blog;
 
   return (
-    <div className="p-8 max-w-[1600px] m-auto">
-      <h1 className="text-dark-green">{blog.title}</h1>
-      <div>
+    <div>
+      <PageTitle title={blog.title}></PageTitle>
+      <div className="p-8 max-w-[1600px] m-auto">
         <PaginatedResourceSection
           className="grid lg:grid-cols-2 gap-6"
           connection={articles}

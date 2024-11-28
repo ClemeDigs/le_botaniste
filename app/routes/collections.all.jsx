@@ -6,6 +6,7 @@ import {PaginatedResourceSection} from '~/components/PaginatedResourceSection';
 import AddToWishList from '~/components/AddToWishList';
 import {useAside} from '~/components/Aside';
 import {AddToCartButton} from '~/components/AddToCartButton';
+import PageTitle from '~/components/PageTitle';
 
 /**
  * @type {MetaFunction<typeof loader>}
@@ -62,20 +63,22 @@ export default function Collection() {
   const {products} = useLoaderData();
 
   return (
-    <div className="p-8 max-w-[1600px] m-auto">
-      <h1 className="text-dark-green">Nos produits</h1>
-      <PaginatedResourceSection
-        connection={products}
-        resourcesClassName="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
-      >
-        {({node: product, index}) => (
-          <ProductItem
-            key={product.id}
-            product={product}
-            loading={index < 8 ? 'eager' : undefined}
-          />
-        )}
-      </PaginatedResourceSection>
+    <div>
+      <PageTitle title="Nos produits"></PageTitle>
+      <div className="p-8 max-w-[1600px] m-auto">
+        <PaginatedResourceSection
+          connection={products}
+          resourcesClassName="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+        >
+          {({node: product, index}) => (
+            <ProductItem
+              key={product.id}
+              product={product}
+              loading={index < 8 ? 'eager' : undefined}
+            />
+          )}
+        </PaginatedResourceSection>
+      </div>
     </div>
   );
 }

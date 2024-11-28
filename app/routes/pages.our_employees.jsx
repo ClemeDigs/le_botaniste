@@ -1,5 +1,6 @@
 import {useLoaderData} from '@remix-run/react';
 import {LuMail} from 'react-icons/lu';
+import PageTitle from '~/components/PageTitle';
 
 export async function loader({context}) {
   const data = await context.storefront.query(EMPLOYEES_QUERY);
@@ -10,9 +11,9 @@ export default function OurEmployees() {
   const {employees} = useLoaderData();
 
   return (
-    <div className="p-8 flex flex-col max-w-[2000px] m-auto">
-      <h1 className="text-dark-green">Nos employés</h1>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 ">
+    <div>
+      <PageTitle title="Nos employés"></PageTitle>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 p-8 max-w-[2000px] m-auto">
         {employees.map(
           ({
             id,
@@ -29,12 +30,12 @@ export default function OurEmployees() {
               key={id}
               className="rounded-lg border-4 border-dark-green bg-dark-green flex flex-col gap-2"
             >
-              <img
+              {/* <img
                 src={photo.reference.image.url}
                 alt={firstname.value + ' ' + lastname.value}
                 className="rounded-t-lg border-4 border-dark-green max-h-[500px] md:max-h-[400px] w-full object-cover object-center lg:object-cover
                 "
-              />
+              /> */}
               <div className="text-white flex flex-col p-4">
                 <h3>
                   {firstname.value} {lastname.value.toUpperCase()}

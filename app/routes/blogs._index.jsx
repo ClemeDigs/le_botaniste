@@ -2,6 +2,7 @@ import {defer} from '@shopify/remix-oxygen';
 import {Link, useLoaderData} from '@remix-run/react';
 import {getPaginationVariables} from '@shopify/hydrogen';
 import {PaginatedResourceSection} from '~/components/PaginatedResourceSection';
+import PageTitle from '~/components/PageTitle';
 
 /**
  * @type {MetaFunction}
@@ -61,7 +62,7 @@ export default function Blogs() {
 
   return (
     <div className="blogs">
-      <h1>Blogs</h1>
+      <PageTitle title="Blogs"></PageTitle>
       <div className="">
         <PaginatedResourceSection connection={blogs}>
           {({node: blog}) => (

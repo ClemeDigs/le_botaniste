@@ -16,7 +16,7 @@ import {RiCloseCircleLine} from 'react-icons/ri';
  *   heading: React.ReactNode;
  * }}
  */
-export function Aside({children, heading, type}) {
+export function Aside({children, heading, type, className}) {
   const {type: activeType, close} = useAside();
   const expanded = type === activeType;
 
@@ -51,7 +51,7 @@ export function Aside({children, heading, type}) {
             <RiCloseCircleLine className="text-5xl text-dark-green" />
           </button>
         </header>
-        <main className="p-3">{children}</main>
+        <main className="p-3 max-h-1/2">{children}</main>
       </aside>
     </div>
   );

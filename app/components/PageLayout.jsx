@@ -23,7 +23,7 @@ export function PageLayout({
 }) {
   return (
     <Aside.Provider>
-      <div className="wrapper max-w-[2000px] w-full bg-white">
+      <div className="wrapper max-w-[2000px] w-full bg-white grow">
         <CartAside cart={cart} />
         <SearchAside />
         <MobileMenuAside

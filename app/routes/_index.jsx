@@ -97,7 +97,10 @@ function FeaturedCollection({collection}) {
             </h1>
           </div>
           <div className="lg:hidden">
-            <PageTitle title={collection.title} />
+            <PageTitle
+              title={collection.title}
+              className="h-[210px] md:h-[80px] lg:h-[120px]"
+            />
           </div>
           <img
             className="w-full hidden 2xl:inline-block"

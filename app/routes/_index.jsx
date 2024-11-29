@@ -179,7 +179,7 @@ function RecommendedProducts({products, product, selectedVariant, variants}) {
                           className="rounded-lg border-8 border-dark-green"
                           data={product.images.nodes[0]}
                           aspectRatio="1/1.3"
-                          sizes="(width: 40em) 20vw, 30vw"
+                          // sizes="(width: 40em) 20vw, 30vw"
                         />
                         <div className="flex flex-col gap-4 p-4">
                           <div className="flex gap-4 items-center">

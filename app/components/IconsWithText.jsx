@@ -9,9 +9,12 @@ export default function IconsWithText() {
     <div>
       <Marquee></Marquee>
       <div className="bg-pink flex flex-col items-center p-8 gap-12">
-        <h2 className="border-t border-b text-center">
+        <h2 className="border-t border-b text-center hidden md:block">
           Nos modalités de commande
         </h2>
+        <h3 className="border-t border-b text-center md:hidden">
+          Nos modalités de commande
+        </h3>
         <div className="flex flex-col md:flex-row gap-10 md:gap-[160px]">
           <IconWithText
             img={paiement}

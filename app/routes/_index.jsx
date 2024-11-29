@@ -97,7 +97,10 @@ function FeaturedCollection({collection}) {
             </h1>
           </div>
           <div className="lg:hidden">
-            <PageTitle title={collection.title} />
+            <PageTitle
+              title={collection.title}
+              className="h-[210px] md:h-[80px] lg:h-[120px]"
+            />
           </div>
           <img
             className="w-full hidden 2xl:inline-block"
@@ -135,7 +138,7 @@ function FeaturedCollection({collection}) {
           <div className="p-4 text-dark lg:h-1/2 2xl:h-auto h-full flex flex-col items-center justify-center gap-3">
             <p>{collection.description}</p>
             <Link
-              className="bg-dark-green text-offWhite px-6 py-3 rounded-lg hover:shadow-lg"
+              className="bg-dark-green text-offWhite px-6 py-3 rounded-full hover:shadow-lg"
               to={`/collections/${collection.handle}`}
             >
               Voir la collection
@@ -164,9 +167,12 @@ function RecommendedProducts({products, product, selectedVariant, variants}) {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {response
                 ? response.products.nodes.map((product) => (
-                    <div key={product.id}>
+                    <div
+                      key={product.id}
+                      className="flex flex-col items-center pb-4 bg-dark-green text-offWhite rounded-lg shadow-2xl"
+                    >
                       <Link
-                        className="flex flex-col bg-dark-green text-offWhite rounded-lg shadow-2xl"
+                        className="flex flex-col"
                         to={`/products/${product.handle}`}
                       >
                         <Image

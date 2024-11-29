@@ -2,6 +2,7 @@ import {useLoaderData, Link} from '@remix-run/react';
 import {defer} from '@shopify/remix-oxygen';
 import {getPaginationVariables, Image} from '@shopify/hydrogen';
 import {PaginatedResourceSection} from '~/components/PaginatedResourceSection';
+import PageTitle from '~/components/PageTitle';
 
 /**
  * @param {LoaderFunctionArgs} args
@@ -51,20 +52,22 @@ export default function Collections() {
   const {collections} = useLoaderData();
 
   return (
-    <div className="p-8 max-w-[1600px] m-auto">
-      <h1>Collections</h1>
-      <PaginatedResourceSection
-        connection={collections}
-        resourcesClassName="collections-grid"
-      >
-        {({node: collection, index}) => (
-          <CollectionItem
-            key={collection.id}
-            collection={collection}
-            index={index}
-          />
-        )}
-      </PaginatedResourceSection>
+    <div>
+      <PageTitle title="Collections"></PageTitle>
+      <div className="p-8 max-w-[1600px] m-auto">
+        <PaginatedResourceSection
+          connection={collections}
+          resourcesClassName="grid md:grid-cols-2 gap-8"
+        >
+          {({node: collection, index}) => (
+            <CollectionItem
+              key={collection.id}
+              collection={collection}
+              index={index}
+            />
+          )}
+        </PaginatedResourceSection>
+      </div>
     </div>
   );
 }
@@ -78,7 +81,7 @@ export default function Collections() {
 function CollectionItem({collection, index}) {
   return (
     <Link
-      className="collection-item"
+      className="bg-dark-green text-offWhite rounded-lg"
       key={collection.id}
       to={`/collections/${collection.handle}`}
       prefetch="intent"
@@ -89,9 +92,12 @@ function CollectionItem({collection, index}) {
           aspectRatio="1/1"
           data={collection.image}
           loading={index < 3 ? 'eager' : undefined}
+          className="rounded-lg border-8 border-dark-green"
         />
       )}
-      <h5>{collection.title}</h5>
+      <div className="p-3">
+        <h5>{collection.title}</h5>
+      </div>
     </Link>
   );
 }

@@ -15,8 +15,9 @@ import {LuAlignJustify} from 'react-icons/lu';
  */
 export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
   const {menu} = header;
+  console.log(menu);
   return (
-    <header className="w-full p-3 top-0 mb-12">
+    <header className="w-full p-3 top-0 mb-12 sticky">
       <div className="bg-pink p-3 rounded-full">
         <div className="max-w-[1600px] m-auto flex flex-col sm:flex-row justify-between items-center">
           <NavLink

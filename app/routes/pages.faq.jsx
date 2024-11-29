@@ -3,6 +3,7 @@ import SearchBar from '~/components/SearchBar';
 import favicon from 'app/assets/favicon.svg';
 import {useState} from 'react';
 import {useLoaderData} from '@remix-run/react';
+import PageTitle from '~/components/PageTitle';
 
 export async function loader({context}) {
   const data = await context.storefront.query(FAQ_QUERY);
@@ -24,9 +25,9 @@ export default function Faq() {
   );
 
   return (
-    <div className="p-8 max-w-[1600px] m-auto">
-      <div className="flex flex-col md:flex-row justify-between py-12 lg:px-12">
-        <h1 className="text-dark-green">FAQ</h1>
+    <div>
+      <PageTitle title="FAQ"></PageTitle>
+      <div className="py-12 lg:px-12 p-8 m-auto">
         <SearchBar onSearch={onSearch} />
       </div>
       <div className="relative w-full flex flex-col items-center gap-4 mt-12">

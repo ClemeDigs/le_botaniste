@@ -15,6 +15,7 @@ export function AddToCartButton({
   disabled,
   lines,
   onClick,
+  className,
 }) {
   return (
     <CartForm route="/cart" inputs={{lines}} action={CartForm.ACTIONS.LinesAdd}>
@@ -26,7 +27,7 @@ export function AddToCartButton({
             value={JSON.stringify(analytics)}
           />
           <button
-            className="bg-pink p-3 rounded-full border-2 border-dark-green text-dark-green hover:shadow-lg"
+            className={`bg-pink px-6 py-3 rounded-full border-2 border-dark-green text-dark-green ${className} hover:shadow-lg`}
             type="submit"
             onClick={onClick}
             disabled={disabled ?? fetcher.state !== 'idle'}

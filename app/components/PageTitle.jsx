@@ -1,11 +1,19 @@
 import mosaique from 'app/assets/mosaique_double.svg';
 
-export default function PageTitle({title}) {
+export default function PageTitle({title, className}) {
   return (
-    <div className="w-full flex items-center bg-offWhite shadow-xl gap-4 h-[140px] md:h-[80px] lg:h-[120px]">
-      <div className="flex-1 h-full hidden md:inline-block">
+    <div
+      className={`w-full flex flex-col md:flex-row items-center bg-offWhite shadow-xl gap-3 h-[140px] md:h-[80px] lg:h-[120px] ${className}`}
+    >
+      <div className="flex-1 md:h-full h-1/2 flex">
         <img
-          className="h-full w-full object-cover"
+          className="w-full object-cover h-full"
+          src={mosaique}
+          alt="Motifs"
+          aria-hidden
+        />
+        <img
+          className="w-full object-cover h-full md:hidden"
           src={mosaique}
           alt="Motifs"
           aria-hidden
@@ -16,7 +24,7 @@ export default function PageTitle({title}) {
         <h1 className="text-center flex-none text-dark-green">{title}</h1>
       </div>
 
-      <div className="flex-1 h-full">
+      <div className="flex-1 h-full hidden md:inline-block">
         <img
           className="h-full w-full object-cover"
           src={mosaique}

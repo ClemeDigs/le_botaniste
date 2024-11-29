@@ -21,11 +21,13 @@ export function PaginatedResourceSection({
 
         return (
           <div className={`${className}`}>
-            <PreviousLink>
+            <PreviousLink className=" text-dark-green">
               {isLoading ? (
                 'Chargement...'
               ) : (
-                <span className="py-4">↑ Précédents</span>
+                <span className="py-4 font-bold text-lg text-dark-green">
+                  ↑ Précédents
+                </span>
               )}
             </PreviousLink>
             {resourcesClassName ? (
@@ -33,11 +35,13 @@ export function PaginatedResourceSection({
             ) : (
               resoucesMarkup
             )}
-            <NextLink>
+            <NextLink className=" text-dark-green">
               {isLoading ? (
                 'Chargement...'
               ) : (
-                <span className="py-4">Suivants ↓</span>
+                <span className="py-4 font-bold text-lg text-dark-green">
+                  Suivants ↓
+                </span>
               )}
             </NextLink>
           </div>

@@ -4,6 +4,9 @@ import {getPaginationVariables, Image, Money} from '@shopify/hydrogen';
 import {useVariantUrl} from '~/lib/variants';
 import {PaginatedResourceSection} from '~/components/PaginatedResourceSection';
 import AddToWishList from '~/components/AddToWishList';
+import {useAside} from '~/components/Aside';
+import {AddToCartButton} from '~/components/AddToCartButton';
+import PageTitle from '~/components/PageTitle';
 
 /**
  * @type {MetaFunction<typeof loader>}
@@ -60,20 +63,22 @@ export default function Collection() {
   const {products} = useLoaderData();
 
   return (
-    <div className="p-8 max-w-[1600px] m-auto">
-      <h1 className="text-dark-green">Nos produits</h1>
-      <PaginatedResourceSection
-        connection={products}
-        resourcesClassName="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
-      >
-        {({node: product, index}) => (
-          <ProductItem
-            key={product.id}
-            product={product}
-            loading={index < 8 ? 'eager' : undefined}
-          />
-        )}
-      </PaginatedResourceSection>
+    <div>
+      <PageTitle title="Nos produits"></PageTitle>
+      <div className="p-8 max-w-[1600px] m-auto">
+        <PaginatedResourceSection
+          connection={products}
+          resourcesClassName="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+        >
+          {({node: product, index}) => (
+            <ProductItem
+              key={product.id}
+              product={product}
+              loading={index < 8 ? 'eager' : undefined}
+            />
+          )}
+        </PaginatedResourceSection>
+      </div>
     </div>
   );
 }
@@ -87,33 +92,45 @@ export default function Collection() {
 function ProductItem({product, loading}) {
   const variant = product.variants.nodes[0];
   const variantUrl = useVariantUrl(product.handle, variant.selectedOptions);
+  const {open} = useAside();
   return (
-    <Link
-      className="bg-dark-green rounded-lg text-offWhite"
-      key={product.id}
-      prefetch="intent"
-      to={variantUrl}
-    >
-      {product.featuredImage && (
-        <Image
-          className="rounded-lg border-8 border-dark-green"
-          alt={product.featuredImage.altText || product.title}
-          aspectRatio="1/1.3"
-          data={product.featuredImage}
-          loading={loading}
-          sizes="(min-width: 45em) 400px, 100vw"
-        />
-      )}
-      <div className="p-3 text-offWhite">
-        <div className="flex gap-4">
-          <h4 className="text-offWhite">{product.title}</h4>
-          <AddToWishList className="text-[1rem]" productId={product.id} />
+    <div className="bg-dark-green rounded-lg text-offWhite pb-4 flex flex-col items-center">
+      <Link key={product.id} prefetch="intent" to={variantUrl}>
+        {product.featuredImage && (
+          <Image
+            className="rounded-lg border-8 border-dark-green"
+            alt={product.featuredImage.altText || product.title}
+            aspectRatio="1/1.3"
+            data={product.featuredImage}
+            loading={loading}
+            sizes="(min-width: 45em) 400px, 100vw"
+          />
+        )}
+        <div className="p-3 text-offWhite">
+          <div className="flex gap-4">
+            <h4 className="text-offWhite">{product.title}</h4>
+            <AddToWishList className="text-[1rem]" productId={product.id} />
+          </div>
+          <small>
+            <Money data={product.priceRange.minVariantPrice} />
+          </small>
         </div>
-        <small>
-          <Money data={product.priceRange.minVariantPrice} />
-        </small>
-      </div>
-    </Link>
+      </Link>
+      <AddToCartButton
+        onClick={() => {
+          open('cart');
+        }}
+        lines={[
+          {
+            merchandiseId: product.variants.nodes[0].id,
+            quantity: 1,
+            selectedVariant: product.variants.nodes[0],
+          },
+        ]}
+      >
+        Ajouter au panier
+      </AddToCartButton>
+    </div>
   );
 }
 
@@ -143,9 +160,13 @@ const PRODUCT_ITEM_FRAGMENT = `#graphql
     }
     variants(first: 1) {
       nodes {
+        id
         selectedOptions {
           name
           value
+        }
+        product {
+          handle
         }
       }
     }

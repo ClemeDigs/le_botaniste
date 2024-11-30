@@ -15,6 +15,7 @@ import {IoPawSharp} from 'react-icons/io5';
 import {GiWateringCan} from 'react-icons/gi';
 import {LuSunMedium} from 'react-icons/lu';
 import AddToWishList from '~/components/AddToWishList';
+import ProductComments from '~/components/Comments';
 
 /**
  * @type {MetaFunction<typeof loader>}
@@ -165,99 +166,105 @@ export default function Product() {
   const {title, descriptionHtml} = product;
 
   return (
-    <div className="flex flex-col lg:flex-row gap-8 p-8 m-auto max-w-[1600px]">
-      <div className="lg:w-[50%] xl:w-[40%] flex items-center justify-center">
-        <ProductImage
-          className="border-8 border-dark-green"
-          image={selectedVariant?.image}
-        />
-      </div>
-
-      <div className="lg:w-[50%] xl:w-[60%] flex flex-col justify-between items-center lg:items-start">
-        <div className="flex flex-col gap-3 max-w-[600px] lg:max-w-none m-auto lg:m-0">
-          <div className="flex gap-4">
-            <h1 className="text-dark-green text-center lg:text-start">
-              {title}
-            </h1>
-            <AddToWishList className="text-[3.5rem]" productId={product.id} />
-          </div>
-          <Rating productId={product.title} />
-          <div>
-            {product.animaux?.value && (
-              <p className="flex flex-row gap-3 items-center">
-                <span className="text-2xl">
-                  <IoPawSharp />
-                </span>
-                {parseMetafieldValue(product.animaux.value)}
-              </p>
-            )}
-            {product.arrosage?.value && (
-              <p className="flex flex-row gap-3 items-center">
-                <span className="text-2xl">
-                  <GiWateringCan />
-                </span>
-                {parseMetafieldValue(product.arrosage.value)}
-              </p>
-            )}
-            {product.luminosite?.value && (
-              <p className="flex flex-row gap-3 items-center">
-                <span className="text-2xl">
-                  <LuSunMedium />
-                </span>
-                {parseMetafieldValue(product.luminosite.value)}
-              </p>
-            )}
-          </div>
-          <ProductPrice
-            price={selectedVariant?.price}
-            compareAtPrice={selectedVariant?.compareAtPrice}
+    <div className="flex flex-col gap-8 p-8 m-auto max-w-[1600px]">
+      <div className="flex flex-col lg:flex-row gap-8">
+        <div className="lg:w-[50%] xl:w-[40%] flex items-center justify-center">
+          <ProductImage
+            className="border-8 border-dark-green"
+            image={selectedVariant?.image}
           />
-
-          <div>
-            <p>
-              <strong>Description</strong>
-            </p>
-            <div dangerouslySetInnerHTML={{__html: descriptionHtml}} />
-          </div>
         </div>
-        <Analytics.ProductView
-          data={{
-            products: [
-              {
-                id: product.id,
-                title: product.title,
-                price: selectedVariant?.price.amount || '0',
-                vendor: product.vendor,
-                variantId: selectedVariant?.id || '',
-                variantTitle: selectedVariant?.title || '',
-                quantity: 1,
-              },
-            ],
-          }}
-        />
-        <Suspense
-          fallback={
-            <ProductForm
-              product={product}
-              selectedVariant={selectedVariant}
-              variants={[]}
+
+        <div className="lg:w-[50%] xl:w-[60%] flex flex-col justify-between items-center lg:items-start">
+          <div className="flex flex-col gap-3 max-w-[600px] lg:max-w-none m-auto lg:m-0">
+            <div className="flex gap-4">
+              <h1 className="text-dark-green text-center lg:text-start">
+                {title}
+              </h1>
+              <AddToWishList className="text-[3.5rem]" productId={product.id} />
+            </div>
+            <Rating productId={product.title} />
+            <div>
+              {product.animaux?.value && (
+                <p className="flex flex-row gap-3 items-center">
+                  <span className="text-2xl">
+                    <IoPawSharp />
+                  </span>
+                  {parseMetafieldValue(product.animaux.value)}
+                </p>
+              )}
+              {product.arrosage?.value && (
+                <p className="flex flex-row gap-3 items-center">
+                  <span className="text-2xl">
+                    <GiWateringCan />
+                  </span>
+                  {parseMetafieldValue(product.arrosage.value)}
+                </p>
+              )}
+              {product.luminosite?.value && (
+                <p className="flex flex-row gap-3 items-center">
+                  <span className="text-2xl">
+                    <LuSunMedium />
+                  </span>
+                  {parseMetafieldValue(product.luminosite.value)}
+                </p>
+              )}
+            </div>
+            <ProductPrice
+              price={selectedVariant?.price}
+              compareAtPrice={selectedVariant?.compareAtPrice}
             />
-          }
-        >
-          <Await
-            errorElement="There was a problem loading product variants"
-            resolve={variants}
-          >
-            {(data) => (
+
+            <div>
+              <p>
+                <strong>Description</strong>
+              </p>
+              <div dangerouslySetInnerHTML={{__html: descriptionHtml}} />
+            </div>
+          </div>
+          <Analytics.ProductView
+            data={{
+              products: [
+                {
+                  id: product.id,
+                  title: product.title,
+                  price: selectedVariant?.price.amount || '0',
+                  vendor: product.vendor,
+                  variantId: selectedVariant?.id || '',
+                  variantTitle: selectedVariant?.title || '',
+                  quantity: 1,
+                },
+              ],
+            }}
+          />
+          <Suspense
+            fallback={
               <ProductForm
                 product={product}
                 selectedVariant={selectedVariant}
-                variants={data?.product?.variants.nodes || []}
+                variants={[]}
               />
-            )}
-          </Await>
-        </Suspense>
+            }
+          >
+            <Await
+              errorElement="There was a problem loading product variants"
+              resolve={variants}
+            >
+              {(data) => (
+                <ProductForm
+                  product={product}
+                  selectedVariant={selectedVariant}
+                  variants={data?.product?.variants.nodes || []}
+                />
+              )}
+            </Await>
+          </Suspense>
+        </div>
       </div>
+      <ProductComments
+        commentsJson={product.comments?.value || '[]'}
+        productId={product.id}
+      ></ProductComments>
     </div>
   );
 }
@@ -307,6 +314,10 @@ const PRODUCT_FRAGMENT = `#graphql
     handle
     descriptionHtml
     description
+    comments: metafield(key: "comments", namespace: "custom") {
+      key
+      value
+    }
     animaux: metafield(key: "animaux", namespace: "custom"){
       value
     }

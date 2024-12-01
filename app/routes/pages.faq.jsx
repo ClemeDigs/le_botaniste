@@ -25,7 +25,7 @@ export default function Faq() {
   );
 
   return (
-    <div>
+    <div className="pb-20">
       <PageTitle title="FAQ"></PageTitle>
       <div className="py-12 lg:px-12 p-8 m-auto">
         <SearchBar onSearch={onSearch} />

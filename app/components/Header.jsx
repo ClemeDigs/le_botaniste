@@ -9,6 +9,7 @@ import {LuShoppingBasket} from 'react-icons/lu';
 import {LuUserCircle2} from 'react-icons/lu';
 import {TbHeart} from 'react-icons/tb';
 import {LuAlignJustify} from 'react-icons/lu';
+import MegaMenu from './MegaMenu';
 
 /**
  * @param {HeaderProps}
@@ -19,6 +20,7 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
   return (
     <header className="w-full p-3 top-0 md:mb-12 sticky">
       <div className="bg-pink p-3 rounded-full">
+
         <div className="max-w-[1600px] m-auto flex flex-col sm:flex-row justify-between items-center">
           <NavLink
             prefetch="intent"
@@ -34,13 +36,14 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
               Le Botaniste
             </span>
           </NavLink>
-          <HeaderMenu
+          <MegaMenu menuItems={menu.items}></MegaMenu>
+          {/* <HeaderMenu
             className="hidden md:flex"
             menu={menu}
             viewport="desktop"
             primaryDomainUrl={header.shop.primaryDomain.url}
             publicStoreDomain={publicStoreDomain}
-          />
+          /> */}
           <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
         </div>
       </div>

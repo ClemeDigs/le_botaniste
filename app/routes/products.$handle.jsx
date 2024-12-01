@@ -15,7 +15,7 @@ import {IoPawSharp} from 'react-icons/io5';
 import {GiWateringCan} from 'react-icons/gi';
 import {LuSunMedium} from 'react-icons/lu';
 import AddToWishList from '~/components/AddToWishList';
-import ProductComments from '~/components/Comments';
+import ProductComments from '~/components/ProductComments';
 
 /**
  * @type {MetaFunction<typeof loader>}
@@ -261,10 +261,7 @@ export default function Product() {
           </Suspense>
         </div>
       </div>
-      <ProductComments
-        commentsJson={product.comments?.value || '[]'}
-        productId={product.id}
-      ></ProductComments>
+      <ProductComments productId={product.id} />
     </div>
   );
 }

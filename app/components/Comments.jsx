@@ -1,63 +1,51 @@
-import {useState} from 'react';
-import {RiH3} from 'react-icons/ri';
+import {useState, useEffect} from 'react';
 
-export default function ProductComments({commentsJson, productId}) {
-  const [comments, setComments] = useState(JSON.parse(commentsJson || '[]'));
+export default function ProductComments({productId}) {
+  // Charger les commentaires globaux depuis localStorage
+  const [allComments, setAllComments] = useState(() => {
+    const storedComments = localStorage.getItem('allComments');
+    return storedComments ? JSON.parse(storedComments) : [];
+  });
+
   const [newComment, setNewComment] = useState('');
   const [author, setAuthor] = useState('');
 
-  const handleSubmit = async (e) => {
+  // Filtrer les commentaires pour ce produit
+  const comments = allComments.filter(
+    (comment) => comment.productId === productId,
+  );
+
+  // Sauvegarder tous les commentaires dans localStorage à chaque mise à jour
+  useEffect(() => {
+    localStorage.setItem('allComments', JSON.stringify(allComments));
+  }, [allComments]);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log('Formulaire soumis');
-    console.log('Texte du commentaire :', newComment);
-    console.log('Auteur :', author);
+    if (!newComment.trim()) {
+      alert('Le commentaire ne peut pas être vide.');
+      return;
+    }
 
     const newCommentData = {
+      productId, // Associe le commentaire à ce produit
       text: newComment,
       author: author || 'Anonyme',
       date: new Date().toISOString(),
     };
 
-    console.log('Données à envoyer :', newCommentData);
+    // Ajouter le nouveau commentaire au tableau global
+    setAllComments((prevComments) => [...prevComments, newCommentData]);
 
-    try {
-      const response = await fetch('/api/add-comment', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          productId,
-          comment: newCommentData,
-        }),
-      });
-
-      console.log('Réponse du serveur :', response);
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => {
-          console.error('Réponse non-JSON reçue');
-          throw new Error(`Erreur HTTP : ${response.status}`);
-        });
-        console.error('Erreur côté serveur :', errorData);
-        return;
-      }
-
-      const responseData = await response.json();
-      console.log('Commentaire ajouté côté serveur :', responseData);
-
-      setComments((prev) => [...prev, newCommentData]);
-      setNewComment('');
-      setAuthor('');
-    } catch (error) {
-      console.error('Erreur réseau ou autre :', error);
-    }
+    // Réinitialiser les champs du formulaire
+    setNewComment('');
+    setAuthor('');
   };
 
   return (
     <div className="p-4 w-3/4 m-auto">
-      <h3 className="">Commentaires</h3>
+      <h3 className="font-bold text-lg">Commentaires</h3>
 
       <ul className="mb-4">
         {comments.length === 0 ? (
@@ -66,7 +54,7 @@ export default function ProductComments({commentsJson, productId}) {
           comments.map((comment, index) => (
             <li key={index} className="border-b py-2">
               <p>{comment.text}</p>
-              <p>
+              <p className="text-sm text-gray-500">
                 {comment.author}, {new Date(comment.date).toLocaleString()}
               </p>
             </li>

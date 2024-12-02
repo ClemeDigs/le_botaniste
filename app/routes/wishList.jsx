@@ -59,7 +59,9 @@ export default function WishList() {
           ))}
         </div>
       ) : (
-        <p>Tu n'as aucun produit favoris!</p>
+        <div className="p-12">
+          <p>Tu n'as aucun produit favoris!</p>
+        </div>
       )}
     </div>
   );

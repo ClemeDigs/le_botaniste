@@ -35,14 +35,14 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
               Le Botaniste
             </span>
           </NavLink>
-          <MegaMenu menuItems={menu.items}></MegaMenu>
-          {/* <HeaderMenu
+          {/*           <MegaMenu menuItems={menu.items}></MegaMenu> */}
+          <HeaderMenu
             className="hidden md:flex"
             menu={menu}
             viewport="desktop"
             primaryDomainUrl={header.shop.primaryDomain.url}
             publicStoreDomain={publicStoreDomain}
-          /> */}
+          />
           <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
         </div>
       </div>

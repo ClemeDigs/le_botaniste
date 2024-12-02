@@ -3,7 +3,7 @@ import mosaique from 'app/assets/mosaique_double.svg';
 export default function PageTitle({title, className}) {
   return (
     <div
-      className={`w-full flex flex-col md:flex-row items-center bg-offWhite shadow-xl gap-3 h-[140px] md:h-[80px] lg:h-[120px] ${className}`}
+      className={`w-full flex flex-col md:flex-row items-center bg-offWhite shadow-xl gap-3 h-[140px] md:h-[80px] lg:h-[120px] overflow-hidden ${className}`}
     >
       <div className="flex-1 md:h-full h-1/2 flex">
         <img

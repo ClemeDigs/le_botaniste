@@ -7,13 +7,13 @@ export default function PageTitle({title, className}) {
     >
       <div className="flex-1 md:h-full h-1/2 flex">
         <img
-          className="w-full object-cover h-full"
+          className="w-full object-cover overflow-hidden h-full"
           src={mosaique}
           alt="Motifs"
           aria-hidden
         />
         <img
-          className="w-full object-cover h-full md:hidden"
+          className="w-full object-cover overflow-hidden h-full md:hidden"
           src={mosaique}
           alt="Motifs"
           aria-hidden

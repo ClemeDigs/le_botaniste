@@ -82,7 +82,7 @@ export default function Collection() {
   const {collection} = useLoaderData();
 
   return (
-    <div className="py-8">
+    <div className="py-3 md:py-8">
       <PageTitle title={collection.title} />
       <div className="flex flex-col gap-6 p-8 max-w-[1600px] m-auto">
         <p className="collection-description">{collection.description}</p>

@@ -22,9 +22,9 @@ export function Footer({footer: footerPromise, header, publicStoreDomain}) {
     <Suspense>
       <Await resolve={footerPromise}>
         {(footer) => (
-          <footer className="w-full bg-dark-green text-offWhite flex justify-center ">
+          <footer className="w-full bg-dark-green text-offWhite flex">
             {footer?.menu && header.shop.primaryDomain?.url && (
-              <div className="max-w-[1440px] m-auto w-full flex flex-col gap-3 items-center md:flex-row md:justify-evenly py-8 lg:items-center">
+              <div className="max-w-[1440px] m-auto w-full flex flex-col gap-3 items-center md:flex-row md:justify-evenly  py-8 lg:items-start">
                 <div className="flex flex-row md:gap-[1.3rem] lg:gap-[3rem] md:flex-col">
                   <img
                     className="w-[100px] md:w-[200px]"
@@ -61,7 +61,7 @@ export function Footer({footer: footerPromise, header, publicStoreDomain}) {
  */
 function FooterMenu({menu, primaryDomainUrl, publicStoreDomain}) {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-4 md:gap-9">
       <Subscribe />
       <nav className="footer-menu flex flex-col" role="navigation">
         <a href="#">Conditions générales de vente</a>

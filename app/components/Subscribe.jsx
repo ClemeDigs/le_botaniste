@@ -24,7 +24,7 @@ export default function Subscribe() {
     <div className="flex flex-col">
       <h3 className="hidden md:block">Infolettre</h3>
       <h6 className="md:hidden">Infolettre</h6>
-      <div className="flex gap-3 items-center text-xl">
+      <div className="flex gap-3 items-center text-xl pb-1">
         <LuMail />
         <p>Inscris-toi à notre infolettre!</p>
       </div>

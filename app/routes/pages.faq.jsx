@@ -36,13 +36,19 @@ export default function Faq() {
           src={favicon}
           alt="Illustration de fougère"
         />
-        <Accordions
-          accordions={filteredFaq.map((eachQuestion) => ({
-            id: eachQuestion.id,
-            title: eachQuestion.question.value,
-            content: eachQuestion.answer.value,
-          }))}
-        />
+        {filteredFaq.length > 0 ? (
+          <Accordions
+            accordions={filteredFaq.map((eachQuestion) => ({
+              id: eachQuestion.id,
+              title: eachQuestion.question.value,
+              content: eachQuestion.answer.value,
+            }))}
+          />
+        ) : (
+          <div className="border-t-4 border-dark-green p-8 w-full">
+            <p>Aucun résultat trouvé pour votre recherche.</p>
+          </div>
+        )}
       </div>
     </div>
   );

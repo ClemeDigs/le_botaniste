@@ -11,7 +11,7 @@ export function CartSummary({cart, layout}) {
   return (
     <div
       aria-labelledby="cart-summary"
-      className={`${className} bg-pink border-t-2 border-dark-green absolute left-0 bottom-0 p-3`}
+      className={`${className} bg-pink border-t-2 border-dark-green absolute left-0 bottom-0 p-3 flex flex-col gap-3`}
     >
       <h4>Total</h4>
       <dl className="flex gap-4 font-semibold">

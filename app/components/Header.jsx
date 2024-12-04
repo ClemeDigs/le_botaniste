@@ -18,9 +18,8 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
   const {menu} = header;
   console.log(menu);
   return (
-    <header className="w-full p-3 top-0 md:mb-12 sticky">
+    <header className="w-full p-3 top-0 md:mb-12 sticky z-10">
       <div className="bg-pink p-3 rounded-full">
-
         <div className="max-w-[1600px] m-auto flex flex-col sm:flex-row justify-between items-center">
           <NavLink
             prefetch="intent"
@@ -36,14 +35,19 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
               Le Botaniste
             </span>
           </NavLink>
-          {/*           <MegaMenu menuItems={menu.items}></MegaMenu> */}
-          <HeaderMenu
+
+          <MegaMenu
+            menuItems={menu.items}
+            primaryDomainUrl={header.shop.primaryDomain.url}
+            publicStoreDomain={publicStoreDomain}
+          ></MegaMenu>
+          {/* <HeaderMenu
             className="hidden md:flex"
             menu={menu}
             viewport="desktop"
             primaryDomainUrl={header.shop.primaryDomain.url}
             publicStoreDomain={publicStoreDomain}
-          />
+          /> */}
           <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
         </div>
       </div>

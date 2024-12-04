@@ -40,11 +40,11 @@ export function Aside({children, heading, type, className}) {
   return (
     <div
       aria-modal
-      className={`overlay ${expanded ? 'expanded' : ''}`}
+      className={`overlay ${expanded ? 'expanded' : ''} z-20 `}
       role="dialog"
     >
       <button className="close-outside" onClick={close} />
-      <aside className="flex flex-col pt-3 pr-3">
+      <aside className="flex flex-col pt-3 pr-3 ">
         <header className="flex justify-between items-center px-3 py-3 bg-pink rounded-r-full">
           <h3 className="text-dark-green">{heading}</h3>
           <button className="close reset" onClick={close}>

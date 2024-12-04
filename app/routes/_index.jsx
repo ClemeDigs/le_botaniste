@@ -9,6 +9,8 @@ import {Button} from '~/components/Button';
 import mosaique from 'app/assets/mosaique.svg';
 import PageTitle from '~/components/PageTitle';
 import {useAside} from '~/components/Aside';
+import DynamicBanner from '~/components/DynamicBanner';
+import banners from '~/data/banners.json';
 
 /**
  * @type {MetaFunction}
@@ -56,13 +58,20 @@ function loadDeferredData({context}) {
   const recommendedProducts = context.storefront
     .query(RECOMMENDED_PRODUCTS_QUERY)
     .catch((error) => {
-      // Log query errors, but don't throw them so the page can still render
       console.error(error);
       return null;
     });
 
+  /*   const products = context.storefront
+    .query(ALL_PRODUCTS_QUERY)
+    .catch((error) => {
+      console.error(error);
+      return null;
+    }); */
+
   return {
     recommendedProducts,
+    /*     products, */
   };
 }
 
@@ -71,8 +80,10 @@ export default function Homepage() {
   const data = useLoaderData();
   return (
     <div className="flex flex-col items-center">
+      {/*       <PromoBanner products={data.products}></PromoBanner> */}
       <FeaturedCollection collection={data.featuredCollection} />
       <RecommendedProducts products={data.recommendedProducts} />
+      <DynamicBanner contents={banners}></DynamicBanner>
       <IconsWithText />
     </div>
   );
@@ -150,12 +161,98 @@ function FeaturedCollection({collection}) {
   );
 }
 
+/* function PromoBanner({products}) {
+  if (!products) return null;
+
+  return (
+    <Suspense fallback={<div>Chargement...</div>}>
+      <Await resolve={products}>
+        {(response) => {
+          console.log(response);
+          if (!response || !response.products.nodes.length) return null;
+
+          const randomIndex = Math.floor(
+            Math.random() * response.products.nodes.length,
+          );
+          const product = response.products.nodes[randomIndex];
+          const image = product?.images?.nodes[0];
+
+          return (
+            <div className="bg-offWhite shadow-lg flex justify-center">
+              <div className="grid lg:grid-cols-2 2xl:grid-cols-3">
+                <div className="flex flex-col items-center justify-between">
+                  <div className="hidden lg:flex p-3 lg:p-0 lg:h-1/2 w-full justify-center items-center bg-dark-green lg:bg-offWhite">
+                    <h1 className="text-offWhite lg:text-dark-green text-center">
+                      Promo
+                    </h1>
+                  </div>
+                  <div className="lg:hidden">
+                    <PageTitle
+                      title="Promo"
+                      className="h-[210px] md:h-[80px] lg:h-[120px]"
+                    />
+                  </div>
+                  <img
+                    className="w-full hidden 2xl:inline-block"
+                    src={mosaique}
+                    alt="Motifs colorés"
+                  />
+                  <Link
+                    className="hidden lg:inline-block w-full lg:h-1/2 2xl:h-auto 2xl:hidden"
+                    to={`/products/${product.handle}`}
+                  >
+                    {image && (
+                      <Image
+                        className="h-full object-cover object-center rounded-b-lg 2xl:rounded-lg border-8 border-dark-green"
+                        data={image}
+                        aspectRatio="1/1"
+                      />
+                    )}
+                  </Link>
+                </div>
+
+                <div className="flex flex-col justify-center lg:hidden 2xl:inline-block">
+                  <Link className="h-full" to={`/products/${product.handle}`}>
+                    {image && (
+                      <Image
+                        className="h-full object-cover object-center rounded-b-lg 2xl:rounded-lg border-8 border-dark-green"
+                        data={image}
+                        aspectRatio="1/1"
+                      />
+                    )}
+                  </Link>
+                </div>
+
+                <div className="flex flex-col justify-between items-center">
+                  <img
+                    className="hidden lg:inline-block w-full lg:h-1/2 lg:object-cover lg:object-center 2xl:object-contain"
+                    src={mosaique}
+                    alt="Motifs colorés"
+                  />
+                  <div className="p-4 text-dark lg:h-1/2 2xl:h-auto h-full flex flex-col items-center justify-center gap-3">
+                    <h2>{product.title}</h2>
+                    <Link
+                      className="bg-dark-green text-offWhite px-6 py-3 rounded-full hover:shadow-lg"
+                      to={`/products/${product.handle}`}
+                    >
+                      Voir la plante
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        }}
+      </Await>
+    </Suspense>
+  );
+} */
+
 /**
  * @param {{
  *   products: Promise<RecommendedProductsQuery | null>;
  * }}
  */
-
 function RecommendedProducts({products, product, selectedVariant, variants}) {
   const {open} = useAside();
   return (
@@ -179,7 +276,6 @@ function RecommendedProducts({products, product, selectedVariant, variants}) {
                           className="rounded-lg border-8 border-dark-green"
                           data={product.images.nodes[0]}
                           aspectRatio="1/1.3"
-                          // sizes="(width: 40em) 20vw, 30vw"
                         />
                         <div className="flex flex-col gap-4 p-4">
                           <div className="flex gap-4 items-center">
@@ -246,6 +342,45 @@ const FEATURED_COLLECTION_QUERY = `#graphql
     }
   }
 `;
+
+/* const ALL_PRODUCTS_QUERY = `#graphql
+query products {
+  products(first: 250) {
+    nodes {
+      id
+      title
+      handle
+      priceRange {
+        minVariantPrice {
+          amount
+          currencyCode
+        }
+      }
+      images(first: 1) {
+        nodes {
+          id
+          url
+          altText
+          width
+          height
+        }
+      }
+      variants(first: 1) {
+        nodes {
+          id
+          selectedOptions {
+            value
+            name
+          }
+          product {
+            handle
+          }
+        }
+      }
+      
+    }
+  }
+}`; */
 
 const RECOMMENDED_PRODUCTS_QUERY = `#graphql
   fragment RecommendedProduct on Product {

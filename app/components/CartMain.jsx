@@ -22,11 +22,11 @@ export function CartMain({layout, cart: originalCart}) {
   const cartHasItems = cart?.totalQuantity > 0;
 
   return (
-    <div className={`${className} overflow-y-auto`}>
+    <div className={`${className} overflow-y-auto max-h-[60vh]`}>
       <CartEmpty hidden={linesCount} layout={layout} />
       <div>
         <div aria-labelledby="cart-lines" className="max-w-[450px]">
-          <ul>
+          <ul className=" flex flex-col gap-4">
             {(cart?.lines?.nodes ?? []).map((line) => (
               <CartLineItem key={line.id} line={line} layout={layout} />
             ))}

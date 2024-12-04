@@ -40,16 +40,22 @@ export default function ProductComments({productId}) {
     <div className="p-4 flex flex-col gap-4">
       <h3 className="text-dark-green">Commentaires</h3>
       <div className="flex flex-col gap-8 lg:flex-row w-full">
-        <ul className="mb-4 w-full lg:w-1/2">
+        <ul className="mb-4 w-full lg:w-1/2 bg-offWhite rounded-3xl">
           {comments.length === 0 ? (
             <li>Aucun commentaire sur ce produit.</li>
           ) : (
             comments.map((comment, index) => (
-              <li key={index} className="border-b-2 border-pink py-2">
-                <p>{comment.comment}</p>
-                <p className="text-dark-green">
-                  {comment.name}, {new Date(comment.date).toLocaleDateString()}
-                </p>
+              <li
+                key={index}
+                className="border-b-2 border-pink py-2 last:border-none"
+              >
+                <div className="px-4">
+                  <p>{comment.comment}</p>
+                  <p className="text-dark-green">
+                    {comment.name},{' '}
+                    {new Date(comment.date).toLocaleDateString()}
+                  </p>
+                </div>
               </li>
             ))
           )}

@@ -11,12 +11,13 @@ import PageTitle from '~/components/PageTitle';
 import {useAside} from '~/components/Aside';
 import DynamicBanner from '~/components/DynamicBanner';
 import banners from '~/data/banners.json';
+import {BANNER_QUERY} from '~/graphql/customer-account/DynamicContent';
 
 /**
  * @type {MetaFunction}
  */
 export const meta = () => {
-  return [{title: 'Le Botaniste | Home'}];
+  return [{title: 'Le Botaniste | Accueil'}];
 };
 
 /**
@@ -38,13 +39,15 @@ export async function loader(args) {
  * @param {LoaderFunctionArgs}
  */
 async function loadCriticalData({context}) {
-  const [{collections}] = await Promise.all([
+  const [{collections}, {metaobjects}] = await Promise.all([
     context.storefront.query(FEATURED_COLLECTION_QUERY),
+    context.storefront.query(BANNER_QUERY),
     // Add other queries here, so that they are loaded in parallel
   ]);
 
   return {
     featuredCollection: collections.nodes[0],
+    dynamicContents: metaobjects?.nodes ?? [],
   };
 }
 
@@ -77,13 +80,14 @@ function loadDeferredData({context}) {
 
 export default function Homepage() {
   /** @type {LoaderReturnData} */
-  const data = useLoaderData();
+  const {dynamicContents, featuredCollection, recommendedProducts} =
+    useLoaderData();
   return (
     <div className="flex flex-col items-center">
       {/*       <PromoBanner products={data.products}></PromoBanner> */}
-      <FeaturedCollection collection={data.featuredCollection} />
-      <RecommendedProducts products={data.recommendedProducts} />
-      <DynamicBanner contents={banners}></DynamicBanner>
+      <FeaturedCollection collection={featuredCollection} />
+      <RecommendedProducts products={recommendedProducts} />
+      <DynamicBanner contents={dynamicContents}></DynamicBanner>
       <IconsWithText />
     </div>
   );

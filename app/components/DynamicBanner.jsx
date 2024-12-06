@@ -30,9 +30,9 @@ export default function DynamicBanner({contents = []}) {
   }
 
   return (
-    <div className="flex gap-4 p-4 items-center max-w-[1600px] m-auto h-[700px] md:max-h-[550px] overflow-hidden">
+    <div className="flex gap-4 p-4 items-center max-w-[1600px] m-auto h-[800px] md:max-h-[550px] overflow-hidden">
       <button
-        className="bg-dark-green text-offWhite rounded-full p-3"
+        className="bg-dark-green text-offWhite rounded-full p-2 lg:p-3"
         onClick={decIndex}
       >
         <LuChevronLeft size={24} />
@@ -40,36 +40,36 @@ export default function DynamicBanner({contents = []}) {
       <div className="relative w-full">
         {contents.map((content, i) => (
           <div
-            key={content.title}
+            key={content.title.value}
             className={`transition-all duration-700 w-full grid md:grid-cols-2 ${
               i === bannerIndex
                 ? 'opacity-100 translate-x-0'
                 : 'opacity-0 translate-x-[-50px]'
             } ${i !== 0 ? 'absolute top-0 left-0' : ''}`}
           >
-            <div className="bg-pink max-h-[450px] p-4 flex flex-col gap-6 justify-between items-center rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none ">
-              <h3>{content.title}</h3>
-              <p>{content.text}</p>
+            <div className="bg-pink md:h-[400px] lg:h-[350px] xl:h-[400px] p-4 xl:p-8 flex flex-col gap-6 justify-between items-center rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none ">
+              <h3>{content.title.value}</h3>
+              <p>{content.description.value}</p>
               <Link
                 className="bg-dark-green text-offWhite rounded-full py-3 px-6"
-                to={content.button.link}
+                to={content.link_url.value}
               >
-                {content.button.text}
+                {content.link_label.value}
               </Link>
               <div className="flex justify-between w-full"></div>
             </div>
-            <div className="h-full w-full relative transition-all duration-700 max-h-[450px]">
+            <div className="h-full w-full relative transition-all duration-700 md:h-[400px] lg:h-[350px] xl:h-[400px]">
               <img
                 className="rounded-b-2xl md:rounded-r-2xl md:rounded-bl-none h-full w-full object-cover"
-                src={content.image}
-                alt={content.title}
+                src={content.image.reference.image.url}
+                alt={content.image_alt.value}
               />
             </div>
           </div>
         ))}
       </div>
       <button
-        className="bg-dark-green text-offWhite rounded-full p-3"
+        className="bg-dark-green text-offWhite rounded-full p-2 lg:p-3"
         onClick={incIndex}
       >
         <LuChevronRight size={24} />

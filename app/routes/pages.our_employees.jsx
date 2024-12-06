@@ -13,7 +13,7 @@ export default function OurEmployees() {
   return (
     <div>
       <PageTitle title="Nos employés"></PageTitle>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 p-8 max-w-[2000px] m-auto">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-8 max-w-[2000px] m-auto">
         {employees.map(
           ({
             id,
@@ -28,20 +28,22 @@ export default function OurEmployees() {
           }) => (
             <div
               key={id}
-              className="rounded-lg border-4 border-dark-green bg-dark-green flex flex-col gap-2"
+              className="rounded-lg border-4 border-dark-green bg-dark-green flex flex-col justify-start"
             >
-              {/* <img
-                src={photo.reference.image.url}
+              <img
+                src={photo?.reference?.image?.url || ''}
                 alt={firstname.value + ' ' + lastname.value}
-                className="rounded-t-lg border-4 border-dark-green max-h-[500px] md:max-h-[400px] w-full object-cover object-center lg:object-cover
-                "
-              /> */}
-              <div className="text-white flex flex-col p-4">
+                className={`rounded-t-lg border-4 border-dark-green max-h-[700px] w-full object-cover ${
+                  photo?.reference?.image?.url ? '' : 'hidden'
+                }`}
+              />
+
+              <div className=" test text-white p-4">
                 <h3>
                   {firstname.value} {lastname.value.toUpperCase()}
                 </h3>
                 <h6>{position.value}</h6>
-                <div className="flex gap-3 items-center pt-4">
+                <div className="flex gap-1 items-center pt-4">
                   <LuMail className="text-2xl" />
                   <p>{email.value}</p>
                 </div>

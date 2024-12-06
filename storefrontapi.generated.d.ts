@@ -357,43 +357,6 @@ export type FeaturedCollectionQuery = {
   };
 };
 
-export type ProductsQueryVariables = StorefrontAPI.Exact<{
-  [key: string]: never;
-}>;
-
-export type ProductsQuery = {
-  products: {
-    nodes: Array<
-      Pick<StorefrontAPI.Product, 'id' | 'title' | 'handle'> & {
-        priceRange: {
-          minVariantPrice: Pick<
-            StorefrontAPI.MoneyV2,
-            'amount' | 'currencyCode'
-          >;
-        };
-        images: {
-          nodes: Array<
-            Pick<
-              StorefrontAPI.Image,
-              'id' | 'url' | 'altText' | 'width' | 'height'
-            >
-          >;
-        };
-        variants: {
-          nodes: Array<
-            Pick<StorefrontAPI.ProductVariant, 'id'> & {
-              selectedOptions: Array<
-                Pick<StorefrontAPI.SelectedOption, 'value' | 'name'>
-              >;
-              product: Pick<StorefrontAPI.Product, 'handle'>;
-            }
-          >;
-        };
-      }
-    >;
-  };
-};
-
 export type RecommendedProductFragment = Pick<
   StorefrontAPI.Product,
   'id' | 'title' | 'handle'
@@ -837,6 +800,9 @@ export type PartnersQuery = {
           >;
         }>;
         name?: StorefrontAPI.Maybe<
+          Pick<StorefrontAPI.MetaobjectField, 'value'>
+        >;
+        description?: StorefrontAPI.Maybe<
           Pick<StorefrontAPI.MetaobjectField, 'value'>
         >;
       }
@@ -1406,10 +1372,6 @@ interface GeneratedQueryTypes {
     return: FeaturedCollectionQuery;
     variables: FeaturedCollectionQueryVariables;
   };
-  '#graphql\nquery products {\n  products(first: 250) {\n    nodes {\n      id\n      title\n      handle\n      priceRange {\n        minVariantPrice {\n          amount\n          currencyCode\n        }\n      }\n      images(first: 1) {\n        nodes {\n          id\n          url\n          altText\n          width\n          height\n        }\n      }\n      variants(first: 1) {\n        nodes {\n          id\n          selectedOptions {\n            value\n            name\n          }\n          product {\n            handle\n          }\n        }\n      }\n      \n    }\n  }\n}': {
-    return: ProductsQuery;
-    variables: ProductsQueryVariables;
-  };
   '#graphql\n  fragment RecommendedProduct on Product {\n    id\n    title\n    handle\n    priceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    variants(first: 1){\n      nodes{\n        id\n        selectedOptions {\n          name\n          value\n        }\n        product {\n          handle\n        }\n      }\n    }\n    images(first: 1) {\n      nodes {\n        id\n        url\n        altText\n        width\n        height\n      }\n    }\n  }\n  query RecommendedProducts ($country: CountryCode, $language: LanguageCode)\n    @inContext(country: $country, language: $language) {\n    products(first: 4, sortKey: UPDATED_AT, reverse: true) {\n      nodes {\n        ...RecommendedProduct\n      }\n    }\n  }\n': {
     return: RecommendedProductsQuery;
     variables: RecommendedProductsQueryVariables;
@@ -1450,7 +1412,7 @@ interface GeneratedQueryTypes {
     return: EmployeesQuery;
     variables: EmployeesQueryVariables;
   };
-  '#graphql\nquery partners {\n  metaobjects(first: 250, type: "Partners") {\n    nodes {\n      id\n      logo: field(key: "logo") {\n        reference {\n          ... on MediaImage {\n            id\n            image {\n              url\n            }\n          }\n        }\n      }\n      name: field(key: "name") {\n        value\n      }\n    }\n  }\n}\n': {
+  '#graphql\nquery partners {\n  metaobjects(first: 250, type: "Partners") {\n    nodes {\n      id\n      logo: field(key: "logo") {\n        reference {\n          ... on MediaImage {\n            id\n            image {\n              url\n            }\n          }\n        }\n      }\n      name: field(key: "name") {\n        value\n      }\n      description: field(key: "description") {\n        value\n      }\n    }\n  }\n}\n': {
     return: PartnersQuery;
     variables: PartnersQueryVariables;
   };

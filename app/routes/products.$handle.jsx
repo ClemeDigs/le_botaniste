@@ -311,10 +311,6 @@ const PRODUCT_FRAGMENT = `#graphql
     handle
     descriptionHtml
     description
-    comments: metafield(key: "comments", namespace: "custom") {
-      key
-      value
-    }
     animaux: metafield(key: "animaux", namespace: "custom"){
       value
     }

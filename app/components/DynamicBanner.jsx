@@ -42,9 +42,9 @@ export default function DynamicBanner({contents = []}) {
             key={content.title.value}
             className={`transition-all duration-700 w-full grid md:grid-cols-2 ${
               i === bannerIndex
-                ? 'opacity-100 translate-x-0'
-                : 'opacity-0 translate-x-[-50px]'
-            } ${i !== 0 ? 'absolute top-0 left-0' : ''}`}
+                ? 'opacity-100 translate-x-0 visible'
+                : 'opacity-0 translate-x-[-50px] invisible'
+            } ${i !== 0 ? 'absolute top-0 left-0 ' : ''}`}
           >
             <div className="bg-pink md:h-[400px] lg:h-[350px] xl:h-[400px] p-4 xl:p-8 flex flex-col gap-6 justify-between items-center rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none ">
               <h3>{content.title.value}</h3>

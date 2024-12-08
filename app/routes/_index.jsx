@@ -347,45 +347,6 @@ const FEATURED_COLLECTION_QUERY = `#graphql
   }
 `;
 
-/* const ALL_PRODUCTS_QUERY = `#graphql
-query products {
-  products(first: 250) {
-    nodes {
-      id
-      title
-      handle
-      priceRange {
-        minVariantPrice {
-          amount
-          currencyCode
-        }
-      }
-      images(first: 1) {
-        nodes {
-          id
-          url
-          altText
-          width
-          height
-        }
-      }
-      variants(first: 1) {
-        nodes {
-          id
-          selectedOptions {
-            value
-            name
-          }
-          product {
-            handle
-          }
-        }
-      }
-      
-    }
-  }
-}`; */
-
 const RECOMMENDED_PRODUCTS_QUERY = `#graphql
   fragment RecommendedProduct on Product {
     id

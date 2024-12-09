@@ -1,7 +1,6 @@
 import {LuChevronLeft, LuChevronRight} from 'react-icons/lu';
 import {useState, useEffect} from 'react';
 import {Link} from '@remix-run/react';
-import {motion} from 'motion/react';
 
 export default function DynamicBanner({contents = []}) {
   const [bannerIndex, setBannerIndex] = useState(0);

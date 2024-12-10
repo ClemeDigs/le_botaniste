@@ -42,7 +42,7 @@ export default function ProductComments({productId}) {
       <div className="flex flex-col gap-8 lg:flex-row w-full">
         <ul className="mb-4 w-full lg:w-1/2 bg-offWhite rounded-3xl">
           {comments.length === 0 ? (
-            <li>Aucun commentaire sur ce produit.</li>
+            <li className="p-4">Aucun commentaire sur ce produit.</li>
           ) : (
             comments.map((comment, index) => (
               <li

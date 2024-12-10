@@ -92,9 +92,9 @@ export default function QuizPage() {
             key={question.id}
             questionData={question}
             btnText={
-              filteredProducts.length === 0
-                ? 'Voir les résultats'
-                : 'Question suivante'
+              currentQuestionIndex < quiz.length - 1
+                ? 'Question suivante'
+                : 'Voir les résultats'
             }
             applyFilter={(selectedAnswer) =>
               handleSelectFilter(currentQuestionIndex, selectedAnswer)
@@ -174,13 +174,13 @@ query products {
       handle
       animaux: metafield(key: "animaux", namespace: "custom"){
       value
-    }
-    arrosage: metafield(key: "arrosage", namespace: "custom"){
-      value
-    }
-    luminosite: metafield(key: "luminosit_", namespace: "custom"){
-      value
-    }
+      }
+      arrosage: metafield(key: "arrosage", namespace: "custom"){
+        value
+      }
+      luminosite: metafield(key: "luminosit_", namespace: "custom"){
+        value
+      }
       priceRange {
         minVariantPrice {
           amount

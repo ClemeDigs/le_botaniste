@@ -5,13 +5,12 @@ import {Image, Money} from '@shopify/hydrogen';
 import IconsWithText from '~/components/IconsWithText';
 import {AddToCartButton} from '~/components/AddToCartButton';
 import AddToWishList from '~/components/AddToWishList';
-import {Button} from '~/components/Button';
-import mosaique from 'app/assets/mosaique.svg';
 import PageTitle from '~/components/PageTitle';
 import {useAside} from '~/components/Aside';
 import DynamicBanner from '~/components/DynamicBanner';
 import banners from '~/data/banners.json';
 import {BANNER_QUERY} from '~/graphql/customer-account/DynamicContent';
+import mosaique from 'app/assets/mosaique.svg';
 
 /**
  * @type {MetaFunction}

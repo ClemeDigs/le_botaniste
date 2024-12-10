@@ -10,6 +10,9 @@ import {LuUserCircle2} from 'react-icons/lu';
 import {TbHeart} from 'react-icons/tb';
 import {LuAlignJustify} from 'react-icons/lu';
 import MegaMenu from './MegaMenu';
+import {useState} from 'react';
+import {SlArrowDown} from 'react-icons/sl';
+import {div} from 'framer-motion/client';
 
 /**
  * @param {HeaderProps}
@@ -47,6 +50,61 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
   );
 }
 
+function MenuItemMobile({menuItem, publicStoreDomain, primaryDomainUrl}) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const url =
+    menuItem.url.includes('myshopify.com') ||
+    menuItem.url.includes(publicStoreDomain) ||
+    menuItem.url.includes(primaryDomainUrl)
+      ? new URL(menuItem.url).pathname
+      : menuItem.url;
+
+  function toggleMenu() {
+    setIsOpen(!isOpen);
+  }
+
+  return (
+    <li className="flex flex-col px-4 text-dark-green">
+      {menuItem.items && menuItem.items.length > 0 ? (
+        <>
+          <button
+            onClick={toggleMenu}
+            className="font-medium cursor-pointer flex justify-between items-center w-full py-2"
+          >
+            {menuItem.title}
+            <SlArrowDown
+              className={`${
+                isOpen ? 'rotate-180' : ''
+              } transition-transform text-xl font-bold`}
+            ></SlArrowDown>
+          </button>
+          <ul
+            className={`px-6 transition-all duration-300 ${
+              isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
+            } overflow-hidden`}
+          >
+            {menuItem.items.map((subItem, index) => (
+              <MenuItemMobile
+                key={index}
+                menuItem={subItem}
+                publicStoreDomain={publicStoreDomain}
+                primaryDomainUrl={primaryDomainUrl}
+              />
+            ))}
+          </ul>
+        </>
+      ) : (
+        <div className="py-2">
+          <a href={url}>
+            <span className="font-semibold">{menuItem.title}</span>
+          </a>
+        </div>
+      )}
+    </li>
+  );
+}
+
 /**
  * @param {{
  *   menu: HeaderProps['header']['menu'];
@@ -61,46 +119,20 @@ export function HeaderMenu({
   viewport,
   publicStoreDomain,
 }) {
-  const className = `header-menu-${viewport} flex gap-3`;
-  const {close} = useAside();
+  const className = `header-menu-${viewport} flex flex-col`;
 
   return (
     <nav className={className} role="navigation">
-      {viewport === 'mobile' && (
-        <NavLink
-          end
-          onClick={close}
-          prefetch="intent"
-          style={activeLinkStyle}
-          to="/"
-        >
-          Home
-        </NavLink>
-      )}
-      {(menu || FALLBACK_HEADER_MENU).items.map((item) => {
-        if (!item.url) return null;
-
-        // if the url is internal, we strip the domain
-        const url =
-          item.url.includes('myshopify.com') ||
-          item.url.includes(publicStoreDomain) ||
-          item.url.includes(primaryDomainUrl)
-            ? new URL(item.url).pathname
-            : item.url;
-        return (
-          <NavLink
-            className="header-menu-item"
-            end
-            key={item.id}
-            onClick={close}
-            prefetch="intent"
-            style={activeLinkStyle}
-            to={url}
-          >
-            {item.title}
-          </NavLink>
-        );
-      })}
+      <ul>
+        {(menu || FALLBACK_HEADER_MENU).items.map((item, index) => (
+          <MenuItemMobile
+            key={index}
+            menuItem={item}
+            publicStoreDomain={publicStoreDomain}
+            primaryDomainUrl={primaryDomainUrl}
+          />
+        ))}
+      </ul>
     </nav>
   );
 }
@@ -133,7 +165,7 @@ function HeaderMenuMobileToggle() {
   const {open} = useAside();
   return (
     <button
-      className="header-menu-mobile-toggle reset md:hidden"
+      className="header-menu-mobile-toggle reset lg:hidden"
       onClick={() => open('mobile')}
     >
       <LuAlignJustify />

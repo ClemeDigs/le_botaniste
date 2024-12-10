@@ -33,6 +33,8 @@ export default function Subscribe() {
           <label htmlFor="email "></label>
           <input
             type="email"
+            id="email"
+            label="email"
             name="email"
             value={email}
             onChange={(e) => {

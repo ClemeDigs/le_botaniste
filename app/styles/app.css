@@ -155,7 +155,7 @@ button.reset:hover:not(:has(> *)) {
 
  */
 .header-menu-mobile-toggle {
-  @media (min-width: 45em) {
+  @media (min-width: 48em) {
     display: none;
   }
 }
@@ -167,7 +167,7 @@ button.reset:hover:not(:has(> *)) {
 
 .header-menu-desktop {
   display: none;
-  @media (min-width: 45em) {
+  @media (min-width: 48em) {
     display: flex;
   }
 }

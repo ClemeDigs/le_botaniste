@@ -270,7 +270,7 @@ export default function Contact() {
               />
             </a>
           </div>
-          <div className="shop-hour pt-6 md:p-0">
+          <div className="shop-hour pt-6 md:px-0 md: py-3">
             <h3 className="text-center">Heures d'ouverture</h3>
             {horaires.map((horaire) => (
               <div

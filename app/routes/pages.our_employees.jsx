@@ -12,7 +12,7 @@ export default function OurEmployees() {
 
   return (
     <div>
-      <PageTitle title="Nos employés"></PageTitle>
+      <PageTitle title="Notre équipe"></PageTitle>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-8 max-w-[2000px] m-auto">
         {employees.map(
           ({

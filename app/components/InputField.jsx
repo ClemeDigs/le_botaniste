@@ -10,7 +10,7 @@ export default function InputField({
   rows,
 }) {
   return (
-    <div className="form-group flex flex-col gap-2">
+    <div className="form-group flex flex-col md:flex-1 gap-2">
       {label && (
         <label htmlFor={name} className="flex items-center gap-2 text-offWhite">
           {icon && <span className="text-lg text-offWhite">{icon}</span>}
@@ -20,6 +20,7 @@ export default function InputField({
       {type === 'textarea' ? (
         <textarea
           value={value}
+          id={name}
           name={name}
           className="form-control px-4 py-2 border-2 rounded-3xl text-dark-green bg-offWhite"
           placeholder={placeholder}
@@ -30,6 +31,7 @@ export default function InputField({
       ) : (
         <input
           type={type}
+          id={name}
           value={value}
           name={name}
           className="form-control px-4 py-2 border-2 rounded-3xl text-dark-green bg-offWhite flex"

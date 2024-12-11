@@ -12,7 +12,6 @@ import {LuAlignJustify} from 'react-icons/lu';
 import MegaMenu from './MegaMenu';
 import {useState} from 'react';
 import {SlArrowDown} from 'react-icons/sl';
-import {div} from 'framer-motion/client';
 
 /**
  * @param {HeaderProps}

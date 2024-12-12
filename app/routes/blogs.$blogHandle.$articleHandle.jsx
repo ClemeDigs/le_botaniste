@@ -81,7 +81,6 @@ export default function Article() {
       const imageHeight = imageRef.current.offsetHeight;
 
       if (textHeight > imageHeight + 64) {
-        // 64px = 4rem
         setIsOverflowing(true);
       }
     }
@@ -106,6 +105,7 @@ export default function Article() {
             data={image}
             aspectRatio={`${isOverflowing ? '3/2' : '1/1'}`}
             loading="eager"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         )}
         <div

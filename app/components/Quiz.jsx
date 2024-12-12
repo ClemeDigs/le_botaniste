@@ -35,7 +35,7 @@ export default function Quiz({questionData, btnText, onClick, applyFilter}) {
           {answers.map((answer, index) => (
             <div className="flex gap-4 items-center" key={index}>
               <input
-                className="peer h-5 w-5 cursor-pointer appearance-none rounded-full bg-offWhite border border-pink checked:border-2 checked:bg-pink transition-all"
+                className="peer h-5 w-5 min-w-5 cursor-pointer appearance-none rounded-full bg-offWhite border border-pink checked:border-2 checked:bg-pink transition-all"
                 type="radio"
                 name={`quiz-question-${questionData.id}`}
                 value={answer.filter}

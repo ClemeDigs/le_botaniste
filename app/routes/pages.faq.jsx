@@ -5,19 +5,45 @@ import {useState} from 'react';
 import {useLoaderData} from '@remix-run/react';
 import PageTitle from '~/components/PageTitle';
 
+/**
+ * @typedef {Object} Faq
+ * @property {string} id
+ * @property {string} title
+ * @property {string} content
+ */
+
+/**
+ *
+ * @param {import('@remix-run/react').LoaderFunctionArgs} args
+ * @returns {{ faq: Faq[] }}
+ */
 export async function loader({context}) {
   const data = await context.storefront.query(FAQ_QUERY);
   return {faq: data.metaobjects.nodes};
 }
 
+/**
+ *
+ * @returns {React.JSX.Element}
+ */
 export default function Faq() {
   const {faq} = useLoaderData();
+  /**
+   * @type {string}
+   */
   const [searchValue, setSearchValue] = useState('');
 
+  /**
+   * @param {React.ChangeEvent<HTMLInputElement>} e
+   * @returns {void}
+   */
   function onSearch(e) {
     setSearchValue(e.target.value);
   }
 
+  /**
+   * @type {Faq[]}
+   */
   const filteredFaq = faq.filter((eachQuestion) =>
     eachQuestion.question.value
       .toLowerCase()

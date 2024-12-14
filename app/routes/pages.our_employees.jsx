@@ -2,11 +2,25 @@ import {useLoaderData} from '@remix-run/react';
 import {LuMail} from 'react-icons/lu';
 import PageTitle from '~/components/PageTitle';
 
+/**
+ * @typedef {import('~/types/types.d').Employee} Employee
+ * @typedef {import('~/types/types.d').EmployeeField} EmployeeField
+ * @typedef {import('~/types/types.d').EmployeePhoto} EmployeePhoto
+ */
+
+/**
+ *
+ * @param {import('@remix-run/react').LoaderFunctionArgs} args
+ * @returns {{ employees: Employee[] }}
+ */
 export async function loader({context}) {
   const data = await context.storefront.query(EMPLOYEES_QUERY);
   return {employees: data.metaobjects.nodes};
 }
 
+/**
+ * @returns {React.JSX.Element}
+ */
 export default function OurEmployees() {
   const {employees} = useLoaderData();
 

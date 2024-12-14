@@ -9,6 +9,16 @@ import {Money} from '@shopify/hydrogen';
 import {AddToCartButton} from '~/components/AddToCartButton';
 import {useAside} from '~/components/Aside';
 
+/**
+ * @typedef {import('~/types/types.d').QuizQuestion} QuizQuestion
+ * @typedef {import('~/types/types.d').Product} Product
+ */
+
+/**
+ *
+ * @param {import('@remix-run/react').LoaderFunctionArgs} args
+ * @returns {{ products: Product[], quiz: QuizQuestion[]}}
+ */
 export async function loader({context}) {
   const productsData = await context.storefront.query(ALL_PRODUCTS_QUERY);
   const quizData = await context.storefront.query(QUIZ_QUERY);
@@ -18,12 +28,22 @@ export async function loader({context}) {
   };
 }
 
+/**
+ *
+ * @returns {React.JSX.Element}
+ */
 export default function QuizPage() {
   const {quiz, products} = useLoaderData();
 
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
+  /**
+
+   * @param {Product} product 
+   * @param {string[]} selectedFilters 
+   * @returns {boolean}
+   */
   function filterProductBySelectedFilters(product, selectedFilters) {
     for (let i = 0; i < selectedFilters.length; i++) {
       const filter = selectedFilters[i];
@@ -56,6 +76,11 @@ export default function QuizPage() {
     return true;
   }
 
+  /**
+   *
+   * @param {number} currentQuestionIndex
+   * @param {string} filter
+   */
   function handleSelectFilter(currentQuestionIndex, filter) {
     setSelectedFilters((prevFilters) => {
       const newFilters = [...prevFilters];
@@ -80,6 +105,9 @@ export default function QuizPage() {
     }
   }
 
+  /**
+   * @type {QuizQuestion}
+   */
   const question = quiz[currentQuestionIndex];
 
   return (

@@ -4,6 +4,10 @@ import service from 'app/assets/service.svg';
 import IconWithText from './IconWithText';
 import Marquee from './Marquee';
 
+/**
+ *
+ * @returns {React.JSX.Element}
+ */
 export default function IconsWithText() {
   return (
     <div>

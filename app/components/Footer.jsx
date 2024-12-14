@@ -102,6 +102,9 @@ function FooterMenu({menu, primaryDomainUrl, publicStoreDomain}) {
   );
 }
 
+/**
+ * @returns {JSX.Element}
+ */
 function Copyright() {
   return (
     <div className="flex flex-col lg:flex-row gap-2 p-bold">
@@ -117,6 +120,9 @@ function Copyright() {
   );
 }
 
+/**
+ * @returns {JSX.Element}
+ */
 function Adresse() {
   return (
     <div className="flex flex-col -translate-x-3 md:translate-x-0 lg:h-[190px]">
@@ -150,6 +156,9 @@ function Adresse() {
   );
 }
 
+/**
+ * @returns {JSX.Element}
+ */
 function SocialMedias() {
   return (
     <div className="flex items-center -translate-x-3 md:translate-x-0 md:flex-col lg:flex-row gap-3 md:gap-1 lg:gap-6 md:items-baseline">

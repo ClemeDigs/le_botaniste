@@ -1,13 +1,46 @@
 import favicon from 'app/assets/favicon.svg';
 import {useState} from 'react';
 
+/**
+ * @typedef {Object} QuestionData
+ * @property {{ value: string }} question
+ * @property {{ value: string }} answer_1_label
+ * @property {{ value: string }} answer_1_filter
+ * @property {{ value: string }} answer_2_label
+ * @property {{ value: string }} answer_2_filter
+ * @property {{ value: string }} answer_3_label
+ * @property {{ value: string }} answer_3_filter
+ * @property {{ value: string }} answer_4_label
+ * @property {{ value: string }} answer_4_filter
+ */
+
+/**
+ *
+ * @param {Object} props - Propriétés du composant.
+ * @param {QuestionData} props.questionData
+ * @param {string} props.btnText
+ * @param {function} props.onClick
+ * @param {function} props.applyFilter
+ * @returns {React.JSX.Element}
+ */
 export default function Quiz({questionData, btnText, onClick, applyFilter}) {
+  /**
+   * @type {string | null}
+   */
   const [selectedAnswer, setSelectedAnswer] = useState(null);
 
+  /**
+   *
+   * @param {string} filter
+   * @returns {void}
+   */
   function handleRadioSelect(filter) {
     setSelectedAnswer(filter);
   }
 
+  /**
+   * @type {QuestionData}
+   */
   const {
     question,
     answer_1_label,
@@ -20,6 +53,9 @@ export default function Quiz({questionData, btnText, onClick, applyFilter}) {
     answer_4_filter,
   } = questionData;
 
+  /**
+   * @type {Object[]}
+   */
   const answers = [
     {label: answer_1_label?.value, filter: answer_1_filter?.value},
     {label: answer_2_label?.value, filter: answer_2_filter?.value},

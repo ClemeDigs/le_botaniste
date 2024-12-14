@@ -1,5 +1,14 @@
 import {SlArrowDown} from 'react-icons/sl';
 
+/**
+ *
+ * @param {Object} props - Propriétés du composant.
+ * @param {string} props.title
+ * @param {string} props.content
+ * @param {boolean} props.isOpen
+ * @param {function} props.onClick
+ * @returns {JSX.Element}
+ */
 export default function Accordion({title, content, isOpen, onClick}) {
   return (
     <div>

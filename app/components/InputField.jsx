@@ -1,3 +1,17 @@
+/**
+ *
+ * @param {Object} props - Propriétés du composant.
+ * @param {string} props.value
+ * @param {string} props.label
+ * @param {string} props.name
+ * @param {string} props.placeholder
+ * @param {string} props.type
+ * @param {function} props.onChange
+ * @param {React.JSX.Element} props.icon
+ * @param {number} props.cols
+ * @param {number} props.rows
+ * @returns {React.JSX.Element}
+ */
 export default function InputField({
   value,
   label,

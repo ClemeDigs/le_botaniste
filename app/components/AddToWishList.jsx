@@ -3,11 +3,22 @@ import {TbHeartFilled} from 'react-icons/tb';
 import {useState, useEffect} from 'react';
 import Cookies from 'js-cookie';
 
+/**
+ *
+ * @param {Object} props - Propriétés du composant.
+ * @param {string} props.productId
+ * @param {string} props.className
+ * @param {function} props.onToggleFavorite
+ * @returns {React.JSX.Element}
+ */
 export default function AddToWishList({
   productId,
   className,
   onToggleFavorite,
 }) {
+  /**
+   * @type {boolean}
+   */
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
@@ -15,10 +26,17 @@ export default function AddToWishList({
     setIsActive(wishlisted[productId] === true);
   }, [productId]);
 
+  /**
+   * @returns {{[key: string]: boolean}}
+   */
   function getWishListed() {
     return JSON.parse(Cookies.get('wishlisted') || '{}');
   }
 
+  /**
+   * @param {{[key: string]: boolean}} wishlisted
+   * @returns {void}
+   */
   function setWishListed(wishlisted) {
     Cookies.set('wishlisted', JSON.stringify(wishlisted), {
       expires: 31,
@@ -26,6 +44,10 @@ export default function AddToWishList({
     });
   }
 
+  /**
+   * @param {Event} e
+   * @returns {void}
+   */
   function onAdd(e) {
     e.preventDefault();
     const wishlisted = getWishListed();
@@ -40,6 +62,10 @@ export default function AddToWishList({
     }
   }
 
+  /**
+   * @param {Event} e
+   * @returns {void}
+   */
   function onRemove(e) {
     e.preventDefault();
     const wishlisted = getWishListed();

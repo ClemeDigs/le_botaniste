@@ -1,3 +1,9 @@
+/**
+ *
+ * @param {Object} props - Propriétés du composant.
+ * @param {function} props.onSearch
+ * @returns {React.JSX.Element}
+ */
 export default function SearchBar({onSearch = () => {}}) {
   return (
     <div className="flex gap-3 items-center pb-3">

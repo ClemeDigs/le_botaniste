@@ -13,17 +13,36 @@ import {
 } from 'react-icons/lu';
 import googlemap from '~/assets/googlemap.png';
 
+/**
+ * @typedef {Object} Horaire
+ * @property {string} id
+ * @property {string} title
+ * @property {string} description
+ */
+
+/**
+ *
+ * @param {import('@remix-run/react').LoaderFunctionArgs} args
+ * @returns {{ horaires: Horaire[] }}
+ */
 export async function loader({context}) {
   const data = await context.storefront.query(HORAIRE_QUERY);
   return {horaires: data?.metaobjects?.nodes || []};
 }
 
+/**
+ *
+ * @returns {React.JSX.Element}
+ */
 export default function Contact() {
+  /**
+   * @type {{ horaires: Horaire[] }}
+   */
   const {horaires = []} = useLoaderData() || {};
-  if (horaires.length === 0) {
-    console.log('Aucun horaire disponible.');
-  }
   // État pour les champs du formulaire
+  /**
+   * @type {{ firstname: string, lastname: string, userEmail: string, phone: string, subject: string, message: string }}
+   */
   const [inputValue, setInputValue] = useState({
     firstname: '',
     lastname: '',
@@ -33,17 +52,10 @@ export default function Contact() {
     message: '',
   });
 
-  // Ancienne fonction pour gérer les changements
-  // const handleChange = (e) => {
-  //   const {name, value} = e.target;
-
-  //   // Met à jour le champ correspondant
-  //   setInputValue((prev) => ({
-  //     ...prev,
-  //     [name]: value,
-  //   }));
-  // };
-
+  /**
+   * @param {React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>} e e
+   * @returns {void}
+   */
   // Fonction pour gérer les changements
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -61,23 +73,12 @@ export default function Contact() {
     }));
   };
 
-  // Validation avec regex pour certains champs
-  // let isValid = true;
-
-  // if (name === 'email') {
-  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Vérifie un format email valide
-  //   isValid = emailRegex.test(value);
-  // } else if (name === 'phone') {
-  //   const phoneRegex =
-  //     /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/; // Vérifie un numéro de 10 chiffres
-  //   isValid = phoneRegex.test(value);
-  // }
-
-  // if (!isValid) {
-  //   console.log(`Invalid value for ${name}: ${value}`);
-  //   return; // Ne met pas à jour si la valeur est invalide
-  // }
-
+  /**
+   *
+   * @param {string} name
+   * @param {string} value
+   * @returns {true | string}
+   */
   const validateField = (name, value) => {
     if (name === 'userEmail') {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -90,6 +91,11 @@ export default function Contact() {
     return true;
   };
 
+  /**
+   *
+   * @param {string} input
+   * @returns {string}
+   */
   const formatPhoneInput = (input) => {
     // Retirer tous les caractères non numériques
     const digits = input.replace(/\D/g, '');
@@ -109,7 +115,11 @@ export default function Contact() {
     return input;
   };
 
-  // Soumission du formulaire
+  /**
+   *
+   * @param {React.FormEvent<HTMLFormElement>} e
+   * @returns {void}
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -124,7 +134,6 @@ export default function Contact() {
       return;
     }
 
-    console.log('Form submitted:', inputValue);
     alert('Formulaire envoyé avec succès!');
   };
 

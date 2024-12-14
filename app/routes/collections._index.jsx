@@ -93,6 +93,7 @@ function CollectionItem({collection, index}) {
           data={collection.image}
           loading={index < 3 ? 'eager' : undefined}
           className="rounded-lg border-8 border-dark-green"
+          sizes="(max-width: 768px) 100vw, 50vw"
         />
       )}
       <div className="p-3">

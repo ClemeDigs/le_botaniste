@@ -1,3 +1,11 @@
+/**
+ *
+ * @param {Object} props - Propriétés du composant.
+ * @param {{ url: string, title: string, items?: { url: string, title: string, items?: any[] }[] }} props.menuItem
+ * @param {string} props.primaryDomainUrl
+ * @param {string} props.publicStoreDomain
+ * @returns {React.JSX.Element}
+ */
 export default function MegaMenu({
   menuItems,
   primaryDomainUrl,

@@ -2,7 +2,16 @@ import {LuChevronLeft, LuChevronRight} from 'react-icons/lu';
 import {useState, useEffect} from 'react';
 import {Link} from '@remix-run/react';
 
+/**
+ *
+ * @param {Object} props - Propriétés du composant.
+ * @param {Object[]} props.contents
+ * @returns {React.JSX.Element}
+ */
 export default function DynamicBanner({contents = []}) {
+  /**
+   * @type {number}
+   */
   const [bannerIndex, setBannerIndex] = useState(0);
 
   useEffect(() => {
@@ -12,16 +21,21 @@ export default function DynamicBanner({contents = []}) {
       );
     }, 3000);
 
-    // Nettoie l'intervalle lors du démontage du composant
     return () => clearInterval(intervalId);
-  }, [contents.length]); // Ajout de `contents.length` comme dépendance
+  }, [contents.length]);
 
+  /**
+   * @returns {void}
+   */
   function decIndex() {
     setBannerIndex((prevIndex) =>
       prevIndex <= 0 ? contents.length - 1 : prevIndex - 1,
     );
   }
 
+  /**
+   * @returns {void}
+   */
   function incIndex() {
     setBannerIndex((prevIndex) =>
       prevIndex >= contents.length - 1 ? 0 : prevIndex + 1,

@@ -1,5 +1,9 @@
 import {LuTruck} from 'react-icons/lu';
 
+/**
+ *
+ * @returns {React.JSX.Element}
+ */
 export default function Marquee() {
   return (
     <div className="marquee__container p-2 text-dark-green border-y-4 border-dark-green flex overflow-hidden w-screen">

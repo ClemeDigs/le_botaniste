@@ -5,6 +5,15 @@ import {Money, Image} from '@shopify/hydrogen';
 import AddToWishList from '~/components/AddToWishList';
 import PageTitle from '~/components/PageTitle';
 
+/**
+ * @typedef {import('~/types/types.d').Product} Product
+ */
+
+/**
+ *
+ * @param {import('@remix-run/react').LoaderFunctionArgs} args
+ * @returns {{ products: Product[] }}
+ */
 export async function loader({context, request}) {
   const cookie = request.headers
     .get('Cookie')
@@ -27,16 +36,28 @@ export async function loader({context, request}) {
   return {products: []};
 }
 
+/**
+ * @returns {React.JSX.Element}
+ */
 export default function WishList() {
+  /** @type {{ products: Product[] }} */
   const data = useLoaderData();
+
+  /** @type {Product[]} */
   const [favoriteProducts, setFavoriteProducts] = useState(data.products);
 
+  /**
+   * @param {string} productId
+   * @returns {void}
+   */
   function removeProductFromFavorites(productId) {
+    /**@type {Product[]} */
     const updatedFavorites = favoriteProducts.filter(
       (product) => product.id !== productId,
     );
     setFavoriteProducts(updatedFavorites);
 
+    /** @type {string | undefined} */
     const cookie = Cookies.get('wishlisted');
     if (cookie) {
       const parsedCookie = JSON.parse(cookie);

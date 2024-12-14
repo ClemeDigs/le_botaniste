@@ -1,5 +1,12 @@
 import mosaique from 'app/assets/mosaique_double.svg';
 
+/**
+ *
+ * @param {Object} props - Propriétés du composant.
+ * @param {string} props.title
+ * @param {string} props.className
+ * @returns {React.JSX.Element}
+ */
 export default function PageTitle({title, className}) {
   return (
     <div

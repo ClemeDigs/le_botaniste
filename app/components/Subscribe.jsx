@@ -1,11 +1,29 @@
 import {useState} from 'react';
 import {LuSend, LuMail} from 'react-icons/lu';
 
+/**
+ *
+ * @param {Object} props - Propriétés du composant.
+ * @returns {React.JSX.Element}
+ */
 export default function Subscribe() {
+  /**
+   * @type {string}
+   */
   const [email, setEmail] = useState('');
+  /**
+   * @type {boolean}
+   */
   const [successMessage, setsuccessMessage] = useState(false);
+  /**
+   * @type {string}
+   */
   const [errorMessage, setErrorMessage] = useState('');
 
+  /**
+   * @param {React.FormEvent<HTMLFormElement>} e
+   * @returns {void}
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
 

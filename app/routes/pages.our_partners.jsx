@@ -1,11 +1,25 @@
 import {useLoaderData} from '@remix-run/react';
 import PageTitle from '~/components/PageTitle';
 
+/**
+ * @typedef {import('~/types/types.d').Partner} Partner
+ * @typedef {import('~/types/types.d').PartnerField} PartnerField
+ * @typedef {import('~/types/types.d').PartnerLogo} PartnerLogo
+ */
+
+/**
+ *
+ * @param {import('@remix-run/react').LoaderFunctionArgs} args
+ * @returns {{ partners: Partner[] }}
+ */
 export async function loader({context}) {
   const data = await context.storefront.query(PARTNERS_QUERY);
   return {partners: data.metaobjects.nodes};
 }
 
+/**
+ * @returns {React.JSX.Element}
+ */
 export default function OurPartners() {
   const {partners} = useLoaderData();
 

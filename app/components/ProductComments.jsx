@@ -1,18 +1,52 @@
 import {useEffect, useState} from 'react';
 
+/**
+ * @typedef {Object} Comment
+ * @property {string} productId
+ * @property {string} name
+ * @property {string} comment
+ * @property {string} date
+ */
+
+/**
+ *
+ * @param {Object} props - Propriétés du composant.
+ * @param {string} props.productId
+ * @returns {React.JSX.Element}
+ */
 export default function ProductComments({productId}) {
+  /**
+   * @type {string}
+   */
   const [commentText, setCommentText] = useState('');
+  /**
+   * @type {string}
+   */
   const [newName, setNewName] = useState('');
+  /**
+   * @type {Comment[]}
+   */
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
+    /**
+     * @type {Comment[]}
+     */
     const savedComments = JSON.parse(localStorage.getItem('comments')) || [];
+    /**
+     * @type {Comment[]}
+     */
     const productComments = savedComments.filter(
       (comment) => comment.productId === productId,
     );
     setComments(productComments);
   }, [productId]);
 
+  /**
+   *
+   * @param {React.FormEvent<HTMLFormElement>} e
+   * @returns {void}
+   */
   function addComment(e) {
     e.preventDefault();
 

@@ -49,9 +49,23 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
   );
 }
 
+/**
+ *
+ * @param {Object} props - Propriétés du composant.
+ * @param {MenuItem} props.menuItem
+ * @param {string} props.primaryDomainUrl
+ * @param {string} props.publicStoreDomain
+ * @returns {React.JSX.Element}
+ */
 function MenuItemMobile({menuItem, publicStoreDomain, primaryDomainUrl}) {
+  /**
+   * @type {boolean}
+   */
   const [isOpen, setIsOpen] = useState(false);
 
+  /**
+   * @type {string}
+   */
   const url =
     menuItem.url.includes('myshopify.com') ||
     menuItem.url.includes(publicStoreDomain) ||
@@ -59,6 +73,9 @@ function MenuItemMobile({menuItem, publicStoreDomain, primaryDomainUrl}) {
       ? new URL(menuItem.url).pathname
       : menuItem.url;
 
+  /**
+   * @returns {void}
+   */
   function toggleMenu() {
     setIsOpen(!isOpen);
   }
@@ -160,6 +177,10 @@ function HeaderCtas({isLoggedIn, cart}) {
   );
 }
 
+/**
+ *
+ * @returns {React.JSX.Element}
+ */
 function HeaderMenuMobileToggle() {
   const {open} = useAside();
   return (
@@ -172,6 +193,10 @@ function HeaderMenuMobileToggle() {
   );
 }
 
+/**
+ *
+ * @returns {React.JSX.Element}
+ */
 function SearchToggle() {
   const {open} = useAside();
   return (
@@ -181,6 +206,10 @@ function SearchToggle() {
   );
 }
 
+/**
+ *
+ * @returns {React.JSX.Element}
+ */
 function LikedProducts() {
   return (
     <Link to="/wishList" className=" flex gap-1 items-center">

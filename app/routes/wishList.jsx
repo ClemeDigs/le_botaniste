@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import Cookies from 'js-cookie';
 import {useLoaderData, Link} from '@remix-run/react';
 import {Money, Image} from '@shopify/hydrogen';
